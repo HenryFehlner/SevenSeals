@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b173puywocko"
-path="res://.godot/imported/PlaceholderHex.png-328be29b1efcc936cb1e8a379329ade6.ctex"
+uid="uid://dwj8f2xmb08oh"
+path="res://.godot/imported/Hex - IDland AI.png-4ee8da51478b1e1d76a175417950fd30.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tilemaps/PlaceholderHex.png"
-dest_files=["res://.godot/imported/PlaceholderHex.png-328be29b1efcc936cb1e8a379329ade6.ctex"]
+source_file="res://tilemaps/Hex - IDland AI.png"
+dest_files=["res://.godot/imported/Hex - IDland AI.png-4ee8da51478b1e1d76a175417950fd30.ctex"]
 
 [params]
 
