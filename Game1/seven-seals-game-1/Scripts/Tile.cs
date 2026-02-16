@@ -3,5 +3,7 @@ using System;
 
 public partial class Tile : Node
 {
-	[Export] vector3
+	[Export] Object
+	
+	 
 }
