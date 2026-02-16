@@ -4,8 +4,9 @@
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i5lig"]
 texture = ExtResource("1_5mgkt")
-margins = Vector2i(5, 0)
-texture_region_size = Vector2i(64, 64)
+margins = Vector2i(2, 33)
+separation = Vector2i(20, 0)
+texture_region_size = Vector2i(78, 64)
 7:0/0 = 0
 8:0/0 = 0
 9:0/0 = 0
@@ -157,10 +158,20 @@ texture_region_size = Vector2i(64, 64)
 [sub_resource type="TileSet" id="TileSet_a5bgr"]
 tile_shape = 3
 tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 0
+physics_layer_0/collision_mask = 0
 sources/3 = SubResource("TileSetAtlasSource_i5lig")
 
 [node name="BaseLevel" type="Node2D"]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD///7/AwAAAAkAAAD/////AwAAAAkAAAD//wAAAwAAAAkAAAAAAAAAAwAAAAkAAAAAAP//AwAAAAkAAAAAAP7/AwAAAAkAAAD+////AwAAAAkAAAD+//3/AwAAAAkAAAD+//7/AwAAAAkAAAD9////AwAAAAkAAAD+/wAAAwAAAAkAAAD+/wEAAwAAAAkAAAD//wEAAwAAAAkAAAAAAAEAAwAAAAkAAAABAAAAAwAAAAkAAAABAP//AwAAAAkAAAABAP7/AwAAAAkAAAAAAP3/AwAAAAkAAAD///3/AwAAAAkAAAA=")
+[node name="Tilesets" type="Node2D" parent="."]
+
+[node name="FloorTilesLayer" type="TileMapLayer" parent="Tilesets"]
+tile_map_data = PackedByteArray("AAD///7/AwAAAAgAAAD/////AwAAAAgAAAD//wAAAwAAAAgAAAAAAAAAAwAAAAgAAAAAAP//AwAAAAgAAAAAAP7/AwAAAAgAAAD+////AwAAAAgAAAD+//3/AwAAAAgAAAD+//7/AwAAAAgAAAD9////AwAAAAgAAAD+/wAAAwAAAAgAAAD+/wEAAwAAAAgAAAD//wEAAwAAAAgAAAAAAAEAAwAAAAgAAAABAAAAAwAAAAgAAAABAP//AwAAAAgAAAABAP7/AwAAAAgAAAAAAP3/AwAAAAgAAAD///3/AwAAAAgAAAA=")
 tile_set = SubResource("TileSet_a5bgr")
+
+[node name="WallTilesLayer" type="TileMapLayer" parent="Tilesets"]
+tile_map_data = PackedByteArray("AAD/////AwAFAAgAAAAAAAAAAwAGAAgAAAD///7/AwACAAgAAAA=")
+tile_set = SubResource("TileSet_a5bgr")
+
+[node name="LevelLoader" type="Node2D" parent="."]
