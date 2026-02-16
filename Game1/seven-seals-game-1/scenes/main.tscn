@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://t4rued83ndvd"]
+[gd_scene load_steps=2 format=3 uid="uid://t4rued83ndvd"]
+
+[ext_resource type="PackedScene" uid="uid://vhu6d0pjeqyt" path="res://scenes/baseLevel.tscn" id="1_o5qli"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="BaseLevel" parent="." instance=ExtResource("1_o5qli")]

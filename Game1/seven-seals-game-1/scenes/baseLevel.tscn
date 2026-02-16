@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=4 uid="uid://vhu6d0pjeqyt"]
+[gd_scene load_steps=5 format=4 uid="uid://vhu6d0pjeqyt"]
 
 [ext_resource type="Texture2D" uid="uid://dwj8f2xmb08oh" path="res://tilemaps/Hex - IDland AI.png" id="1_5mgkt"]
+[ext_resource type="Script" uid="uid://xmoxjytg8oys" path="res://scenes/LevelLoader.cs" id="2_i5lig"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i5lig"]
 texture = ExtResource("1_5mgkt")
@@ -167,7 +168,7 @@ sources/3 = SubResource("TileSetAtlasSource_i5lig")
 [node name="Tilesets" type="Node2D" parent="."]
 
 [node name="FloorTilesLayer" type="TileMapLayer" parent="Tilesets"]
-tile_map_data = PackedByteArray("AAD///7/AwAAAAgAAAD/////AwAAAAgAAAD//wAAAwAAAAgAAAAAAAAAAwAAAAgAAAAAAP//AwAAAAgAAAAAAP7/AwAAAAgAAAD+////AwAAAAgAAAD+//3/AwAAAAgAAAD+//7/AwAAAAgAAAD9////AwAAAAgAAAD+/wAAAwAAAAgAAAD+/wEAAwAAAAgAAAD//wEAAwAAAAgAAAAAAAEAAwAAAAgAAAABAAAAAwAAAAgAAAABAP//AwAAAAgAAAABAP7/AwAAAAgAAAAAAP3/AwAAAAgAAAD///3/AwAAAAgAAAA=")
+tile_map_data = PackedByteArray("AAD///7/AwAAAAgAAAD/////AwAAAAgAAAD//wAAAwAAAAgAAAAAAAAAAwAAAAgAAAAAAP//AwAAAAgAAAAAAP7/AwAAAAgAAAD+////AwAAAAgAAAD+//3/AwAAAAgAAAD+//7/AwAAAAgAAAD9////AwAAAAgAAAD+/wAAAwAAAAgAAAD+/wEAAwAAAAgAAAD//wEAAwAAAAgAAAAAAAEAAwAAAAgAAAABAAAAAwAAAAgAAAABAP//AwAAAAgAAAABAP7/AwAAAAgAAAAAAP3/AwAAAAgAAAD///3/AwAAAAgAAAD8////AwAAAAgAAAD9//7/AwAAAAgAAAD9//3/AwAAAAgAAAD+//z/AwAAAAgAAAD///z/AwAAAAgAAAAAAPz/AwAAAAgAAAABAPz/AwAAAAgAAAABAP3/AwAAAAgAAAACAP7/AwAAAAgAAAACAP//AwAAAAgAAAACAAAAAwAAAAgAAAABAAEAAwAAAAgAAAABAAIAAwAAAAgAAAAAAAIAAwAAAAgAAAD//wIAAwAAAAgAAAD+/wIAAwAAAAgAAAD9/wEAAwAAAAgAAAD9/wAAAwAAAAgAAAA=")
 tile_set = SubResource("TileSet_a5bgr")
 
 [node name="WallTilesLayer" type="TileMapLayer" parent="Tilesets"]
@@ -175,3 +176,4 @@ tile_map_data = PackedByteArray("AAD/////AwAFAAgAAAAAAAAAAwAGAAgAAAD///7/AwACAAg
 tile_set = SubResource("TileSet_a5bgr")
 
 [node name="LevelLoader" type="Node2D" parent="."]
+script = ExtResource("2_i5lig")
