@@ -43,6 +43,21 @@ public partial class Tile : Node
 		}
 	}
 	
+	Tile(){
+		
+	}
+	
+	Tile(int x, int y, TileContent content){
+		tile = new Tile(); 
+		
+		tile.TileContent = content;
+		tile.TileLocation = new Vector2(x,y);
+		
+		return tile; 
+	}
+	
+	
+	
 	public void SetNeighbor(HexDirection direction, Tile tile)
 	{
 		Neighbors[direction] = tile;
