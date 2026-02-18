@@ -42,7 +42,7 @@ public partial class Tile : Node
 			Neighbors[dir] = null;
 		}
 	}
-	
+		
 	Tile(){
 		
 	}

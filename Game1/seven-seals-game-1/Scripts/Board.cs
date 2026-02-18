@@ -6,7 +6,7 @@ public partial class Board : Node
 	Tile[] AllTiles; 
 	
 	
-	GenerateTiles(){
+	void GenerateTiles(){
 		for (x=0; x < 7; x++){
 			for(y=0; y < 7; y++){
 				Tile tile = new Tile(x,y,tileContent.empty);
@@ -14,8 +14,10 @@ public partial class Board : Node
 		}
 	}
 	
-	LinkTiles(){
+	void LinkTiles(){
 		
 	}
+	
+	
 	
 }
