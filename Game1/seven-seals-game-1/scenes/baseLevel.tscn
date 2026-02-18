@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://vhu6d0pjeqyt"]
+[gd_scene load_steps=6 format=4 uid="uid://vhu6d0pjeqyt"]
 
 [ext_resource type="Texture2D" uid="uid://dwj8f2xmb08oh" path="res://tilemaps/Hex - IDland AI.png" id="1_5mgkt"]
 [ext_resource type="Script" uid="uid://xmoxjytg8oys" path="res://scenes/LevelLoader.cs" id="2_i5lig"]
+[ext_resource type="PackedScene" uid="uid://cslyqif5vqkc8" path="res://scenes/Tile.tscn" id="3_rthoy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i5lig"]
 texture = ExtResource("1_5mgkt")
@@ -177,3 +178,4 @@ tile_set = SubResource("TileSet_a5bgr")
 
 [node name="LevelLoader" type="Node2D" parent="."]
 script = ExtResource("2_i5lig")
+tileScene = ExtResource("3_rthoy")

@@ -1,9 +1,12 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class LevelLoader : Node2D
 {
-	string levelDataFromJson;
+	private string levelDataFromJson;
+	[Export] private PackedScene tileScene;
+	private List<Node> tileList;
 	
 	public override void _Ready()
 	{
@@ -35,6 +38,11 @@ public partial class LevelLoader : Node2D
 			// Print data for debugging
 			GD.Print(tileType + " " + tilePosX + ", " + tilePosY);
 			if (i % 7 == 6) { GD.Print(""); }	// split by row
+			
+			// Instantiate tiles
+			Node2D newTile = tileScene.Instantiate();
+			
+			AddChild(tileScene.Instantiate());
 		}
 	}
 	
