@@ -14,6 +14,14 @@ public partial class Board : Node
 		}
 	}
 	
+	
+	// Top y- 1
+	// Bottom y + 1 
+	// TopRight y - 1 x + 1
+	//TopLeft  y - 1 x - 1
+	//BottomRight y + 1 x + 1
+	//BottomLeft  y + 1 x - 1
+	
 	void LinkTiles(){
 		
 	}
