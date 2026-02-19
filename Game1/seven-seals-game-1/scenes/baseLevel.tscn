@@ -167,6 +167,7 @@ sources/3 = SubResource("TileSetAtlasSource_i5lig")
 [node name="BaseLevel" type="Node2D"]
 
 [node name="Tilesets" type="Node2D" parent="."]
+visible = false
 
 [node name="FloorTilesLayer" type="TileMapLayer" parent="Tilesets"]
 tile_map_data = PackedByteArray("AAD///7/AwAAAAgAAAD/////AwAAAAgAAAD//wAAAwAAAAgAAAAAAAAAAwAAAAgAAAAAAP//AwAAAAgAAAAAAP7/AwAAAAgAAAD+////AwAAAAgAAAD+//3/AwAAAAgAAAD+//7/AwAAAAgAAAD9////AwAAAAgAAAD+/wAAAwAAAAgAAAD+/wEAAwAAAAgAAAD//wEAAwAAAAgAAAAAAAEAAwAAAAgAAAABAAAAAwAAAAgAAAABAP//AwAAAAgAAAABAP7/AwAAAAgAAAAAAP3/AwAAAAgAAAD///3/AwAAAAgAAAD8////AwAAAAgAAAD9//7/AwAAAAgAAAD9//3/AwAAAAgAAAD+//z/AwAAAAgAAAD///z/AwAAAAgAAAAAAPz/AwAAAAgAAAABAPz/AwAAAAgAAAABAP3/AwAAAAgAAAACAP7/AwAAAAgAAAACAP//AwAAAAgAAAACAAAAAwAAAAgAAAABAAEAAwAAAAgAAAABAAIAAwAAAAgAAAAAAAIAAwAAAAgAAAD//wIAAwAAAAgAAAD+/wIAAwAAAAgAAAD9/wEAAwAAAAgAAAD9/wAAAwAAAAgAAAA=")
@@ -179,3 +180,4 @@ tile_set = SubResource("TileSet_a5bgr")
 [node name="LevelLoader" type="Node2D" parent="."]
 script = ExtResource("2_i5lig")
 tileScene = ExtResource("3_rthoy")
+hexSideLength = 20.0

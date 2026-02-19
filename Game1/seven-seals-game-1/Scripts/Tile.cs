@@ -22,7 +22,7 @@ public enum HexDirection
 	Right
 }
 
-public partial class Tile : Node
+public partial class Tile : Node2D
 {
 	[Export] public TileContent Content { get; set; } = TileContent.Empty;
 	[Export] public Vector2 TileLocation { get; set; }
@@ -66,13 +66,17 @@ public partial class Tile : Node
 			   Content == TileContent.End;
 	}
 	
-public void SetContent(TileContent newContent)
-{
-	if (Content == newContent)
-		return;
+	public void SetContent(TileContent newContent)
+	{
+		if (Content == newContent)
+			return;
 
-	Content = newContent;
-	//UpdateVisual();
-}
-
+		Content = newContent;
+		//UpdateVisual();
+	}
+	
+	public void SetPosition(Vector2 newPos)
+	{
+		Position = newPos;
+	}
 }

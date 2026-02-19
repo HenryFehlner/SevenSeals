@@ -12,6 +12,9 @@ public partial class LevelLoader : Node2D
 	[Export] private PackedScene tileScene;
 	private List<Node> tileList;
 	
+	// Tile details for conversion to world coords
+	[Export] private float hexSideLength;
+	
 	public override void _Ready()
 	{
 		GD.Print("Building Level");
@@ -39,14 +42,20 @@ public partial class LevelLoader : Node2D
 			int tilePosX = (int)tile["pos"].AsGodotDictionary()["x"];
 			int tilePosY = (int)tile["pos"].AsGodotDictionary()["y"];
 			
+			// Convert from axial to world coordinates
+			Vector2 worldCoords = AxialToWorldCoords(tilePosX, tilePosY);
+			
 			// Print data for debugging
 			GD.Print(tileType + " " + tilePosX + ", " + tilePosY);
 			if (i % 7 == 6) { GD.Print(""); }	// split by row
 			
 			// Instantiate tiles
 			Node newTile = tileScene.Instantiate();
+			Tile tileScript = newTile as Tile;
+			tileScript.SetPosition(worldCoords);
+			GD.Print(tileScript.TileLocation);
 			
-			AddChild(tileScene.Instantiate());
+			AddChild(newTile);
 		}
 	}
 	
@@ -68,5 +77,13 @@ public partial class LevelLoader : Node2D
 		Variant parsedResult = Json.ParseString(jsonText);
 		Godot.Collections.Dictionary resultDict = parsedResult.AsGodotDictionary();
 		return resultDict;
+	}
+	
+	private Vector2 AxialToWorldCoords(int q, int r)
+	{
+		float xPos = Mathf.Sqrt(3.0f) * hexSideLength * ((r / 2.0f) + q);
+		float yPos = (3.0f / 2.0f) * hexSideLength * r;
+		
+		return new Vector2(xPos, yPos);
 	}
 }
