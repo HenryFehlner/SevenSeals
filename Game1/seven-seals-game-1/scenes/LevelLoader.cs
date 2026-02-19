@@ -10,10 +10,17 @@ public partial class LevelLoader : Node2D
 {
 	private string levelDataFromJson;
 	[Export] private PackedScene tileScene;
-	private List<Node> tileList;
 	
 	// Tile details for conversion to world coords
 	[Export] private float hexSideLength;
+	
+	// Tile textures
+	[Export] Texture2D emptyTexture;
+	[Export] Texture2D rockTexture;
+	[Export] Texture2D wallTexture;
+	[Export] Texture2D startTexture;
+	[Export] Texture2D endTexture;
+	[Export] Texture2D invalidTexture;
 	
 	public override void _Ready()
 	{
@@ -47,7 +54,7 @@ public partial class LevelLoader : Node2D
 			
 			// Print data for debugging
 			GD.Print(tileType + " " + tilePosX + ", " + tilePosY);
-			GD.Print(worldCoords);
+			//GD.Print(worldCoords);
 			//if (i % 7 == 6) { GD.Print(""); }	// split by row
 			
 			// Instantiate tiles
@@ -56,28 +63,35 @@ public partial class LevelLoader : Node2D
 			
 			// Set tile properties
 			TileContent content = TileContent.Invalid;
+			Texture2D tileTexture = invalidTexture;
 			switch (tileType)
 			{
 				case "01U1":
 					content = TileContent.Empty;
+					tileTexture = emptyTexture;
 					break;
 				case "M1C4":
 					content = TileContent.Rock;
+					tileTexture = rockTexture;
 					break;
 				case "02U1":
 					content = TileContent.Wall;
+					tileTexture = wallTexture;
 					break;
 				case "PR06":
 					content = TileContent.Start;
+					tileTexture = startTexture;
 					break;
 				case "M1S4":
 					content = TileContent.End;
+					tileTexture = endTexture;
 					break;
 				default:
 					content = TileContent.Invalid;
+					tileTexture = invalidTexture;
 					break;
 			}
-			tileScript.Setup(worldCoords, content);
+			tileScript.Setup(worldCoords, content, tileTexture);
 			
 			AddChild(newTile);
 			

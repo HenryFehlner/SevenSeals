@@ -26,7 +26,7 @@ public partial class Tile : Node2D
 {
 	[Export] public TileContent Content { get; set; } = TileContent.Empty;
 	[Export] public Vector2 TileLocation { get; set; }
-	private Texture tileTexture;
+	private Sprite2D tileSprite;
 
 	private Dictionary<HexDirection, Tile> Neighbors;
 
@@ -44,15 +44,20 @@ public partial class Tile : Node2D
 		}
 	}
 
-	public void Setup(int x, int y, TileContent content)
+	public void Setup(int x, int y, TileContent content, Texture2D tileTexture)
 	{
 		TileLocation = new Vector2(x, y);
-		Setup(TileLocation, content);
+		Setup(TileLocation, content, tileTexture);
 	}
 	
-	public void Setup(Vector2 pos, TileContent content)
+	public void Setup(Vector2 pos, TileContent content, Texture2D tileTexture)
 	{
-		SetPosition(pos);
+		// Get sprite
+		tileSprite = GetNode<Sprite2D>("TileSprite");
+		
+		// Set position, tile type, and texture
+		SetTilePosition(pos);
+		SetTexture(tileTexture);
 		Content = content;
 		GD.Print(Content);
 	}
@@ -83,13 +88,14 @@ public partial class Tile : Node2D
 		//UpdateVisual();
 	}
 	
-	public void SetPosition(Vector2 newPos)
+	public void SetTilePosition(Vector2 newPos)
 	{
 		Position = newPos;
 	}
 	
-	public void SetSpriteTexture()
+	public void SetTexture(Texture2D texture)
 	{
-		
+		GD.Print(texture);
+		tileSprite.Texture = texture;
 	}
 }

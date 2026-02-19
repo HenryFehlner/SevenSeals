@@ -5,5 +5,7 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.855, 0.855)
 
 [node name="BaseLevel" parent="." instance=ExtResource("1_o5qli")]
+position = Vector2(390, -290)

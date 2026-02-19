@@ -35,7 +35,7 @@ public partial class Board : Node
 				Tile tile = TileScene.Instantiate<Tile>();
 				AddChild(tile);
 
-				tile.Setup(x, y, TileContent.Empty);
+				//tile.Setup(x, y, TileContent.Empty);
 				Tiles[coord] = tile;
 			}
 		}
