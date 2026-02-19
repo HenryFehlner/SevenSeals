@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 public enum TileContent
 {
-	Empty,
-	Rock,
-	Wall,
-	Start,
-	End,
-	Invalid
+	Empty,	// 01U1
+	Rock,	// M1C4
+	Wall,	// 02U1
+	Start,	// PR06
+	End,	// M1S4
+	Invalid	// 03U1
 }
 
 public enum HexDirection
@@ -26,6 +26,7 @@ public partial class Tile : Node2D
 {
 	[Export] public TileContent Content { get; set; } = TileContent.Empty;
 	[Export] public Vector2 TileLocation { get; set; }
+	private Texture tileTexture;
 
 	private Dictionary<HexDirection, Tile> Neighbors;
 
@@ -46,7 +47,14 @@ public partial class Tile : Node2D
 	public void Setup(int x, int y, TileContent content)
 	{
 		TileLocation = new Vector2(x, y);
+		Setup(TileLocation, content);
+	}
+	
+	public void Setup(Vector2 pos, TileContent content)
+	{
+		SetPosition(pos);
 		Content = content;
+		GD.Print(Content);
 	}
 
 	public void SetNeighbor(HexDirection direction, Tile tile)
@@ -78,5 +86,10 @@ public partial class Tile : Node2D
 	public void SetPosition(Vector2 newPos)
 	{
 		Position = newPos;
+	}
+	
+	public void SetSpriteTexture()
+	{
+		
 	}
 }

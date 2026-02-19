@@ -20,7 +20,7 @@ public partial class LevelLoader : Node2D
 		GD.Print("Building Level");
 		
 		// Get data file
-		Godot.Collections.Dictionary jsonData = LoadJsonFile("res://LevelData/testLevel2.json");
+		Godot.Collections.Dictionary jsonData = LoadJsonFile("res://LevelData/level1.json");
 		
 		// Get the size of the level
 		Godot.Collections.Dictionary boundsData = jsonData["bounds"].AsGodotDictionary();
@@ -47,15 +47,49 @@ public partial class LevelLoader : Node2D
 			
 			// Print data for debugging
 			GD.Print(tileType + " " + tilePosX + ", " + tilePosY);
-			if (i % 7 == 6) { GD.Print(""); }	// split by row
+			GD.Print(worldCoords);
+			//if (i % 7 == 6) { GD.Print(""); }	// split by row
 			
 			// Instantiate tiles
 			Node newTile = tileScene.Instantiate();
 			Tile tileScript = newTile as Tile;
-			tileScript.SetPosition(worldCoords);
-			GD.Print(worldCoords);
+			
+			// Set tile properties
+			TileContent content = TileContent.Invalid;
+			switch (tileType)
+			{
+				case "01U1":
+					content = TileContent.Empty;
+					break;
+				case "M1C4":
+					content = TileContent.Rock;
+					break;
+				case "02U1":
+					content = TileContent.Wall;
+					break;
+				case "PR06":
+					content = TileContent.Start;
+					break;
+				case "M1S4":
+					content = TileContent.End;
+					break;
+				default:
+					content = TileContent.Invalid;
+					break;
+			}
+			tileScript.Setup(worldCoords, content);
 			
 			AddChild(newTile);
+			
+			/*
+			Empty,	// 01U1
+			Rock,	// M1C4
+			Wall,	// 02U1
+			Start,	// PR06
+			End,	// M1S4
+			Invalid	// 03U1*/
+			
+			if (i % 7 == 6) { GD.Print(""); }	// split by row for console logging
 		}
 	}
 	
