@@ -70,5 +70,26 @@ public partial class Board : Node
 		{
 			tile.SetNeighbor(dir, neighbor);
 		}
+		
+		
+		
 	}
+	public void ApplyLevel(Level level)
+{
+	// Step 1: Reset everything to Invalid (or Empty)
+	foreach (Tile tile in Tiles.Values)
+	{
+		tile.SetContent(TileContent.Invalid);
+	}
+
+	// Step 2: Apply level-defined tiles
+	foreach (var pair in level.TileMap)
+	{
+		if (Tiles.TryGetValue(pair.Key, out Tile tile))
+		{
+			tile.SetContent(pair.Value);
+		}
+	}
+}
+
 }

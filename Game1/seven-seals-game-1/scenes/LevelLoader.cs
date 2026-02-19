@@ -2,6 +2,10 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+
+// If there is any way to make this return a dictionary 
+// mapping a vector2 to the tile contents, then 
+// I can easily use that later 
 public partial class LevelLoader : Node2D
 {
 	private string levelDataFromJson;

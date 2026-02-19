@@ -8,6 +8,10 @@ public partial class GameManager : Node
 
 	private Tile currentTile;
 
+
+
+
+
 	public override void _Ready()
 	{
 		// Example: start on a known tile
