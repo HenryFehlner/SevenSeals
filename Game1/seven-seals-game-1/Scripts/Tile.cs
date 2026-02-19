@@ -65,4 +65,14 @@ public partial class Tile : Node
 			   Content == TileContent.Start ||
 			   Content == TileContent.End;
 	}
+	
+public void SetContent(TileContent newContent)
+{
+	if (Content == newContent)
+		return;
+
+	Content = newContent;
+	//UpdateVisual();
+}
+
 }

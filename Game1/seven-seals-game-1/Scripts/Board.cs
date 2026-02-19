@@ -16,6 +16,11 @@ public partial class Board : Node
 		GenerateTiles();
 		LinkTiles();
 	}
+	
+	public IEnumerable<Tile> GetAllTiles()
+	{
+		return Tiles.Values;
+	}
 
 	private void GenerateTiles()
 	{
