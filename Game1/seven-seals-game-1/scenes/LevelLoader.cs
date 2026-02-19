@@ -53,7 +53,7 @@ public partial class LevelLoader : Node2D
 			Node newTile = tileScene.Instantiate();
 			Tile tileScript = newTile as Tile;
 			tileScript.SetPosition(worldCoords);
-			GD.Print(tileScript.TileLocation);
+			GD.Print(worldCoords);
 			
 			AddChild(newTile);
 		}
@@ -79,10 +79,21 @@ public partial class LevelLoader : Node2D
 		return resultDict;
 	}
 	
+	// this math is WEIRD
 	private Vector2 AxialToWorldCoords(int q, int r)
 	{
-		float xPos = Mathf.Sqrt(3.0f) * hexSideLength * ((r / 2.0f) + q);
+		float widthOffset = Mathf.Sqrt(3.0f) * hexSideLength;
+		float xPos = -(widthOffset * ((r / 2.0f) + q));
 		float yPos = (3.0f / 2.0f) * hexSideLength * r;
+		
+		if (r % 2 == 0)	// Offset every other row because everything is stupid
+		{
+			xPos = -widthOffset * q;
+		}
+		else
+		{
+			xPos = -widthOffset * q - (widthOffset / 2.0f);
+		}
 		
 		return new Vector2(xPos, yPos);
 	}
