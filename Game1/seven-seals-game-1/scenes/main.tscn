@@ -29,7 +29,7 @@ MoveLabel = NodePath("../MovesLabel")
 
 [node name="GameNavigator" type="Node2D" parent="." node_paths=PackedStringArray("GameManager")]
 script = ExtResource("4_tbgi4")
-LevelPaths = PackedStringArray("res://LevelData/level1.json", "res://LevelData/TestBoardRock.json", "res://LevelData/testLevel.json")
+LevelPaths = PackedStringArray("res://LevelData/level1.json", "res://LevelData/FinalLevel2.json", "res://LevelData/FinalLevel3.json", "res://LevelData/FinalLevel4.json", "res://LevelData/FinalLevel5.json")
 GameManager = NodePath("../GameManager")
 
 [node name="LevelCompletePanel" type="HBoxContainer" parent="."]
@@ -56,9 +56,9 @@ texture = ExtResource("6_tefeu")
 expand_mode = 3
 
 [node name="MovesLabel" type="RichTextLabel" parent="."]
-offset_left = 382.0
-offset_top = -372.0
-offset_right = 655.0
-offset_bottom = -276.0
+offset_left = 317.0
+offset_top = -369.0
+offset_right = 642.0
+offset_bottom = -273.0
 theme_override_font_sizes/normal_font_size = 60
 text = "Moves: 0"
