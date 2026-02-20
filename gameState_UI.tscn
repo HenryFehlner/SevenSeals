@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://csv6yvr5cdq4m"]
+
+[ext_resource type="Script" uid="uid://bqx34qdmwq0th" path="res://scripts/game_UI.gd" id="1_ffam5"]
+[ext_resource type="PackedScene" path="res://scenes/pause_menu.tscn" id="2_hsii4"]
+[ext_resource type="FontFile" uid="uid://dnh4pbjs21eam" path="res://fonts/ByteBounce.ttf" id="2_q1ass"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = 5.0
+offset_right = -3.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ffam5")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 1160.0
+offset_bottom = 654.0
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 60
+
+[node name="pause" type="Button" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 25.0
+offset_right = 269.0
+offset_bottom = 149.0
+theme_override_fonts/font = ExtResource("2_q1ass")
+theme_override_font_sizes/font_size = 85
+text = "Pause"
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 98.0
+offset_top = 312.0
+offset_right = 466.0
+offset_bottom = 546.0
+
+[node name="scoreLabel" type="Label" parent="MarginContainer2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_q1ass")
+theme_override_font_sizes/font_size = 85
+text = "Score: 0"
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_hsii4")]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[connection signal="pressed" from="pause" to="." method="_on_pause_pressed"]
