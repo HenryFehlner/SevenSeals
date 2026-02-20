@@ -27,7 +27,7 @@ LevelCompletePanel = NodePath("../LevelCompletePanel")
 Star1 = NodePath("../LevelCompletePanel/Star1")
 Star2 = NodePath("../LevelCompletePanel/Star2")
 Star3 = NodePath("../LevelCompletePanel/Star3")
-MoveLabel = NodePath("../MovesLabel")
+MoveLabel = NodePath("../UI/MovesLabel")
 
 [node name="GameNavigator" type="Node2D" parent="." node_paths=PackedStringArray("GameManager")]
 script = ExtResource("4_tbgi4")
@@ -57,7 +57,11 @@ layout_mode = 2
 texture = ExtResource("6_tefeu")
 expand_mode = 3
 
-[node name="MovesLabel" type="RichTextLabel" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 12
+follow_viewport_enabled = true
+
+[node name="MovesLabel" type="RichTextLabel" parent="UI"]
 offset_left = 317.0
 offset_top = -369.0
 offset_right = 642.0
@@ -66,10 +70,9 @@ theme_override_fonts/normal_font = ExtResource("7_tipki")
 theme_override_font_sizes/normal_font_size = 80
 text = "Moves: 0"
 
-[node name="UI" type="CanvasLayer" parent="."]
-
 [node name="Control" parent="UI" instance=ExtResource("7_o6xl0")]
-offset_left = -673.0
+anchors_preset = -1
+offset_left = -681.0
 offset_top = -377.0
 offset_right = -473.0
 offset_bottom = -277.0

@@ -37,20 +37,6 @@ theme_override_fonts/font = ExtResource("2_q1ass")
 theme_override_font_sizes/font_size = 85
 text = "Pause"
 
-[node name="MarginContainer2" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_left = -30.0
-offset_top = 72.0
-offset_right = 338.0
-offset_bottom = 306.0
-
-[node name="scoreLabel" type="Label" parent="MarginContainer2"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_q1ass")
-theme_override_font_sizes/font_size = 85
-text = "Score: 0"
-
 [node name="PauseMenu" parent="." instance=ExtResource("2_hsii4")]
 visible = false
 layout_mode = 1
