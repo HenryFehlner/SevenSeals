@@ -14,6 +14,13 @@ public partial class GameManager : Node
 	
 	private bool reachedEnd = false;
 	
+	private bool levelComplete = false;
+	
+	[Export] public HBoxContainer LevelCompletePanel;
+	[Export] public TextureRect Star1;
+	[Export] public TextureRect Star2;
+	[Export] public TextureRect Star3;
+	
 
 	public override void _Ready()
 	{
@@ -94,6 +101,7 @@ private bool TryPushRock(Tile rockTile, HexDirection dir)
 			takeMove(reachedEnd);
 			destination.SetContent(TileContent.Rock);
 			rockTile.SetContent(TileContent.Empty);
+			UpdateHighlights();
 			
 			return true;
 
@@ -102,6 +110,7 @@ private bool TryPushRock(Tile rockTile, HexDirection dir)
 			// Rock breaks
 			takeMove(reachedEnd);
 			rockTile.SetContent(TileContent.Empty);
+			UpdateHighlights();
 			
 			return true;
 
@@ -135,6 +144,8 @@ private Tile FindStartTile()
 
 private void OnTileClicked(Tile tile)
 {
+	if (levelComplete) return; 
+	
 	if (currentTile == null)
 		return;
 
@@ -158,6 +169,9 @@ private void UpdateHighlights()
 		tile.SetHighlight(false);
 	}
 
+	if (levelComplete)
+		return;   
+		
 	// Highlight valid moves
 	foreach (Tile tile in GetValidMoves())
 	{
@@ -169,6 +183,8 @@ private void UpdateHighlights()
 
 public void StartLevel(Level level)
 {
+	LevelCompletePanel.Visible = false;
+	levelComplete = false;
 	currentLevel = level;
 	moveCount = 0;
 	if (Board == null)
@@ -225,22 +241,52 @@ private void PrintValidMoves(List<Tile> validMoves)
 
 public void takeMove(bool reachedEnd)
 {
+	
 	moveCount++;
 	GD.Print("Moves Taken: ", moveCount);
+	
+	if (!reachedEnd) return;
+
+	levelComplete = true;
 
 	if (reachedEnd)
 	{
+		foreach (Tile tile in Board.GetAllTiles()){
+			tile.SetHighlight(false);
+			UpdateHighlights();
+			}
+			
+	
 		GD.Print("Level completed in ", moveCount, " moves");
+		 int stars = CalculateStars();
+	 	GD.Print("LEVEL COMPLETE!");
+		GD.Print($"Stars Earned: {stars}");
 
-		if (moveCount > currentLevel.OneStarMoves)
-			GD.Print("No Stars");
-		else if (moveCount > currentLevel.TwoStarMoves)
-			GD.Print("1 Star");
-		else if (moveCount > currentLevel.ThreeStarMoves)
-			GD.Print("2 Stars");
-		else
-			GD.Print("3 Stars");
+		ShowStarResult(stars);
 	}
 }
+
+private int CalculateStars()
+{
+	if (moveCount > currentLevel.OneStarMoves)
+		return 0;
+	if (moveCount > currentLevel.TwoStarMoves)
+		return 1;
+	if (moveCount > currentLevel.ThreeStarMoves)
+		return 2;
+
+	return 3;
+}
+
+private void ShowStarResult(int stars)
+{
+	LevelCompletePanel.Visible = true;
+
+	Star1.Visible = stars >= 1;
+	Star2.Visible = stars >= 2;
+	Star3.Visible = stars >= 3;
+}
+
+
 
 }

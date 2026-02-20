@@ -15,7 +15,7 @@ public partial class GameNavigator : Node
 		loader = new LevelLoader();
 		GD.Print(LevelPaths == null ? "LevelPaths NULL" : "LevelPaths OK");
 		allLevels = LoadLevels();
-		GameManager.StartLevel(allLevels[0]);
+		GameManager.StartLevel(allLevels[1]);
 	}
 
 	// Enter level information here
@@ -58,4 +58,31 @@ public partial class GameNavigator : Node
 
 		return levels;
 	}
+	
+	public override void _Input(InputEvent @event)
+{
+	if (@event is InputEventKey key &&
+		key.Pressed &&
+		!key.Echo)
+	{
+		int index = -1;
+
+		switch (key.Keycode)
+		{
+			case Key.Key1: index = 0; break;
+			case Key.Key2: index = 1; break;
+			case Key.Key3: index = 2; break;
+			case Key.Key4: index = 3; break;
+			case Key.Key5: index = 4; break;
+			case Key.Key6: index = 5; break;
+			case Key.Key7: index = 6; break;
+		}
+
+		if (index >= 0 && index < allLevels.Count)
+		{
+			GD.Print($"Starting Level {index + 1}");
+			GameManager.StartLevel(allLevels[index]);
+		}
+	}
+}
 }
