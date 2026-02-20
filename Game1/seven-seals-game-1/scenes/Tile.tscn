@@ -1,10 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://cslyqif5vqkc8"]
+[gd_scene load_steps=9 format=3 uid="uid://cslyqif5vqkc8"]
 
 [ext_resource type="Script" uid="uid://xq8esmlkrciv" path="res://Scripts/Tile.cs" id="1_2sjy5"]
+[ext_resource type="Texture2D" uid="uid://bsgu1ncut5yo7" path="res://Sprites/EmptyTile.png" id="2_1m54g"]
 [ext_resource type="Texture2D" uid="uid://tc7oh47yxkvm" path="res://Sprites/placeholderTile.png" id="2_vhibn"]
+[ext_resource type="Texture2D" uid="uid://dguvkjgqtn0ee" path="res://Sprites/RockTile.png" id="3_5f4kx"]
+[ext_resource type="Texture2D" uid="uid://b8vxxoidppiuj" path="res://Sprites/WallTile.png" id="4_1ipp3"]
+[ext_resource type="Texture2D" uid="uid://byimha17tsf33" path="res://Sprites/StartTile.png" id="5_o7uur"]
+[ext_resource type="Texture2D" uid="uid://0ihnj1p3cv4u" path="res://Sprites/EndTile.png" id="6_yo1t6"]
+[ext_resource type="Texture2D" uid="uid://cbce72381t7rv" path="res://Sprites/InvalidTile.png" id="7_sumi4"]
 
 [node name="Tile" type="Node2D"]
 script = ExtResource("1_2sjy5")
+EmptyTexture = ExtResource("2_1m54g")
+RockTexture = ExtResource("3_5f4kx")
+WallTexture = ExtResource("4_1ipp3")
+StartTexture = ExtResource("5_o7uur")
+EndTexture = ExtResource("6_yo1t6")
+InvalidTexture = ExtResource("7_sumi4")
 
 [node name="TileSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_vhibn")

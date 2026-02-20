@@ -7,7 +7,8 @@ public partial class GameManager : Node
 	[Export] public Board Board;
 
 	private Tile currentTile;
-
+	
+	
 
 
 
@@ -15,7 +16,6 @@ public partial class GameManager : Node
 	public override void _Ready()
 	{
 		// Example: start on a known tile
-		// You can replace this with Start tile lookup later
 		currentTile = FindStartTile();
 	}
 	

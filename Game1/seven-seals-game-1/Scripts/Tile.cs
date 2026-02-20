@@ -29,10 +29,20 @@ public partial class Tile : Node2D
 	private Sprite2D tileSprite;
 
 	private Dictionary<HexDirection, Tile> Neighbors;
+	
+	[Export] public Texture2D EmptyTexture;
+	[Export] public Texture2D RockTexture;
+	[Export] public Texture2D WallTexture;
+	[Export] public Texture2D StartTexture;
+	[Export] public Texture2D EndTexture;
+	[Export] public Texture2D InvalidTexture;
+	
 
 	public override void _Ready()
 	{
 		InitializeNeighbors();
+		tileSprite = GetNode<Sprite2D>("TileSprite");
+		UpdateVisual();
 	}
 
 	private void InitializeNeighbors()
@@ -44,10 +54,9 @@ public partial class Tile : Node2D
 		}
 	}
 
-	public void Setup(int x, int y, TileContent content, Texture2D tileTexture)
+	public void Setup(TileContent content)
 	{
-		TileLocation = new Vector2(x, y);
-		Setup(TileLocation, content, tileTexture);
+		Content = content;
 	}
 	
 	public void Setup(Vector2 pos, TileContent content, Texture2D tileTexture)
@@ -83,19 +92,34 @@ public partial class Tile : Node2D
 	{
 		if (Content == newContent)
 			return;
-
 		Content = newContent;
-		//UpdateVisual();
+		UpdateVisual();
 	}
 	
 	public void SetTilePosition(Vector2 newPos)
 	{
 		Position = newPos;
 	}
-	
+
 	public void SetTexture(Texture2D texture)
 	{
 		GD.Print(texture);
 		tileSprite.Texture = texture;
+	}
+	
+		private void UpdateVisual()
+	{
+		if (tileSprite == null)
+			return;
+
+		tileSprite.Texture = Content switch
+		{
+			TileContent.Empty => EmptyTexture,
+			TileContent.Rock => RockTexture,
+			TileContent.Wall => WallTexture,
+			TileContent.Start => StartTexture,
+			TileContent.End => EndTexture,
+			_ => InvalidTexture
+		};
 	}
 }

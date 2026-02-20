@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public partial class Board : Node
 {
 	[Export] public PackedScene TileScene;
+	[Export] private float hexSideLength = 32f;
 
 	private const int Width = 7;
 	private const int Height = 7;
@@ -16,12 +17,15 @@ public partial class Board : Node
 		GenerateTiles();
 		LinkTiles();
 	}
-	
+
 	public IEnumerable<Tile> GetAllTiles()
 	{
 		return Tiles.Values;
 	}
 
+	// ─────────────────────────────
+	// TILE CREATION (SINGLE SOURCE)
+	// ─────────────────────────────
 	private void GenerateTiles()
 	{
 		Tiles = new Dictionary<Vector2I, Tile>();
@@ -33,14 +37,18 @@ public partial class Board : Node
 				Vector2I coord = new Vector2I(x, y);
 
 				Tile tile = TileScene.Instantiate<Tile>();
-				AddChild(tile);
+				tile.Position = AxialToWorldCoords(coord);
+				tile.SetContent(TileContent.Empty);
 
-				//tile.Setup(x, y, TileContent.Empty);
+				AddChild(tile);
 				Tiles[coord] = tile;
 			}
 		}
 	}
 
+	// ─────────────────────────────
+	// NEIGHBOR LINKING
+	// ─────────────────────────────
 	private void LinkTiles()
 	{
 		foreach (var pair in Tiles)
@@ -48,17 +56,14 @@ public partial class Board : Node
 			Vector2I c = pair.Key;
 			Tile tile = pair.Value;
 
-			// Top
-			TrySetNeighbor(tile, HexDirection.UpLeft,     c.X - 1, c.Y - 1);
-			TrySetNeighbor(tile, HexDirection.UpRight,    c.X + 1, c.Y - 1);
+			TrySetNeighbor(tile, HexDirection.UpLeft,    c.X - 1, c.Y - 1);
+			TrySetNeighbor(tile, HexDirection.UpRight,   c.X + 1, c.Y - 1);
 
-			// Middle
-			TrySetNeighbor(tile, HexDirection.Left,       c.X - 1, c.Y);
-			TrySetNeighbor(tile, HexDirection.Right,      c.X + 1, c.Y);
+			TrySetNeighbor(tile, HexDirection.Left,      c.X - 1, c.Y);
+			TrySetNeighbor(tile, HexDirection.Right,     c.X + 1, c.Y);
 
-			// Bottom
-			TrySetNeighbor(tile, HexDirection.DownLeft,   c.X - 1, c.Y + 1);
-			TrySetNeighbor(tile, HexDirection.DownRight,  c.X + 1, c.Y + 1);
+			TrySetNeighbor(tile, HexDirection.DownLeft,  c.X - 1, c.Y + 1);
+			TrySetNeighbor(tile, HexDirection.DownRight, c.X + 1, c.Y + 1);
 		}
 	}
 
@@ -70,26 +75,35 @@ public partial class Board : Node
 		{
 			tile.SetNeighbor(dir, neighbor);
 		}
-		
-		
-		
-	}
-	public void ApplyLevel(Level level)
-{
-	// Step 1: Reset everything to Invalid (or Empty)
-	foreach (Tile tile in Tiles.Values)
-	{
-		tile.SetContent(TileContent.Invalid);
 	}
 
-	// Step 2: Apply level-defined tiles
-	foreach (var pair in level.TileMap)
+	// ─────────────────────────────
+	// LEVEL APPLICATION
+	// ─────────────────────────────
+	public void ApplyLevel(Level level)
 	{
-		if (Tiles.TryGetValue(pair.Key, out Tile tile))
+		foreach (Tile tile in Tiles.Values)
+			tile.SetContent(TileContent.Invalid);
+
+		foreach (var pair in level.TileMap)
 		{
-			tile.SetContent(pair.Value);
+			if (Tiles.TryGetValue(pair.Key, out Tile tile))
+				tile.SetContent(pair.Value);
 		}
 	}
-}
 
+	// ─────────────────────────────
+	// COORD CONVERSION
+	// ─────────────────────────────
+	private Vector2 AxialToWorldCoords(Vector2I coord)
+	{
+		float widthOffset = Mathf.Sqrt(3.0f) * hexSideLength;
+		float yPos = (3.0f / 2.0f) * hexSideLength * coord.Y;
+
+		float xPos = (coord.Y % 2 == 0)
+			? -widthOffset * coord.X
+			: -widthOffset * coord.X - (widthOffset / 2.0f);
+
+		return new Vector2(xPos, yPos);
+	}
 }

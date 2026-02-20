@@ -22,6 +22,142 @@ public partial class LevelLoader : Node2D
 	[Export] Texture2D endTexture;
 	[Export] Texture2D invalidTexture;
 	
+	
+		public Dictionary<Vector2I, TileContent> LoadFromFile(string fileName)
+	{
+		Dictionary<Vector2I, TileContent> tileMap =
+		new Dictionary<Vector2I, TileContent>();
+		
+		
+		GD.Print("Building Level");
+		
+		// Get data file
+		Godot.Collections.Dictionary jsonData = LoadJsonFile("res://LevelData/level1.json");
+		
+		// Get the size of the level
+		Godot.Collections.Dictionary boundsData = jsonData["bounds"].AsGodotDictionary();
+		int xSize = (int)boundsData["max"].AsGodotDictionary()["x"];
+		int ySize = (int)boundsData["max"].AsGodotDictionary()["y"];
+		int tileCount = xSize * ySize;
+		
+		// Loop through the tiles and get their data
+		Godot.Collections.Array tilesData = jsonData["tiles"].AsGodotArray();
+		for (int i = 0; i < tileCount; ++i)
+		{
+			// Get each individual tile
+			Godot.Collections.Dictionary tile = tilesData[i].AsGodotDictionary();
+			
+			// Get tile type
+			string tileType = (string)tile["tileId"];
+			
+			// Get tile position
+			int tilePosX = (int)tile["pos"].AsGodotDictionary()["x"];
+			int tilePosY = (int)tile["pos"].AsGodotDictionary()["y"];
+			
+			Vector2I coord = new Vector2I(tilePosX,tilePosY);
+			tileMap[coord] = ParseTileContent(tileType);
+			
+			
+			
+			
+			// Convert from axial to world coordinates
+			Vector2 worldCoords = AxialToWorldCoords(tilePosX, tilePosY);
+			
+			
+			// Print data for debugging
+			GD.Print(tileType + " " + tilePosX + ", " + tilePosY);
+			//GD.Print(worldCoords);
+			//if (i % 7 == 6) { GD.Print(""); }	// split by row
+			
+			
+			// Instantiate tiles
+			/*
+			Node newTile = tileScene.Instantiate();
+			Tile tileScript = newTile as Tile;
+			
+			
+			// Set tile properties
+			TileContent content = TileContent.Invalid;
+			Texture2D tileTexture = invalidTexture;
+			switch (tileType)
+			{
+				case "01U1":
+					content = TileContent.Empty;
+					tileTexture = emptyTexture;
+					break;
+				case "M1C4":
+					content = TileContent.Rock;
+					tileTexture = rockTexture;
+					break;
+				case "02U1":
+					content = TileContent.Wall;
+					tileTexture = wallTexture;
+					break;
+				case "PR06":
+					content = TileContent.Start;
+					tileTexture = startTexture;
+					break;
+				case "M1S4":
+					content = TileContent.End;
+					tileTexture = endTexture;
+					break;
+				default:
+					content = TileContent.Invalid;
+					tileTexture = invalidTexture;
+					break;
+			}
+			tileScript.Setup(worldCoords, content, tileTexture);
+			
+			AddChild(newTile);
+			
+			/*
+			Empty,	// 01U1
+			Rock,	// M1C4
+			Wall,	// 02U1
+			Start,	// PR06
+			End,	// M1S4
+			Invalid	// 03U1*/
+			
+			if (i % 7 == 6) { GD.Print(""); }	// split by row for console logging
+			
+		}
+		return tileMap;
+	}
+	
+	private TileContent ParseTileContent(string tileType){
+		switch (tileType)
+			{
+				case "01U1":
+					return TileContent.Empty;
+					
+					
+				case "M1C4":
+					return TileContent.Rock;
+					
+					
+				case "02U1":
+					return  TileContent.Wall;
+					
+					
+				case "PR06":
+					return TileContent.Start;
+				
+					
+				case "M1S4":
+					return TileContent.End;
+	
+					
+				default:
+					return TileContent.Invalid;
+					
+					
+			}
+	}
+	
+	
+	
+	
+	
 	public override void _Ready()
 	{
 		GD.Print("Building Level");
@@ -57,9 +193,12 @@ public partial class LevelLoader : Node2D
 			//GD.Print(worldCoords);
 			//if (i % 7 == 6) { GD.Print(""); }	// split by row
 			
+			
 			// Instantiate tiles
+			
 			Node newTile = tileScene.Instantiate();
 			Tile tileScript = newTile as Tile;
+			
 			
 			// Set tile properties
 			TileContent content = TileContent.Invalid;
@@ -145,4 +284,7 @@ public partial class LevelLoader : Node2D
 		
 		return new Vector2(xPos, yPos);
 	}
+	
+
+	
 }
