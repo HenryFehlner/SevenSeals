@@ -68,10 +68,10 @@ offset_bottom = 0.0
 mouse_filter = 2
 
 [node name="MovesLabel" type="RichTextLabel" parent="UI"]
-offset_left = 803.0
-offset_top = 27.0
-offset_right = 1128.0
-offset_bottom = 123.0
+offset_left = 860.0
+offset_top = 46.0
+offset_right = 1185.0
+offset_bottom = 142.0
 theme_override_fonts/normal_font = ExtResource("7_tipki")
 theme_override_font_sizes/normal_font_size = 80
 text = "Moves: 0"
