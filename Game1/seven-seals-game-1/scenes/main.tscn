@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://t4rued83ndvd"]
+[gd_scene load_steps=8 format=3 uid="uid://t4rued83ndvd"]
 
 [ext_resource type="PackedScene" uid="uid://vhu6d0pjeqyt" path="res://scenes/baseLevel.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://c1t6newk6d4u0" path="res://Scripts/GameManager.cs" id="2_0wfyh"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cslyqif5vqkc8" path="res://scenes/Tile.tscn" id="3_tbgi4"]
 [ext_resource type="Script" uid="uid://c7tg1hr7xum2q" path="res://GameNavigator.cs" id="4_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://bgyr2qhi0fvnx" path="res://Sprites/StarIcon.png" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://csv6yvr5cdq4m" path="res://scenes/gameState_UI.tscn" id="7_o6xl0"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -62,3 +63,11 @@ offset_right = 642.0
 offset_bottom = -273.0
 theme_override_font_sizes/normal_font_size = 60
 text = "Moves: 0"
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="UI" instance=ExtResource("7_o6xl0")]
+offset_left = -673.0
+offset_top = -373.0
+offset_right = -473.0
+offset_bottom = -273.0
