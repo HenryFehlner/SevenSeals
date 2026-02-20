@@ -18,13 +18,14 @@ script = ExtResource("2_jyhfs")
 TileScene = ExtResource("3_tbgi4")
 hexSideLength = 65.0
 
-[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("Board", "LevelCompletePanel", "Star1", "Star2", "Star3")]
+[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("Board", "LevelCompletePanel", "Star1", "Star2", "Star3", "MoveLabel")]
 script = ExtResource("2_0wfyh")
 Board = NodePath("../Board")
 LevelCompletePanel = NodePath("../LevelCompletePanel")
 Star1 = NodePath("../LevelCompletePanel/Star1")
 Star2 = NodePath("../LevelCompletePanel/Star2")
 Star3 = NodePath("../LevelCompletePanel/Star3")
+MoveLabel = NodePath("../MovesLabel")
 
 [node name="GameNavigator" type="Node2D" parent="." node_paths=PackedStringArray("GameManager")]
 script = ExtResource("4_tbgi4")
@@ -32,6 +33,7 @@ LevelPaths = PackedStringArray("res://LevelData/level1.json", "res://LevelData/T
 GameManager = NodePath("../GameManager")
 
 [node name="LevelCompletePanel" type="HBoxContainer" parent="."]
+visible = false
 offset_left = -614.0
 offset_top = -193.0
 offset_right = 637.0
@@ -52,3 +54,11 @@ expand_mode = 3
 layout_mode = 2
 texture = ExtResource("6_tefeu")
 expand_mode = 3
+
+[node name="MovesLabel" type="RichTextLabel" parent="."]
+offset_left = 382.0
+offset_top = -372.0
+offset_right = 655.0
+offset_bottom = -276.0
+theme_override_font_sizes/normal_font_size = 60
+text = "Moves: 0"

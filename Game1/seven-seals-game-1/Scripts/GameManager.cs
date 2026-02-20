@@ -21,6 +21,8 @@ public partial class GameManager : Node
 	[Export] public TextureRect Star2;
 	[Export] public TextureRect Star3;
 	
+	[Export] public RichTextLabel MoveLabel;
+	
 
 	public override void _Ready()
 	{
@@ -187,6 +189,7 @@ public void StartLevel(Level level)
 	levelComplete = false;
 	currentLevel = level;
 	moveCount = 0;
+	UpdateMoveDisplay();
 	if (Board == null)
 	{
 		GD.PrintErr("GameManager: Board reference not set");
@@ -243,6 +246,8 @@ public void takeMove(bool reachedEnd)
 {
 	
 	moveCount++;
+	UpdateMoveDisplay();
+	
 	GD.Print("Moves Taken: ", moveCount);
 	
 	if (!reachedEnd) return;
@@ -264,6 +269,12 @@ public void takeMove(bool reachedEnd)
 
 		ShowStarResult(stars);
 	}
+}
+
+private void UpdateMoveDisplay()
+{
+	if (MoveLabel != null)
+		MoveLabel.Text = $"Moves: {moveCount}";
 }
 
 private int CalculateStars()
