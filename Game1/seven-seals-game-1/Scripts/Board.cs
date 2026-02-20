@@ -50,22 +50,38 @@ public partial class Board : Node
 	// NEIGHBOR LINKING
 	// ─────────────────────────────
 	private void LinkTiles()
+{
+	foreach (var pair in Tiles)
 	{
-		foreach (var pair in Tiles)
-		{
-			Vector2I c = pair.Key;
-			Tile tile = pair.Value;
+		Vector2I c = pair.Key;
+		Tile tile = pair.Value;
 
-			TrySetNeighbor(tile, HexDirection.UpLeft,    c.X - 1, c.Y - 1);
+		bool isOddRow = (c.Y % 2 == 1);
+
+		if (isOddRow)
+		{
+			TrySetNeighbor(tile, HexDirection.UpLeft,    c.X,     c.Y - 1);
 			TrySetNeighbor(tile, HexDirection.UpRight,   c.X + 1, c.Y - 1);
 
 			TrySetNeighbor(tile, HexDirection.Left,      c.X - 1, c.Y);
 			TrySetNeighbor(tile, HexDirection.Right,     c.X + 1, c.Y);
 
-			TrySetNeighbor(tile, HexDirection.DownLeft,  c.X - 1, c.Y + 1);
+			TrySetNeighbor(tile, HexDirection.DownLeft,  c.X,     c.Y + 1);
 			TrySetNeighbor(tile, HexDirection.DownRight, c.X + 1, c.Y + 1);
 		}
+		else
+		{
+			TrySetNeighbor(tile, HexDirection.UpLeft,    c.X - 1, c.Y - 1);
+			TrySetNeighbor(tile, HexDirection.UpRight,   c.X,     c.Y - 1);
+
+			TrySetNeighbor(tile, HexDirection.Left,      c.X - 1, c.Y);
+			TrySetNeighbor(tile, HexDirection.Right,     c.X + 1, c.Y);
+
+			TrySetNeighbor(tile, HexDirection.DownLeft,  c.X - 1, c.Y + 1);
+			TrySetNeighbor(tile, HexDirection.DownRight, c.X,     c.Y + 1);
+		}
 	}
+}
 
 	private void TrySetNeighbor(Tile tile, HexDirection dir, int x, int y)
 	{

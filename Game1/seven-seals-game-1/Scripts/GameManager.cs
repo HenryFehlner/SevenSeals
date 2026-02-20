@@ -14,7 +14,10 @@ public partial class GameManager : Node
 
 	public override void _Ready()
 	{
-		
+		foreach (Tile tile in Board.GetAllTiles())
+	{
+		tile.Clicked += OnTileClicked;
+	}
 	}
 	
 		public List<Tile> GetValidMoves()
@@ -112,6 +115,40 @@ private Tile FindStartTile()
 	return null;
 }
 
+private void OnTileClicked(Tile tile)
+{
+	if (currentTile == null)
+		return;
+
+	// Determine which direction this tile is from current
+	foreach (HexDirection dir in Enum.GetValues(typeof(HexDirection)))
+	{
+		if (currentTile.GetNeighbor(dir) == tile)
+		{
+			TryMove(dir);
+			//UpdatePlayerVisual();
+			return;
+		}
+	}
+}
+
+private void UpdateHighlights()
+{
+	// Clear all highlights
+	foreach (Tile tile in Board.GetAllTiles())
+	{
+		tile.SetHighlight(false);
+	}
+
+	// Highlight valid moves
+	foreach (Tile tile in GetValidMoves())
+	{
+		tile.SetHighlight(true);
+	}
+	
+	PrintValidMoves(GetValidMoves());
+}
+
 public void StartLevel(Level level)
 {
 	moveCount = 0;
@@ -140,6 +177,31 @@ public void StartLevel(Level level)
 	}
 
 	GD.Print($"Level {level.LevelNumber} started");
+	UpdateHighlights();
+}
+
+private void PrintValidMoves(List<Tile> validMoves)
+{
+	if (validMoves.Count == 0)
+	{
+		GD.Print("Valid Moves: NONE");
+		return;
+	}
+
+	GD.Print("Valid Moves:");
+
+	foreach (Tile tile in validMoves)
+	{
+		GD.Print(" → Tile at ", tile.Position,
+	" Content: ", tile.Content);
+	}
+	
+	foreach (HexDirection dir in Enum.GetValues(typeof(HexDirection)))
+{
+	Tile n = currentTile.GetNeighbor(dir);
+	if (n != null)
+		GD.Print(dir, ": ", n.Content);
+}
 }
 
 }

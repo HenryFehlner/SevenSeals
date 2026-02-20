@@ -27,6 +27,7 @@ public partial class Tile : Node2D
 	[Export] public TileContent Content { get; set; } = TileContent.Empty;
 	[Export] public Vector2 TileLocation { get; set; }
 	private Sprite2D tileSprite;
+	public event Action<Tile> Clicked;
 
 	private Dictionary<HexDirection, Tile> Neighbors;
 	
@@ -43,6 +44,9 @@ public partial class Tile : Node2D
 		InitializeNeighbors();
 		tileSprite = GetNode<Sprite2D>("TileSprite");
 		UpdateVisual();
+		
+		var area = GetNode<Area2D>("Area2D");
+		area.InputEvent += OnInputEvent;
 	}
 
 	private void InitializeNeighbors()
@@ -122,5 +126,20 @@ public partial class Tile : Node2D
 			TileContent.End => EndTexture,
 			_ => InvalidTexture
 		};
+	}
+	
+	public void SetHighlight(bool on)
+{
+	tileSprite.Modulate = on ? Colors.Yellow : Colors.White;
+}
+	
+		private void OnInputEvent(Node viewport, InputEvent @event, long shapeIdx)
+	{
+		if (@event is InputEventMouseButton mouse &&
+			mouse.Pressed &&
+			mouse.ButtonIndex == MouseButton.Left)
+		{
+			Clicked?.Invoke(this);
+		}
 	}
 }
