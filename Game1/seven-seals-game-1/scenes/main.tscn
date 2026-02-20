@@ -58,21 +58,20 @@ texture = ExtResource("6_tefeu")
 expand_mode = 3
 
 [node name="UI" type="CanvasLayer" parent="."]
-layer = 12
-follow_viewport_enabled = true
+layer = 6
+
+[node name="Control" parent="UI" instance=ExtResource("7_o6xl0")]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
 
 [node name="MovesLabel" type="RichTextLabel" parent="UI"]
-offset_left = 317.0
-offset_top = -369.0
-offset_right = 642.0
-offset_bottom = -273.0
+offset_left = 803.0
+offset_top = 27.0
+offset_right = 1128.0
+offset_bottom = 123.0
 theme_override_fonts/normal_font = ExtResource("7_tipki")
 theme_override_font_sizes/normal_font_size = 80
 text = "Moves: 0"
-
-[node name="Control" parent="UI" instance=ExtResource("7_o6xl0")]
-anchors_preset = -1
-offset_left = -681.0
-offset_top = -377.0
-offset_right = -473.0
-offset_bottom = -277.0
