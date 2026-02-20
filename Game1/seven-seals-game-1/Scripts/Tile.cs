@@ -109,6 +109,7 @@ public partial class Tile : Node2D
 	
 		private void UpdateVisual()
 	{
+		GD.Print(tileSprite.Texture?.GetSize());
 		if (tileSprite == null)
 			return;
 

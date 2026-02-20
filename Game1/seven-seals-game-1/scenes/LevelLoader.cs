@@ -32,7 +32,7 @@ public partial class LevelLoader : Node2D
 		GD.Print("Building Level");
 		
 		// Get data file
-		Godot.Collections.Dictionary jsonData = LoadJsonFile("res://LevelData/level1.json");
+		Godot.Collections.Dictionary jsonData = LoadJsonFile(fileName);
 		
 		// Get the size of the level
 		Godot.Collections.Dictionary boundsData = jsonData["bounds"].AsGodotDictionary();
@@ -157,7 +157,7 @@ public partial class LevelLoader : Node2D
 	
 	
 	
-	
+	/*
 	public override void _Ready()
 	{
 		GD.Print("Building Level");
@@ -240,11 +240,12 @@ public partial class LevelLoader : Node2D
 			Wall,	// 02U1
 			Start,	// PR06
 			End,	// M1S4
-			Invalid	// 03U1*/
+			Invalid	// 03U1
 			
-			if (i % 7 == 6) { GD.Print(""); }	// split by row for console logging
+			//if (i % 7 == 6) { GD.Print(""); }	// split by row for console logging
 		}
 	}
+	*/
 	
 	private Godot.Collections.Dictionary LoadJsonFile(string filePath)
 	{

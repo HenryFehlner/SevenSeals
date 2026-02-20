@@ -8,15 +8,13 @@ public partial class GameManager : Node
 
 	private Tile currentTile;
 	
+	private int moveCount;
 	
-
-
-
+	
 
 	public override void _Ready()
 	{
-		// Example: start on a known tile
-		currentTile = FindStartTile();
+		
 	}
 	
 		public List<Tile> GetValidMoves()
@@ -51,18 +49,16 @@ public partial class GameManager : Node
 	if (adjacent == null)
 		return false;
 
-	// Normal movement
-	if (adjacent.IsWalkable())
-	{
-		currentTile = adjacent;
-		return true;
-	}
+if (adjacent.Content == TileContent.Rock)
+{
+	return TryPushRock(adjacent, dir);
+}
 
-	// Push interaction
-	if (adjacent.Content == TileContent.Rock)
-	{
-		return TryPushRock(adjacent, dir);
-	}
+if (adjacent.IsWalkable())
+{
+	currentTile = adjacent;
+	return true;
+}
 
 	return false;
 }
@@ -114,6 +110,36 @@ private Tile FindStartTile()
 
 	GD.PrintErr("GameManager: No Start tile found");
 	return null;
+}
+
+public void StartLevel(Level level)
+{
+	moveCount = 0;
+	if (Board == null)
+	{
+		GD.PrintErr("GameManager: Board reference not set");
+		return;
+	}
+
+	if (level == null)
+	{
+		GD.PrintErr("GameManager: Level is null");
+		return;
+	}
+
+	// Apply level data to board
+	Board.ApplyLevel(level);
+
+	// Find player start
+	currentTile = FindStartTile();
+
+	if (currentTile == null)
+	{
+		GD.PrintErr("GameManager: Start tile not found");
+		return;
+	}
+
+	GD.Print($"Level {level.LevelNumber} started");
 }
 
 }

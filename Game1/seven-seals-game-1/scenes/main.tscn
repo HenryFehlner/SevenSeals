@@ -1,11 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://t4rued83ndvd"]
+[gd_scene load_steps=6 format=3 uid="uid://t4rued83ndvd"]
 
 [ext_resource type="PackedScene" uid="uid://vhu6d0pjeqyt" path="res://scenes/baseLevel.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://c1t6newk6d4u0" path="res://Scripts/GameManager.cs" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://epm7wq0ebs3v" path="res://Scripts/Board.cs" id="2_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://cslyqif5vqkc8" path="res://scenes/Tile.tscn" id="3_tbgi4"]
+[ext_resource type="Script" uid="uid://c7tg1hr7xum2q" path="res://GameNavigator.cs" id="4_tbgi4"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.855, 0.855)
 
-[node name="BaseLevel" parent="." instance=ExtResource("1_o5qli")]
+[node name="Board" parent="." instance=ExtResource("1_o5qli")]
 position = Vector2(390, -290)
+script = ExtResource("2_jyhfs")
+TileScene = ExtResource("3_tbgi4")
+hexSideLength = 65.0
+
+[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("Board")]
+script = ExtResource("2_0wfyh")
+Board = NodePath("../Board")
+
+[node name="GameNavigator" type="Node2D" parent="." node_paths=PackedStringArray("GameManager")]
+script = ExtResource("4_tbgi4")
+LevelPaths = PackedStringArray("res://LevelData/level1.json", "res://LevelData/testLevel2.json", "res://LevelData/testLevel.json")
+GameManager = NodePath("../GameManager")
