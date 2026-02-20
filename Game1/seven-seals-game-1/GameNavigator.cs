@@ -27,9 +27,9 @@ public partial class GameNavigator : Node
 		Level level1 = new Level();
 		level1.Setup(
 			1,
-			20, // three-star moves
-			30, // two-star moves
-			40, // one-star moves
+			7, // three-star moves
+			8, // two-star moves
+			9, // one-star moves
 			loader.LoadFromFile(LevelPaths[0])
 		);
 		levels.Add(level1);

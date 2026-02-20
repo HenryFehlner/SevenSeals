@@ -8,8 +8,11 @@ public partial class GameManager : Node
 
 	private Tile currentTile;
 	
-	private int moveCount;
+	private int moveCount = 0;
 	
+	private Level currentLevel;
+	
+	private bool reachedEnd = false;
 	
 
 	public override void _Ready()
@@ -52,6 +55,8 @@ public partial class GameManager : Node
 	if (adjacent == null)
 		return false;
 
+GD.Print(" → Moving", dir);
+	
 if (adjacent.Content == TileContent.Rock)
 {
 	return TryPushRock(adjacent, dir);
@@ -59,8 +64,17 @@ if (adjacent.Content == TileContent.Rock)
 
 if (adjacent.IsWalkable())
 {
-	currentTile = adjacent;
-	return true;
+bool reachedEnd = (adjacent.Content == TileContent.End);
+
+// Move player marker
+currentTile.SetContent(TileContent.Empty);
+adjacent.SetContent(TileContent.Start);
+currentTile = adjacent;
+
+takeMove(reachedEnd);
+
+UpdateHighlights();
+return true;
 }
 
 	return false;
@@ -77,14 +91,18 @@ private bool TryPushRock(Tile rockTile, HexDirection dir)
 		case TileContent.Empty:
 		case TileContent.Start:
 			// Rock moves forward
+			takeMove(reachedEnd);
 			destination.SetContent(TileContent.Rock);
 			rockTile.SetContent(TileContent.Empty);
+			
 			return true;
 
 		case TileContent.Wall:
 		case TileContent.End:
 			// Rock breaks
+			takeMove(reachedEnd);
 			rockTile.SetContent(TileContent.Empty);
+			
 			return true;
 
 		case TileContent.Rock:
@@ -151,6 +169,7 @@ private void UpdateHighlights()
 
 public void StartLevel(Level level)
 {
+	currentLevel = level;
 	moveCount = 0;
 	if (Board == null)
 	{
@@ -202,6 +221,26 @@ private void PrintValidMoves(List<Tile> validMoves)
 	if (n != null)
 		GD.Print(dir, ": ", n.Content);
 }
+}
+
+public void takeMove(bool reachedEnd)
+{
+	moveCount++;
+	GD.Print("Moves Taken: ", moveCount);
+
+	if (reachedEnd)
+	{
+		GD.Print("Level completed in ", moveCount, " moves");
+
+		if (moveCount > currentLevel.OneStarMoves)
+			GD.Print("No Stars");
+		else if (moveCount > currentLevel.TwoStarMoves)
+			GD.Print("1 Star");
+		else if (moveCount > currentLevel.ThreeStarMoves)
+			GD.Print("2 Stars");
+		else
+			GD.Print("3 Stars");
+	}
 }
 
 }

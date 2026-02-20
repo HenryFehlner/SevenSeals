@@ -139,6 +139,7 @@ public partial class Tile : Node2D
 			mouse.Pressed &&
 			mouse.ButtonIndex == MouseButton.Left)
 		{
+			GD.Print("Tile clicked!");
 			Clicked?.Invoke(this);
 		}
 	}
