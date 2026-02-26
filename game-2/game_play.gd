@@ -1,34 +1,48 @@
 extends CanvasLayer
 
+#region UI Reference
 @onready var coloringCanvas : Control = $ColoringCanvas
 @onready var lineArtLayer:CanvasLayer = $LineArt
 @onready var drawingContainer:Control = $LineArt/ColoringContainer
 
-var currentPage:int
+#region Drawing State
+var currentPage:int = 0
+var currentColor: Color = Color.RED
+var brushSize: int = 10
+var isDrawing: bool = false
+var drawingMode: String = "brush"
+var undoStack: Array[Image] = []
+var redoStack: Array[Image] = []
+var UndoSteps: int = 200
 
+#region Page Data
 #can only put pictures in this array
-var coloringLayers: Array[Image] = [
-
-]
-
+var coloringLayers: Array[Image] = []
 #will hold all the line art
 var pages: Array[Image] = [
 	
 	preload("res://coloring-images/catipillar.jpg").get_image(),
 	preload("res://coloring-images/stringray.jpg").get_image()
 ]
-
 #size of the canvas, will be able to change it to mobile easily
 var canvasSize: Vector2 = Vector2(400, 490)
 
+#region Drawing Properties
 var lineMask: Image
+var lineWidth: float = 4.0
+var lineColor: Color = Color.BLACK
+var floodFillActive:bool = false
 
+#region signals
+signal layersLoaded
+
+#region functions
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	createPageDef()
 	drawPage(0)
 
-
+#creates a page to attach to the coloring layer
 func createPageDef()-> void:
 	coloringLayers.clear()
 	#creates an specific page for each line art coloring oage.
@@ -39,6 +53,7 @@ func createPageDef()-> void:
 		coloringLayers.append(img)
 		
 
+#Creates the coloring layer so you can draw on top of the line art layer 
 func setColoringLayer() -> void:
 	for c:TextureRect in coloringCanvas.get_children():
 		c.queue_free()
@@ -54,7 +69,7 @@ func setColoringLayer() -> void:
 	#makes sure it's being rendered ontop 
 	lineArtLayer.layer = 1
 		
-
+#Converts the image into a texture
 func updateColorDisplay() -> void:
 	var display:TextureRect = coloringCanvas.get_node("ColoringLayer")
 	if display:
@@ -62,12 +77,13 @@ func updateColorDisplay() -> void:
 		text.set_image(coloringLayers[currentPage])
 		display.texture = text
 		
-		
+	
+#Displays the actual texture	
 func drawPage(pageNumber:int) -> void:
 	if pageNumber < 0 or pageNumber > pages.size():
 		return
 	currentPage = pageNumber
-	#clearDrawingContainer()
+	clearDrawingContainer()
 	var img:Image = pages[currentPage]
 	img.convert(Image.FORMAT_RGBA8)
 	img.resize(int(canvasSize.x), int(canvasSize.y))
@@ -86,3 +102,8 @@ func drawPage(pageNumber:int) -> void:
 	
 	setColoringLayer()
 	
+#Clears the drawing container
+func clearDrawingContainer() -> void: 
+	for child:TextureRect in drawingContainer.get_children():
+		drawingContainer.remove_child(child)
+		child.queue_free()
