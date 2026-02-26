@@ -19,7 +19,7 @@ var pages: Array[Image] = [
 ]
 
 #size of the canvas, will be able to change it to mobile easily
-var canvasSize: Vector2 = Vector2(800, 600)
+var canvasSize: Vector2 = Vector2(400, 490)
 
 var lineMask: Image
 
@@ -30,7 +30,7 @@ func _ready() -> void:
 
 
 func createPageDef()-> void:
-
+	coloringLayers.clear()
 	#creates an specific page for each line art coloring oage.
 	for i:int in range(pages.size()):
 		#This will create each new page, size, and that it contains red, blue and yellow 
