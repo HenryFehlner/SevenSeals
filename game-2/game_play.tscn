@@ -1,3 +1,259 @@
-[gd_scene format=3 uid="uid://bj2qtximt8g2r"]
+[gd_scene load_steps=22 format=3 uid="uid://bj2qtximt8g2r"]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource type="Script" uid="uid://c6hp52svm5rq1" path="res://game_play.gd" id="1_uxx58"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jou2t"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uxx58"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.037343122, 0.0935623, 0.22036335, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Gradient" id="Gradient_w8nmq"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.93792796, 0.46693867, 0.6639464, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sr1gb"]
+gradient = SubResource("Gradient_w8nmq")
+width = 140
+
+[sub_resource type="Gradient" id="Gradient_pj5e7"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.5336356, 0.7784726, 0.8072525, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vkeae"]
+gradient = SubResource("Gradient_pj5e7")
+width = 140
+
+[sub_resource type="Gradient" id="Gradient_strlv"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.77260303, 0.89096767, 0.6510901, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uqw4b"]
+gradient = SubResource("Gradient_strlv")
+width = 140
+
+[sub_resource type="Gradient" id="Gradient_gqjqd"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.71128523, 0.72752964, 0.92949605, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pvdjo"]
+gradient = SubResource("Gradient_gqjqd")
+width = 140
+
+[sub_resource type="Gradient" id="Gradient_0mbhd"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.9829224, 0.7155917, 0.62592524, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uycrd"]
+gradient = SubResource("Gradient_0mbhd")
+width = 140
+
+[sub_resource type="Gradient" id="Gradient_7bf21"]
+offsets = PackedFloat32Array(0.99707603, 1)
+colors = PackedColorArray(0.97726256, 0.8050569, 0.5411208, 1, 1, 0.8547574, 0.7532998, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x2ujm"]
+gradient = SubResource("Gradient_7bf21")
+width = 140
+
+[sub_resource type="Gradient" id="Gradient_xjpow"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.6542497, 0.8499911, 0.99556464, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fvbcm"]
+gradient = SubResource("Gradient_xjpow")
+width = 140
+
+[sub_resource type="Gradient" id="Gradient_kgpdb"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.7635418, 0.94379634, 0.866235, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a1b81"]
+gradient = SubResource("Gradient_kgpdb")
+width = 140
+
+[sub_resource type="Gradient" id="Gradient_htgex"]
+offsets = PackedFloat32Array(0, 0.00877193, 0.8538012, 1)
+colors = PackedColorArray(0.7213606, 0.91365623, 0.8605532, 1, 0.7213606, 0.91365623, 0.8605532, 1, 0.7213606, 0.91365623, 0.8605532, 1, 0.7213606, 0.91365623, 0.8605532, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3ux7j"]
+gradient = SubResource("Gradient_htgex")
+
+[node name="Main" type="CanvasLayer"]
+script = ExtResource("1_uxx58")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColoringCanvas" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LineArt" type="CanvasLayer" parent="."]
+
+[node name="ColoringContainer" type="Control" parent="LineArt"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ToolBar" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1008.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jou2t")
+
+[node name="GridContainer" type="GridContainer" parent="ToolBar"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 0.0
+
+[node name="Brush" type="Button" parent="ToolBar/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Brush"
+
+[node name="Bucket" type="Button" parent="ToolBar/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Bucket"
+
+[node name="Eraser" type="Button" parent="ToolBar/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Eraser"
+
+[node name="Undo" type="Button" parent="ToolBar/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Undo"
+
+[node name="Redo" type="Button" parent="ToolBar/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Redo"
+
+[node name="Next" type="Button" parent="ToolBar/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Next"
+
+[node name="Previous" type="Button" parent="ToolBar/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Previous"
+
+[node name="Camera" type="Button" parent="ToolBar/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Camera
+"
+
+[node name="ColorToolbar" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 850.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uxx58")
+
+[node name="GridContainer" type="GridContainer" parent="ColorToolbar"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.5
+columns = 2
+
+[node name="color1" type="TextureButton" parent="ColorToolbar/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = SubResource("GradientTexture1D_sr1gb")
+stretch_mode = 0
+
+[node name="color2" type="TextureButton" parent="ColorToolbar/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = SubResource("GradientTexture1D_vkeae")
+stretch_mode = 0
+
+[node name="color3" type="TextureButton" parent="ColorToolbar/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = SubResource("GradientTexture1D_uqw4b")
+stretch_mode = 0
+
+[node name="color4" type="TextureButton" parent="ColorToolbar/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = SubResource("GradientTexture1D_pvdjo")
+stretch_mode = 0
+
+[node name="color5" type="TextureButton" parent="ColorToolbar/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = SubResource("GradientTexture1D_uycrd")
+stretch_mode = 0
+
+[node name="color6" type="TextureButton" parent="ColorToolbar/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = SubResource("GradientTexture1D_x2ujm")
+stretch_mode = 0
+
+[node name="color7" type="TextureButton" parent="ColorToolbar/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = SubResource("GradientTexture1D_fvbcm")
+stretch_mode = 0
+
+[node name="color8" type="TextureButton" parent="ColorToolbar/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = SubResource("GradientTexture1D_a1b81")
+texture_pressed = SubResource("GradientTexture1D_3ux7j")
+stretch_mode = 0
