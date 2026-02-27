@@ -21,7 +21,7 @@ var coloringLayers: Array[Image] = []
 #will hold all the line art
 var pages: Array[Image] = [
 	
-	preload("res://coloring-images/pikachuu.png").get_image(),
+	preload("res://coloring-images/pikachu2.png").get_image(),
 	preload("res://coloring-images/stringray.jpg").get_image()
 ]
 #size of the canvas, will be able to change it to mobile easily
