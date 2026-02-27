@@ -95,6 +95,7 @@ func drawPage(pageNumber:int) -> void:
 	textRect.texture = text
 	textRect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	textRect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	#textRect.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	textRect.z_index = 0
 	await get_tree().process_frame
 	textRect.name = "LineArtImage"
