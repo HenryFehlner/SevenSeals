@@ -107,3 +107,32 @@ func clearDrawingContainer() -> void:
 	for child:TextureRect in drawingContainer.get_children():
 		drawingContainer.remove_child(child)
 		child.queue_free()
+	
+#currently checks for mouse movement
+func _input(event: InputEvent) -> void:
+	if floodFillActive:
+		return
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if isMouseOverUi(event.position):
+				return
+				
+			#for coloring
+			if event.pressed:
+				pass
+			else:
+				pass
+	
+	elif event is InputEventMouseMotion and isDrawing:
+		if isMouseOverUi(event.position):
+			pass
+	
+#Checks to see if the mouse is over the UI
+#Can be changed to finger
+func isMouseOverUi(mousePos: Vector2) -> bool:
+	if $ToolBar and $ToolBar.get_global_rect().has_point(mousePos):
+		return true
+	if $ColorToolbar and $ColorToolbar.get_global_rect().has_point(mousePos):
+		return true
+		
+	return false
