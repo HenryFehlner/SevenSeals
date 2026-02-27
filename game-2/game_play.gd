@@ -21,7 +21,7 @@ var coloringLayers: Array[Image] = []
 #will hold all the line art
 var pages: Array[Image] = [
 	
-	preload("res://coloring-images/catipillar.jpg").get_image(),
+	preload("res://coloring-images/pikachuu.png").get_image(),
 	preload("res://coloring-images/stringray.jpg").get_image()
 ]
 #size of the canvas, will be able to change it to mobile easily
@@ -119,13 +119,16 @@ func _input(event: InputEvent) -> void:
 				
 			#for coloring
 			if event.pressed:
-				pass
+				startColoring(event.position)
+				print("coloring work")
 			else:
-				pass
+				stopColoring()
 	
 	elif event is InputEventMouseMotion and isDrawing:
 		if isMouseOverUi(event.position):
-			pass
+			return
+			
+		continueColoring(event.position)
 	
 #Checks to see if the mouse is over the UI
 #Can be changed to finger
@@ -136,3 +139,55 @@ func isMouseOverUi(mousePos: Vector2) -> bool:
 		return true
 		
 	return false
+	
+#gets the coloring position from the image
+func getColoringPosition(screenPos: Vector2) -> Vector2:
+	var textRect = drawingContainer.get_node("LineArtImage")
+	if textRect:
+		var imgSize: Vector2 = textRect.texture.get_size()
+		var rectSize: Vector2 = textRect.size
+		var cScale = min(rectSize.x/imgSize.x, rectSize.y/imgSize.y )
+		var coffset = (rectSize - imgSize * cScale)/2
+		var local = (screenPos - textRect.global_position - coffset)/cScale
+		
+		return Vector2(
+			clamp(local.x, 0, canvasSize.x-1),
+		clamp(local.y,0,canvasSize.y-1)
+		)
+	
+	return screenPos
+	
+
+func drawBrush(pos: Vector2) -> void:
+	var img = coloringLayers[currentPage]
+	for x:int in range(-brushSize, brushSize+1):
+		for y:int in range (-brushSize, brushSize+1):
+			if x*x+ y*y < brushSize * brushSize:
+				var px:int = int(pos.x)+x
+				var py:int = int(pos.y)+y
+				if (px >= 0 and
+				 	px < int(canvasSize.x) and 
+					py >= 0 and 
+					py < int(canvasSize.y)):
+						if lineMask.get_pixel(px,py).a<0.1:
+							img.set_pixel(px,py,currentColor)
+							print("painting at ", px, py)
+							
+							
+	updateColorDisplay()
+	
+
+func startColoring(pos:Vector2) -> void:
+	var local = getColoringPosition(pos)
+	if drawingMode == "brush":
+		isDrawing = true
+		drawBrush(local)
+		
+func continueColoring(pos:Vector2)-> void:
+	if not isDrawing:return
+	drawBrush(getColoringPosition(pos))
+	
+func stopColoring()-> void:
+	isDrawing = false
+					
+			
