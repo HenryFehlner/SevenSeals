@@ -10,7 +10,7 @@ var currentPage:int = 0
 var currentColor: Color = Color.RED
 var brushSize: int = 10
 var isDrawing: bool = false
-var drawingMode: String = "brush"
+var drawingMode: String = "bucket"
 var undoStack: Array[Image] = []
 var redoStack: Array[Image] = []
 var UndoSteps: int = 200
@@ -183,6 +183,9 @@ func startColoring(pos:Vector2) -> void:
 	if drawingMode == "brush":
 		isDrawing = true
 		drawBrush(local)
+	elif drawingMode == "bucket":
+		floodFillScanline(local, currentColor)
+		
 		
 func continueColoring(pos:Vector2)-> void:
 	if not isDrawing:return
@@ -192,3 +195,78 @@ func stopColoring()-> void:
 	isDrawing = false
 					
 			
+
+func floodFillScanline(startPos:Vector2, fillColor:Color)->void:
+	var img:Image = coloringLayers[currentPage]
+	var x:int = int(startPos.x)
+	var y:int = int(startPos.y)
+	
+	if x < 0 or x >= canvasSize.x or y < 0 or y >= canvasSize.y:
+		return
+		
+	var originalColor = img.get_pixel(x,y)
+	if originalColor == fillColor:
+		return
+		
+	var stack: Array[Vector2i] = [Vector2i(x,y)]
+	var filledPixels: Dictionary = {}
+	
+	while stack.size() > 0:
+		var current: Vector2i = stack.pop_back()
+		var cx:int = current.x
+		var cy:int = current.y
+		
+		if cx < 0 or cx >= canvasSize.x or cy < 0 or cy >= canvasSize.y:
+			continue 
+			
+		var pixelKey:Vector2i = Vector2i(cx, cy)
+		if filledPixels.has(pixelKey):
+			continue 
+			
+		if img.get_pixel(cx, cy) != originalColor:
+			continue
+			
+		if lineMask.get_pixel(cx, cy).a > 0.1:
+			continue
+			
+		var left:int = cx
+		var right:int = cx
+		
+		#left boundary
+		while (
+			left > 0 and 
+		img.get_pixel(left-1, cy) == originalColor and 
+		lineMask.get_pixel(left - 1,cy).a <= 0.1
+		):
+			left -= 1
+		
+		#right boundary	
+		while (
+			right < canvasSize.x-1 and 
+		img.get_pixel(right+1, cy) == originalColor and 
+		lineMask.get_pixel(right+ 1,cy).a <= 0.1
+		):
+			right += 1
+			
+		for i in range(left, right+1):
+			img.set_pixel(i,cy,fillColor)
+			filledPixels[Vector2i(i,cy)] = true
+		
+		for i:int in range(left,right+1):
+			if cy > 0:
+					var aboveKey = Vector2i(i, cy-1)
+					if not (
+						filledPixels.has(aboveKey) and 
+						img.get_pixel(i, cy-1) == originalColor and 
+						lineMask.get_pixel(i, cy-1).a <= 0.1):
+							stack.append(Vector2i(i,cy-1))
+			if cy < canvasSize.y -1:
+				var belowKey:Vector2i = Vector2i(i,cy+1)
+				if not (
+						filledPixels.has(belowKey) and 
+						img.get_pixel(i, cy+1) == originalColor and 
+						lineMask.get_pixel(i, cy+1).a <= 0.1):
+							stack.append(Vector2i(i,cy+1))
+							
+	updateColorDisplay()
+		
