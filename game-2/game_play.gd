@@ -269,4 +269,51 @@ func floodFillScanline(startPos:Vector2, fillColor:Color)->void:
 							stack.append(Vector2i(i,cy+1))
 							
 	updateColorDisplay()
+	
+func setBurshColor(color:Color)-> void:
+	currentColor = color
+	
+func setBrushSize(size:int)-> void:
+	brushSize = size
+	
+func setDrawingMode(mode:String)-> void:
+	drawingMode = mode
 		
+
+#region Linking Color Buttons
+func _on_color_1_pressed(source: BaseButton) -> void:
+	currentColor = source.texture_normal.gradient.get_color(0)
+
+func _on_color_2_pressed(source: BaseButton) -> void:
+	currentColor = source.texture_normal.gradient.get_color(0)
+
+
+func _on_color_3_pressed(source: BaseButton) -> void:
+	currentColor = source.texture_normal.gradient.get_color(0)
+
+func _on_color_4_pressed(source: BaseButton) -> void:
+	currentColor = source.texture_normal.gradient.get_color(0)
+
+
+func _on_color_5_pressed(source: BaseButton) -> void:
+	currentColor = source.texture_normal.gradient.get_color(0)
+
+
+func _on_color_6_pressed(source: BaseButton) -> void:
+	currentColor = source.texture_normal.gradient.get_color(0)
+
+
+func _on_color_7_pressed(source: BaseButton) -> void:
+	currentColor = source.texture_normal.gradient.get_color(0)
+
+
+func _on_color_8_pressed(source: BaseButton) -> void:
+	currentColor = source.texture_normal.gradient.get_color(0)
+
+
+func _on_brush_pressed(source: BaseButton) -> void:
+	setDrawingMode("brush")
+
+
+func _on_bucket_pressed(source: BaseButton) -> void:
+	setDrawingMode("bucket")

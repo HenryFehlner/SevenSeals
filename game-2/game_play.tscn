@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://bj2qtximt8g2r"]
+[gd_scene load_steps=23 format=3 uid="uid://bj2qtximt8g2r"]
 
 [ext_resource type="Script" uid="uid://c6hp52svm5rq1" path="res://game_play.gd" id="1_uxx58"]
+[ext_resource type="Script" uid="uid://cyk4ppl5e8yso" path="res://color_toolbar.gd" id="2_w8nmq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jou2t"]
 content_margin_left = 0.0
@@ -202,6 +203,7 @@ offset_left = -304.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uxx58")
+script = ExtResource("2_w8nmq")
 
 [node name="GridContainer" type="GridContainer" parent="ColorToolbar"]
 layout_mode = 2
@@ -256,3 +258,14 @@ size_flags_vertical = 3
 texture_normal = SubResource("GradientTexture1D_a1b81")
 texture_pressed = SubResource("GradientTexture1D_3ux7j")
 stretch_mode = 0
+
+[connection signal="pressed" from="ToolBar/GridContainer/Brush" to="." method="_on_brush_pressed" flags=18]
+[connection signal="pressed" from="ToolBar/GridContainer/Bucket" to="." method="_on_bucket_pressed" flags=18]
+[connection signal="pressed" from="ColorToolbar/GridContainer/color1" to="." method="_on_color_1_pressed" flags=18]
+[connection signal="pressed" from="ColorToolbar/GridContainer/color2" to="." method="_on_color_2_pressed" flags=18]
+[connection signal="pressed" from="ColorToolbar/GridContainer/color3" to="." method="_on_color_3_pressed" flags=18]
+[connection signal="pressed" from="ColorToolbar/GridContainer/color4" to="." method="_on_color_4_pressed" flags=18]
+[connection signal="pressed" from="ColorToolbar/GridContainer/color5" to="." method="_on_color_5_pressed" flags=18]
+[connection signal="pressed" from="ColorToolbar/GridContainer/color6" to="." method="_on_color_6_pressed" flags=18]
+[connection signal="pressed" from="ColorToolbar/GridContainer/color7" to="." method="_on_color_7_pressed" flags=18]
+[connection signal="pressed" from="ColorToolbar/GridContainer/color8" to="." method="_on_color_8_pressed" flags=18]
