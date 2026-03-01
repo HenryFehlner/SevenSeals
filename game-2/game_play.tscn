@@ -261,6 +261,7 @@ stretch_mode = 0
 
 [connection signal="pressed" from="ToolBar/GridContainer/Brush" to="." method="_on_brush_pressed" flags=18]
 [connection signal="pressed" from="ToolBar/GridContainer/Bucket" to="." method="_on_bucket_pressed" flags=18]
+[connection signal="pressed" from="ToolBar/GridContainer/Eraser" to="." method="_on_eraser_pressed" flags=18]
 [connection signal="pressed" from="ColorToolbar/GridContainer/color1" to="." method="_on_color_1_pressed" flags=18]
 [connection signal="pressed" from="ColorToolbar/GridContainer/color2" to="." method="_on_color_2_pressed" flags=18]
 [connection signal="pressed" from="ColorToolbar/GridContainer/color3" to="." method="_on_color_3_pressed" flags=18]

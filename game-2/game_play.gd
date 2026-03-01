@@ -270,6 +270,7 @@ func floodFillScanline(startPos:Vector2, fillColor:Color)->void:
 							
 	updateColorDisplay()
 	
+#region Utility functions for buttons 
 func setBurshColor(color:Color)-> void:
 	currentColor = color
 	
@@ -310,10 +311,13 @@ func _on_color_7_pressed(source: BaseButton) -> void:
 func _on_color_8_pressed(source: BaseButton) -> void:
 	currentColor = source.texture_normal.gradient.get_color(0)
 
-
+#region brush settings
 func _on_brush_pressed(source: BaseButton) -> void:
 	setDrawingMode("brush")
 
 
 func _on_bucket_pressed(source: BaseButton) -> void:
 	setDrawingMode("bucket")
+
+func _on_eraser_pressed(source: BaseButton) -> void:
+	currentColor = Color.TRANSPARENT
