@@ -13,7 +13,7 @@ var isDrawing: bool = false
 var drawingMode: String = "bucket"
 var undoStack: Array[Image] = []
 var redoStack: Array[Image] = []
-var UndoSteps: int = 200
+var maxUndoSteps: int = 200
 
 #region Page Data
 #can only put pictures in this array
@@ -81,7 +81,7 @@ func updateColorDisplay() -> void:
 	
 #Displays the actual texture	
 func drawPage(pageNumber:int) -> void:
-	if pageNumber < 0 or pageNumber > pages.size():
+	if pageNumber < 0 or pageNumber >= pages.size():
 		return
 	currentPage = pageNumber
 	clearDrawingContainer()
@@ -159,6 +159,7 @@ func getColoringPosition(screenPos: Vector2) -> Vector2:
 	return screenPos
 	
 
+#Drawing the brush stroke 
 func drawBrush(pos: Vector2) -> void:
 	var img = coloringLayers[currentPage]
 	for x:int in range(-brushSize, brushSize+1):
@@ -181,9 +182,11 @@ func drawBrush(pos: Vector2) -> void:
 func startColoring(pos:Vector2) -> void:
 	var local = getColoringPosition(pos)
 	if drawingMode == "brush":
+		saveState()
 		isDrawing = true
 		drawBrush(local)
 	elif drawingMode == "bucket":
+		saveState()
 		floodFillScanline(local, currentColor)
 		
 		
@@ -195,7 +198,7 @@ func stopColoring()-> void:
 	isDrawing = false
 					
 			
-
+#Fill Tool
 func floodFillScanline(startPos:Vector2, fillColor:Color)->void:
 	var img:Image = coloringLayers[currentPage]
 	var x:int = int(startPos.x)
@@ -339,3 +342,54 @@ func _on_next_pressed(source: BaseButton) -> void:
 
 func _on_previous_pressed(source: BaseButton) -> void:
 	prevPage()
+	
+#Do not have button for this currently, 
+#but one can be made if we want to offer
+func clearPage() -> void:
+	coloringLayers[currentPage].fill(Color.TRANSPARENT)
+	updateColorDisplay()
+	
+	
+func undo() -> void:
+	if undoStack.is_empty():
+		print("Nothing to undo")
+		return
+	var img:Image = undoStack.pop_back()
+	var current:Image = coloringLayers[currentPage].duplicate()
+	redoStack.append(current)
+	coloringLayers[currentPage] = img	
+	updateColorDisplay()
+	
+func redo() -> void:
+	if redoStack.is_empty():
+		print("Nothing to redo")
+		return
+	var img:Image = redoStack.pop_back()
+	var current:Image = coloringLayers[currentPage].duplicate()
+	undoStack.append(current)
+	coloringLayers[currentPage] = img
+	updateColorDisplay()
+	
+func  saveState() -> void:
+	if currentPage < 0 or currentPage >= coloringLayers.size():
+		push_warning("saveState: currentPage out of range: %s" % currentPage)
+		return
+	
+	var img:Image = coloringLayers[currentPage]
+	if img == null:
+		push_warning("saveState: coloringLayers[%s] is null" % currentPage)
+		return
+		
+	var snapshot = img.duplicate()
+	undoStack.append(snapshot)
+	redoStack.clear()
+	
+	if undoStack.size() > maxUndoSteps:
+		undoStack.pop_front()
+
+
+func _on_redo_pressed() -> void:
+	redo()
+
+func _on_undo_pressed() -> void:
+	undo()
