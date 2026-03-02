@@ -315,15 +315,14 @@ func _on_color_8_pressed(source: BaseButton) -> void:
 	currentColor = source.texture_normal.gradient.get_color(0)
 
 #region brush settings
-func _on_brush_pressed(source: BaseButton) -> void:
-	setDrawingMode("brush")
+func _on_eraser_pressed() -> void:
+	currentColor = Color.TRANSPARENT
 
-
-func _on_bucket_pressed(source: BaseButton) -> void:
+func _on_bucket_pressed() -> void:
 	setDrawingMode("bucket")
 
-func _on_eraser_pressed(source: BaseButton) -> void:
-	currentColor = Color.TRANSPARENT
+func _on_brush_pressed() -> void:
+	setDrawingMode("brush")
 	
 func nextPage() -> void:
 	if currentPage < pages.size()-1:
@@ -335,12 +334,10 @@ func prevPage() -> void:
 		currentPage -= 1
 		drawPage(currentPage)
 
-
-func _on_next_pressed(source: BaseButton) -> void:
+func _on_next_pressed() -> void:
 	nextPage()
-
-
-func _on_previous_pressed(source: BaseButton) -> void:
+	
+func _on_previous_pressed() -> void:
 	prevPage()
 	
 #Do not have button for this currently, 
@@ -386,7 +383,6 @@ func  saveState() -> void:
 	
 	if undoStack.size() > maxUndoSteps:
 		undoStack.pop_front()
-
 
 func _on_redo_pressed() -> void:
 	redo()
