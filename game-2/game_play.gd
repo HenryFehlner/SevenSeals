@@ -22,7 +22,8 @@ var coloringLayers: Array[Image] = []
 var pages: Array[Image] = [
 	
 	preload("res://coloring-images/pikachu2.png").get_image(),
-	preload("res://coloring-images/stringray.jpg").get_image()
+	preload("res://coloring-images/mareanie.png").get_image(),
+	preload("res://coloring-images/slyveon.png").get_image()
 ]
 #size of the canvas, will be able to change it to mobile easily
 var canvasSize: Vector2 = Vector2(400, 490)
@@ -150,7 +151,6 @@ func getColoringPosition(screenPos: Vector2) -> Vector2:
 		var cScale = min(rectSize.x/imgSize.x, rectSize.y/imgSize.y )
 		var coffset = (rectSize - imgSize * cScale)/2
 		var local = (screenPos - textRect.global_position - coffset)/cScale
-		
 		return Vector2(
 			clamp(local.x, 0, canvasSize.x-1),
 		clamp(local.y,0,canvasSize.y-1)
@@ -321,3 +321,21 @@ func _on_bucket_pressed(source: BaseButton) -> void:
 
 func _on_eraser_pressed(source: BaseButton) -> void:
 	currentColor = Color.TRANSPARENT
+	
+func nextPage() -> void:
+	if currentPage < pages.size()-1:
+		currentPage += 1
+		drawPage(currentPage)
+		
+func prevPage() -> void:
+	if currentPage > 0:
+		currentPage -= 1
+		drawPage(currentPage)
+
+
+func _on_next_pressed(source: BaseButton) -> void:
+	nextPage()
+
+
+func _on_previous_pressed(source: BaseButton) -> void:
+	prevPage()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0ll463wak7b4"
-path="res://.godot/imported/catipillar.png-54177e6a7e679d3b45625bcd21679e4e.ctex"
+uid="uid://cudecbylv3cui"
+path="res://.godot/imported/slyveon.png-18cc5e0abe80be9826e97789b8f7aa83.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://coloring-images/catipillar.png"
-dest_files=["res://.godot/imported/catipillar.png-54177e6a7e679d3b45625bcd21679e4e.ctex"]
+source_file="res://coloring-images/slyveon.png"
+dest_files=["res://.godot/imported/slyveon.png-18cc5e0abe80be9826e97789b8f7aa83.ctex"]
 
 [params]
 

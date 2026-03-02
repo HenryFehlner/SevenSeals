@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqf5jld14cyfv"
-path="res://.godot/imported/catipillar.jpg-fe679346cdc269b1c9c039f625b0561e.ctex"
+uid="uid://blamj60val2hh"
+path="res://.godot/imported/mareanie.png-821161bf5063099d38e0689b8c41097b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://coloring-images/catipillar.jpg"
-dest_files=["res://.godot/imported/catipillar.jpg-fe679346cdc269b1c9c039f625b0561e.ctex"]
+source_file="res://coloring-images/mareanie.png"
+dest_files=["res://.godot/imported/mareanie.png-821161bf5063099d38e0689b8c41097b.ctex"]
 
 [params]
 
