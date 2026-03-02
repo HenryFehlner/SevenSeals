@@ -41,7 +41,13 @@ signal layersLoaded
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	createPageDef()
+	loadProgress()
+	runApp()
+
+
+func runApp() ->  void:
 	drawPage(0)
+	setDrawingMode("Bucket")
 
 #creates a page to attach to the coloring layer
 func createPageDef()-> void:
@@ -389,3 +395,24 @@ func _on_redo_pressed() -> void:
 
 func _on_undo_pressed() -> void:
 	undo()
+	
+func saveProgess() -> void:
+	var file = FileAccess.open("user://layers.dat",FileAccess.WRITE)
+	if file:
+		var data = []
+		for img in coloringLayers:
+			var bytes = img.save_png_to_buffer()
+			data.append(bytes)
+		file.store_var(data)
+		file.close()
+	
+func loadProgress() -> void:
+	if FileAccess.file_exists("user://layers.dat"):
+		var file = FileAccess.open("user://layers.dat", FileAccess.READ)
+		if file:
+			var data = file.get_var()
+			for i in range(data.size()):
+				var img = Image.new()
+				img.load_png_from_buffer(data[i])
+				coloringLayers[i] = img
+			file.close()
