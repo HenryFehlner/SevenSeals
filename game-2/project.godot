@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Game2"
-run/main_scene="uid://bj2qtximt8g2r"
-config/features=PackedStringArray("4.5", "Mobile")
+run/main_scene="uid://dejf4gmly8t1q"
+config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
 
 [display]
