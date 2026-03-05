@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://che684hmuci16" path="res://c#-scripts/ZoomAndPanImage.cs" id="2_qa0f2"]
 
 [node name="ImageColorPick" type="Node2D"]
-script = ExtResource("1_1kb0h")
 
 [node name="UserPhoto" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("2_qa0f2")
@@ -13,3 +12,18 @@ sprite = NodePath("PhotoSprite")
 
 [node name="PhotoSprite" type="Sprite2D" parent="UserPhoto"]
 texture = ExtResource("1_vf0pg")
+
+[node name="ColorPicker" type="Node2D" parent="." node_paths=PackedStringArray("userPhoto")]
+script = ExtResource("1_1kb0h")
+userPhoto = NodePath("../UserPhoto")
+
+[node name="RectOutline" type="ColorRect" parent="ColorPicker"]
+offset_right = 45.0
+offset_bottom = 45.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorDisplayRect" type="ColorRect" parent="ColorPicker"]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 40.0
+offset_bottom = 40.0
