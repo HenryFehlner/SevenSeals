@@ -46,8 +46,8 @@ public partial class ZoomAndPanImage : Node2D
 		maxZoom = scale * maxAllowedZoomScale;
 		Zoom(scale);
 		
-		//sprite.Scale = new Vector2(scale, scale);			// Set sprite's scale property
-		sprite.Scale = new Vector2(1.0f, 1.0f);
+		sprite.Scale = new Vector2(scale, scale);			// Set sprite's scale property
+		//sprite.Scale = new Vector2(1.0f, 1.0f);
 		
 		sprite.Centered = true;
 		sprite.Position = Vector2.Zero;

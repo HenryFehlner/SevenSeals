@@ -134,14 +134,13 @@ size_flags_vertical = 4
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1008.0
+offset_bottom = -1245.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jou2t")
 
 [node name="GridContainer" type="GridContainer" parent="ToolBar"]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_stretch_ratio = 0.0
 
 [node name="Brush" type="Button" parent="ToolBar/GridContainer"]
@@ -195,13 +194,12 @@ text = "Camera
 
 [node name="ColorToolbar" type="PanelContainer" parent="."]
 top_level = true
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -304.0
-grow_horizontal = 0
-grow_vertical = 2
+offset_top = -355.0
+offset_right = 720.0
+grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_uxx58")
 script = ExtResource("2_w8nmq")
 
@@ -212,12 +210,14 @@ columns = 2
 
 [node name="color1" type="TextureButton" parent="ColorToolbar/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = SubResource("GradientTexture1D_sr1gb")
 stretch_mode = 0
 
 [node name="color2" type="TextureButton" parent="ColorToolbar/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = SubResource("GradientTexture1D_vkeae")
 stretch_mode = 0
