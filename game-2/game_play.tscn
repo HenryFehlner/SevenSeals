@@ -134,7 +134,7 @@ size_flags_vertical = 4
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -1245.0
+offset_top = 1245.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jou2t")
@@ -142,12 +142,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jou2t")
 [node name="GridContainer" type="GridContainer" parent="ToolBar"]
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-
-[node name="Brush" type="Button" parent="ToolBar/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Brush"
+columns = 2
 
 [node name="Bucket" type="Button" parent="ToolBar/GridContainer"]
 layout_mode = 2
@@ -173,32 +168,45 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Redo"
 
-[node name="Next" type="Button" parent="ToolBar/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Next"
-
 [node name="Previous" type="Button" parent="ToolBar/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Previous"
+text = "Previous Image"
+
+[node name="Next" type="Button" parent="ToolBar/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Next Image"
 
 [node name="Camera" type="Button" parent="ToolBar/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Camera
+text = "Camera (coming soon)"
+
+[node name="Gallery" type="Button" parent="ToolBar/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Gallery
 "
+
+[node name="Brush" type="Button" parent="ToolBar/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Brush"
 
 [node name="ColorToolbar" type="PanelContainer" parent="."]
 top_level = true
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -355.0
+offset_top = -1600.0
 offset_right = 720.0
+offset_bottom = -1245.0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_uxx58")
 script = ExtResource("2_w8nmq")
@@ -259,13 +267,13 @@ texture_normal = SubResource("GradientTexture1D_a1b81")
 texture_pressed = SubResource("GradientTexture1D_3ux7j")
 stretch_mode = 0
 
-[connection signal="pressed" from="ToolBar/GridContainer/Brush" to="." method="_on_brush_pressed"]
 [connection signal="pressed" from="ToolBar/GridContainer/Bucket" to="." method="_on_bucket_pressed"]
 [connection signal="pressed" from="ToolBar/GridContainer/Eraser" to="." method="_on_eraser_pressed"]
 [connection signal="pressed" from="ToolBar/GridContainer/Undo" to="." method="_on_undo_pressed"]
 [connection signal="pressed" from="ToolBar/GridContainer/Redo" to="." method="_on_redo_pressed"]
-[connection signal="pressed" from="ToolBar/GridContainer/Next" to="." method="_on_next_pressed"]
 [connection signal="pressed" from="ToolBar/GridContainer/Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="ToolBar/GridContainer/Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="ToolBar/GridContainer/Brush" to="." method="_on_brush_pressed"]
 [connection signal="pressed" from="ColorToolbar/GridContainer/color1" to="." method="_on_color_1_pressed" flags=18]
 [connection signal="pressed" from="ColorToolbar/GridContainer/color2" to="." method="_on_color_2_pressed" flags=18]
 [connection signal="pressed" from="ColorToolbar/GridContainer/color3" to="." method="_on_color_3_pressed" flags=18]
