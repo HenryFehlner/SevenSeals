@@ -14,10 +14,9 @@ sprite = NodePath("PhotoSprite")
 [node name="PhotoSprite" type="Sprite2D" parent="UserPhoto"]
 texture = ExtResource("1_vf0pg")
 
-[node name="ColorPicker" type="Node2D" parent="." node_paths=PackedStringArray("userPhoto", "addColorButton")]
+[node name="ColorPicker" type="Node2D" parent="." node_paths=PackedStringArray("userPhoto")]
 script = ExtResource("1_1kb0h")
 userPhoto = NodePath("../UserPhoto")
-addColorButton = NodePath("../PanelContainer/GridContainer/AddColorButton")
 
 [node name="RectOutline" type="ColorRect" parent="ColorPicker"]
 offset_right = 45.0
