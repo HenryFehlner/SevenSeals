@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Game2"
-run/main_scene="uid://q3c4r7mgfn5s"
+run/main_scene="uid://bj2qtximt8g2r"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalData="*res://c#-scripts/GlobalData.cs"
 
 [display]
 
