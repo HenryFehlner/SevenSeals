@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var lineArtLayer:CanvasLayer = $LineArt
 @onready var drawingContainer:Control = $LineArt/ColoringContainer
 
+
 #region Drawing State
 var currentPage:int = 0
 var currentColor: Color = Color.RED
@@ -44,6 +45,10 @@ func _ready() -> void:
 	loadProgress()
 	#Set up first page and default tool
 	runApp()
+	
+	setupDefaultPalette()
+	
+	loadSavedPalette()
 
 
 func runApp() ->  void:
@@ -342,34 +347,61 @@ func setDrawingMode(mode:String)-> void:
 		
 
 #region Linking Color Buttons
+
 func _on_color_1_pressed(source: BaseButton) -> void:
-	currentColor = source.texture_normal.gradient.get_color(0)
+	var colors = GlobalData.GetSavedColors()
+	if colors.size() > 0:
+		currentColor = colors[0]
+	print("Color 1 selected:", currentColor)
 
 func _on_color_2_pressed(source: BaseButton) -> void:
-	currentColor = source.texture_normal.gradient.get_color(0)
-
+	var colors = GlobalData.GetSavedColors()
+	if colors.size() > 1:
+		currentColor = colors[1]
+	print("Color 2 selected:", currentColor)
 
 func _on_color_3_pressed(source: BaseButton) -> void:
-	currentColor = source.texture_normal.gradient.get_color(0)
+	var colors = GlobalData.GetSavedColors()
+	if colors.size() > 2:
+		currentColor = colors[2]
+	print("Color 3 selected:", currentColor)
 
 func _on_color_4_pressed(source: BaseButton) -> void:
-	currentColor = source.texture_normal.gradient.get_color(0)
-
+	var colors = GlobalData.GetSavedColors()
+	if colors.size() > 3:
+		currentColor = colors[3]
+	print("Color 4 selected:", currentColor)
 
 func _on_color_5_pressed(source: BaseButton) -> void:
-	currentColor = source.texture_normal.gradient.get_color(0)
-
+	var colors = GlobalData.GetSavedColors()
+	if colors.size() > 4:
+		currentColor = colors[4]
+	print("Color 5 selected:", currentColor)
 
 func _on_color_6_pressed(source: BaseButton) -> void:
-	currentColor = source.texture_normal.gradient.get_color(0)
-
+	var colors = GlobalData.GetSavedColors()
+	if colors.size() > 5:
+		currentColor = colors[5]
+	print("Color 6 selected:", currentColor)
 
 func _on_color_7_pressed(source: BaseButton) -> void:
-	currentColor = source.texture_normal.gradient.get_color(0)
-
+	var colors = GlobalData.GetSavedColors()
+	if colors.size() > 6:
+		currentColor = colors[6]
+	print("Color 7 selected:", currentColor)
 
 func _on_color_8_pressed(source: BaseButton) -> void:
-	currentColor = source.texture_normal.gradient.get_color(0)
+	var colors = GlobalData.GetSavedColors()
+	if colors.size() > 7:
+		currentColor = colors[7]
+	print("Color 8 selected:", currentColor)
+
+"""
+func setPaletteColor(index:int):
+	var colors = GlobalData.GetSavedColors()
+	if index < colors.size():
+		currentColor = colors[index]
+"""
 
 #region brush settings
 func _on_eraser_pressed() -> void:
@@ -467,7 +499,51 @@ func loadProgress() -> void:
 				img.load_png_from_buffer(data[i])
 				coloringLayers[i] = img
 			file.close()
+			
+"""
+@onready var paletteButtons : Array = [
+	$ColorToolbar/Color1,
+	$ColorToolbar/Color2,
+	$ColorToolbar/Color3,
+	$ColorToolbar/Color4,
+	$ColorToolbar/Color5,
+	$ColorToolbar/Color6,
+	$ColorToolbar/Color7,
+	$ColorToolbar/Color8
+]
+"""
+@onready var paletteButtons = $ColorToolbar/GridContainer.get_children()
+"""
+func make_color_texture(color: Color) -> GradientTexture2D:
+	var gradient := Gradient.new()
+	gradient.add_point(0, color)
+	gradient.add_point(0, color)
+	
+	var texture := GradientTexture2D.new()
+	texture.gradient = gradient
+	return texture
+"""
+	
+func make_color_texture(color: Color) -> ImageTexture:
+	var img := Image.create(32, 32, false, Image.FORMAT_RGBA8)
+	img.fill(color)
 
+	var texture := ImageTexture.create_from_image(img)
+	return texture
+
+func setupDefaultPalette():
+	var gray := Color(0.5, 0.5, 0.5)
+	
+	for button in paletteButtons:
+		button.texture_normal = make_color_texture(gray)
+		
+
+func loadSavedPalette():
+	var colors = GlobalData.GetSavedColors()
+
+	for i in range(paletteButtons.size()):
+		if i < colors.size():
+			paletteButtons[i].texture_normal = make_color_texture(colors[i])
 
 func _on_gallery_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/Gallery.tscn")

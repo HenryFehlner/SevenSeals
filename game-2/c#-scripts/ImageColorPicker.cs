@@ -10,7 +10,6 @@ public partial class ImageColorPicker : Node2D
 	private ColorRect colorDisplayRect;
 	private ColorRect colorOutlineRect;
 	[Export] public Button addColorButton;
-	
 	private Color pickedColor = new Color(1, 1, 1, 1);
 	
 	private Vector2 viewportSize;
@@ -39,6 +38,7 @@ public partial class ImageColorPicker : Node2D
 		
 		// Get world pos for conversion to local coords
 		worldPos = GetViewport().GetCanvasTransform().AffineInverse() * viewportCenter;
+		
 		
 		addColorButton.Pressed += AddColor;
 	}
@@ -115,7 +115,6 @@ private void AddColor()
 		GlobalData.SavedColors.RemoveAt(0);
 
 	GlobalData.SavedColors.Add(pickedColor);
-	GD.Print("Added color: ", pickedColor);
 }
 
 }
