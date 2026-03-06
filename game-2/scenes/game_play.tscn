@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://bj2qtximt8g2r"]
 
-[ext_resource type="Script" uid="uid://c6hp52svm5rq1" path="res://game_play.gd" id="1_uxx58"]
-[ext_resource type="Script" uid="uid://cyk4ppl5e8yso" path="res://color_toolbar.gd" id="2_w8nmq"]
+[ext_resource type="Script" uid="uid://c6hp52svm5rq1" path="res://game_play.gd" id="1_swo0f"]
+[ext_resource type="Script" uid="uid://cyk4ppl5e8yso" path="res://color_toolbar.gd" id="2_c7ik0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jou2t"]
 content_margin_left = 0.0
@@ -99,7 +99,7 @@ colors = PackedColorArray(0.7213606, 0.91365623, 0.8605532, 1, 0.7213606, 0.9136
 gradient = SubResource("Gradient_htgex")
 
 [node name="Main" type="CanvasLayer"]
-script = ExtResource("1_uxx58")
+script = ExtResource("1_swo0f")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -209,7 +209,7 @@ offset_right = 720.0
 offset_bottom = -1245.0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_uxx58")
-script = ExtResource("2_w8nmq")
+script = ExtResource("2_c7ik0")
 
 [node name="GridContainer" type="GridContainer" parent="ColorToolbar"]
 layout_mode = 2
@@ -273,6 +273,7 @@ stretch_mode = 0
 [connection signal="pressed" from="ToolBar/GridContainer/Redo" to="." method="_on_redo_pressed"]
 [connection signal="pressed" from="ToolBar/GridContainer/Previous" to="." method="_on_previous_pressed"]
 [connection signal="pressed" from="ToolBar/GridContainer/Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="ToolBar/GridContainer/Gallery" to="." method="_on_gallery_pressed"]
 [connection signal="pressed" from="ToolBar/GridContainer/Brush" to="." method="_on_brush_pressed"]
 [connection signal="pressed" from="ColorToolbar/GridContainer/color1" to="." method="_on_color_1_pressed" flags=18]
 [connection signal="pressed" from="ColorToolbar/GridContainer/color2" to="." method="_on_color_2_pressed" flags=18]
