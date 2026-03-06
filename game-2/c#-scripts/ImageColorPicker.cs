@@ -58,7 +58,8 @@ public partial class ImageColorPicker : Node2D
 		//GD.Print("Clamped texture coord: ", clampedCoordX, ", ", clampedCoordY);
 		
 		// Get color from pixel
-		pickedColor = cachedImage.GetPixel(clampedCoordX, clampedCoordY);
+		//pickedColor = cachedImage.GetPixel(clampedCoordX, clampedCoordY);
+		pickedColor = GetAveragePixelColor(clampedCoordX, clampedCoordY);
 		
 		// Set picker colors
 		colorOutlineRect.SetColor(InvertColorGrayscale(pickedColor));
@@ -66,11 +67,32 @@ public partial class ImageColorPicker : Node2D
 		//GD.Print("Picked color: " + pickedColor + "\n");
 	}
 	
-	private void GetAveragePixelColor(int xPos, int yPos, int radius)
+	private Color GetAveragePixelColor(int xPos, int yPos)
 	{
 		// TODO: Get the average color of a small group of pixels
 		
+		// Temporary color components
+		float r = 0.0f;
+		float g = 0.0f;
+		float b = 0.0f;
+		float a = 0.0f;
+		
 		// Get number of pixels that would be contained in a square of the radius's size
+		for (int col = yPos - 1; col <= yPos + 1; col++)
+		{
+			for (int row = xPos - 1; row <= xPos + 1; row++)
+			{
+				Color pixelColor = cachedImage.GetPixel(row, col);
+				
+				r += pixelColor.R;
+				g += pixelColor.G;
+				b += pixelColor.B;
+				a += pixelColor.A;
+			}
+		}
+		
+		return new Color(r / 9.0f, g / 9.0f, b / 9.0f, a / 9.0f);
+		//GD.Print("\n");
 		
 		// For loop with to go over that number of pixels
 			// Iterate over each pixel in game of life fashion
@@ -114,7 +136,6 @@ private void AddColor()
 	if (GlobalData.SavedColors.Count >= MAX_COLORS)
 		GlobalData.SavedColors.RemoveAt(0);
 
-	GlobalData.SavedColors.Add(pickedColor);
-}
-
+		GlobalData.SavedColors.Add(pickedColor);
+	}
 }
