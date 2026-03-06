@@ -46,7 +46,7 @@ func _ready() -> void:
 	#Set up first page and default tool
 	runApp()
 	
-	setupDefaultPalette()
+	'setupDefaultPalette()'
 	
 	loadSavedPalette()
 
@@ -222,7 +222,7 @@ func drawBrush(pos: Vector2) -> void:
 						#Only paint if NOT over line art
 						if lineMask.get_pixel(px,py).a<0.1:
 							img.set_pixel(px,py,currentColor)
-							print("painting at ", px, py)
+							'print("painting at ", px, py)'	
 							
 	#Updates display after drawing						
 	updateColorDisplay()
