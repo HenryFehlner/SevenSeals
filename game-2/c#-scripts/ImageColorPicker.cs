@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class ImageColorPicker : Node2D
 {
@@ -8,12 +9,15 @@ public partial class ImageColorPicker : Node2D
 	private Image cachedImage;
 	private ColorRect colorDisplayRect;
 	private ColorRect colorOutlineRect;
+	[Export] public Button addColorButton;
 	
 	private Color pickedColor = new Color(1, 1, 1, 1);
 	
 	private Vector2 viewportSize;
 	private Vector2 viewportCenter;
 	private Vector2 worldPos;
+	
+	const int MAX_COLORS = 8;
 	
 	public override void _Ready()
 	{
@@ -35,6 +39,8 @@ public partial class ImageColorPicker : Node2D
 		
 		// Get world pos for conversion to local coords
 		worldPos = GetViewport().GetCanvasTransform().AffineInverse() * viewportCenter;
+		
+		addColorButton.Pressed += AddColor;
 	}
 	
 	public override void _Process(double delta)
@@ -101,4 +107,15 @@ public partial class ImageColorPicker : Node2D
 		else
 			return new Color(1.0f, 1.0f, 1.0f, 1.0f);
 	}
+	
+
+private void AddColor()
+{
+	if (GlobalData.SavedColors.Count >= MAX_COLORS)
+		GlobalData.SavedColors.RemoveAt(0);
+
+	GlobalData.SavedColors.Add(pickedColor);
+	GD.Print("Added color: ", pickedColor);
+}
+
 }
