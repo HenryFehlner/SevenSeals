@@ -1,16 +1,16 @@
+/*
+
 using Godot;
 using System;
 
 public partial class CameraDisplay : Node
 {
-	/*
-	private TextureRect display;
+	
+	[Export]public TextureRect display;
 	private CameraFeed feed;
 
 	public override void _Ready()
 	{
-		display = GetNode<TextureRect>("TextureRect");
-
 		CameraServer.CameraFeedsUpdated += OnFeedsUpdated;
 		CameraServer.MonitoringFeeds = true;
 	}
@@ -34,5 +34,10 @@ public partial class CameraDisplay : Node
 
 		display.Texture = feed.Texture;
 	}
-	*/
+	
+	public void  startCamera(){
+		feed.feed_is_active = true; 
+	}
+	
 }
+*/
