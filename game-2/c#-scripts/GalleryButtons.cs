@@ -16,17 +16,27 @@ public partial class GalleryButtons : Control
 		photoFilePaths = GetPhotos("res://user-photos");
 		
 		// Create a button for each photo
+		GD.Print("Loading photos");
 		foreach (string file in photoFilePaths)
 		{
 			// Complete photo path
 			string photoPath = "res://user-photos/" + file;
+			GD.Print("File loaded: " + photoPath);
 			
-			// Create button and load photo
+			// Create button for image
 			Vector2 buttonSize = new Vector2(GetViewport().GetVisibleRect().Size.X / 2.0f, GetViewport().GetVisibleRect().Size.X / 2.0f);
 			Button button = new Button();
 			button.CustomMinimumSize = buttonSize;
+			
+			// Load image from complete path
+			//Image loadedImage = new Image();
+			//loadedImage.Load(photoPath);
+			//ImageTexture texture = ImageTexture.CreateFromImage(loadedImage);
+			var texture = ResourceLoader.Load<Texture2D>(photoPath);
+			
+			// Populate photoRect with loaded image
 			TextureRect photoRect = new TextureRect();
-			photoRect.Texture = GD.Load<Texture2D>(photoPath);
+			photoRect.Texture = texture;
 			
 			// Set texture rect properties
 			photoRect.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
@@ -64,6 +74,7 @@ public partial class GalleryButtons : Control
 			
 			while (filename != "")
 			{
+				GD.Print(filename);
 				if (!dir.CurrentIsDir() && filename.EndsWith(".png"))	// Ignore .import files
 				{
 					photos.Add(filename);

@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 public partial class ColorPickerButtons : PanelContainer
-{
+{	
 	public void _on_return_button_pressed()
 	{
 		GD.Print("Returning to main scene");
