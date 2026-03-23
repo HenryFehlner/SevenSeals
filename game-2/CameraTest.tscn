@@ -5,8 +5,24 @@
 [node name="CameraTest" type="Node2D"]
 script = ExtResource("1_fvl0b")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -125.0
-offset_top = -80.0
-offset_right = 121.0
-offset_bottom = 77.0
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 720.0
+offset_bottom = 1600.0
+
+[node name="PhotoButtons" type="BoxContainer" parent="Control"]
+layout_mode = 0
+offset_top = 1200.0
+offset_right = 720.0
+offset_bottom = 1600.0
+
+[node name="TextureButton" type="TextureButton" parent="Control/PhotoButtons"]
+layout_mode = 2
+
+[node name="ConfimButtons" type="BoxContainer" parent="Control"]
+visible = false
+layout_mode = 0
+offset_top = 1200.0
+offset_right = 720.0
+offset_bottom = 1600.0
