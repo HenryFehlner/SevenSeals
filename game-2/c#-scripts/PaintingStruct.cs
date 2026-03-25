@@ -10,7 +10,14 @@ using System.Collections.Generic;
 [GlobalClass]
 public partial class PaintingStruct : Resource
 {
-	string paintingID;							// name of painting
-	string coloringImagePath;					// path to lineart
-	List<List<Color>> requiredColors;		// a list comprised of colors and whether they have been found, should always be initialized to false
+	string PaintingID;							// name of painting
+	string ColoringImagePath;					// path to lineart
+	Dictionary<Color, bool> RequiredColors;		// required colors and whether they have been found
+	
+	public PaintingStruct(string paintingID, string coloringImagePath, Dictionary<Color, bool> requiredColors)
+	{
+		PaintingID = paintingID;
+		ColoringImagePath = coloringImagePath;
+		RequiredColors = requiredColors;
+	}
 }

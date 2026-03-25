@@ -1,22 +1,22 @@
 [gd_scene load_steps=6 format=3 uid="uid://dejf4gmly8t1q"]
 
-[ext_resource type="Script" uid="uid://cqppmqqqkn8t5" path="res://c#-scripts/ImageColorPicker.cs" id="1_1kb0h"]
-[ext_resource type="Texture2D" uid="uid://cwvcytooamefn" path="res://user-photos/sky2.png" id="1_vf0pg"]
-[ext_resource type="Script" uid="uid://che684hmuci16" path="res://c#-scripts/ZoomAndPanImage.cs" id="2_qa0f2"]
-[ext_resource type="Script" uid="uid://clk72xilu1qgk" path="res://c#-scripts/ColorPickerButtons.cs" id="4_qa0f2"]
-[ext_resource type="Script" uid="uid://suh04cxr5cga" path="res://c#-scripts/ColorPickerPalette.cs" id="5_qnds0"]
+[ext_resource type="Script" uid="uid://che684hmuci16" path="res://c#-scripts/color-picker/ZoomAndPanImage.cs" id="1_cqqj6"]
+[ext_resource type="Texture2D" uid="uid://cwvcytooamefn" path="res://user-photos/sky2.png" id="2_ogcst"]
+[ext_resource type="Script" uid="uid://cqppmqqqkn8t5" path="res://c#-scripts/color-picker/ImageColorPicker.cs" id="3_4xlko"]
+[ext_resource type="Script" uid="uid://clk72xilu1qgk" path="res://c#-scripts/color-picker/ColorPickerButtons.cs" id="4_k481l"]
+[ext_resource type="Script" uid="uid://suh04cxr5cga" path="res://c#-scripts/color-picker/ColorPickerPalette.cs" id="5_t2wq8"]
 
 [node name="ImageColorPick" type="Node2D"]
 
 [node name="UserPhoto" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
-script = ExtResource("2_qa0f2")
+script = ExtResource("1_cqqj6")
 sprite = NodePath("PhotoSprite")
 
 [node name="PhotoSprite" type="Sprite2D" parent="UserPhoto"]
-texture = ExtResource("1_vf0pg")
+texture = ExtResource("2_ogcst")
 
 [node name="ColorPicker" type="Node2D" parent="." node_paths=PackedStringArray("userPhoto", "addColorButton")]
-script = ExtResource("1_1kb0h")
+script = ExtResource("3_4xlko")
 userPhoto = NodePath("../UserPhoto")
 addColorButton = NodePath("../ButtonsPanelContainer/ButtonsGridContainer/AddColorButton")
 
@@ -35,7 +35,7 @@ offset_bottom = 40.0
 offset_top = 1400.0
 offset_right = 720.0
 offset_bottom = 1600.0
-script = ExtResource("4_qa0f2")
+script = ExtResource("4_k481l")
 
 [node name="ButtonsGridContainer" type="GridContainer" parent="ButtonsPanelContainer"]
 layout_mode = 2
@@ -58,7 +58,7 @@ text = "Add Color to Palette"
 [node name="PalettePanelContainer" type="PanelContainer" parent="."]
 offset_right = 720.0
 offset_bottom = 200.0
-script = ExtResource("5_qnds0")
+script = ExtResource("5_t2wq8")
 
 [node name="PaletteGridContainer" type="GridContainer" parent="PalettePanelContainer"]
 layout_mode = 2

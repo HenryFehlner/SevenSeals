@@ -6,9 +6,13 @@ public partial class PaintingGalleryButtons : Control
 {
 	private GridContainer paintingContainer;
 	private List<string> paintingFilePaths;
+	private List<PaintingStruct> paintingObjects;
 	
 	public override void _Ready()
 	{
+		// Create (or get in the future) paintings
+		paintingObjects = new List<PaintingStruct>();
+		
 		// Get grid container
 		paintingContainer = GetNode<GridContainer>("PaintingContainer");
 		
