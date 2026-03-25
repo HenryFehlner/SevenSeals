@@ -16,12 +16,12 @@ public partial class PaintingGalleryButtons : Control
 		//paintingFilePaths = GetPaintings("res://coloring-images");
 		
 		// Create a button for each photo
-		GD.Print("Loading photos");
+		GD.Print("Loading paintings...");
 		foreach (PaintingStruct painting in GlobalData.PaintingList)
 		{
 			// Complete photo path
 			string paintingPath = painting.ColoringImagePath;
-			GD.Print("File loaded: " + paintingPath);
+			GD.Print("Painting image added: " + paintingPath);
 			
 			// Create button for image
 			Vector2 buttonSize = new Vector2(GetViewport().GetVisibleRect().Size.X / 2.0f, GetViewport().GetVisibleRect().Size.X / 2.0f);
@@ -54,7 +54,7 @@ public partial class PaintingGalleryButtons : Control
 			button.FocusMode = Control.FocusModeEnum.None;
 			
 			// Set signal
-			button.Pressed += () => OnPaintingPressed(paintingPath);
+			button.Pressed += () => OnPaintingPressed(painting);
 			
 			// Add to scene
 			paintingContainer.AddChild(button);
@@ -89,10 +89,10 @@ public partial class PaintingGalleryButtons : Control
 		return paintings;
 	}
 	
-	private void OnPaintingPressed(string path)
+	private void OnPaintingPressed(PaintingStruct painting)
 	{
 		// Set global active photo
-		GlobalData.ActivePhoto = path;
+		GlobalData.ActivePainting = painting;
 		GD.Print("New active painting: " + GlobalData.ActivePainting);
 		
 		// Change scene to color picker
@@ -103,6 +103,6 @@ public partial class PaintingGalleryButtons : Control
 	{
 		GD.Print("Returning to main menu");
 		// TODO: Link to main menu scene when it exists
-		//GetTree().ChangeSceneToFile("res://scenes/game_play.tscn");
+		GetTree().ChangeSceneToFile("res://scenes/main-menu.tscn");
 	}
 }

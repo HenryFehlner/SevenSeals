@@ -62,6 +62,7 @@ script = ExtResource("5_t2wq8")
 
 [node name="PaletteGridContainer" type="GridContainer" parent="PalettePanelContainer"]
 layout_mode = 2
+columns = 3
 
 [connection signal="pressed" from="ButtonsPanelContainer/ButtonsGridContainer/ReturnButton" to="ButtonsPanelContainer" method="_on_return_button_pressed"]
 [connection signal="pressed" from="ButtonsPanelContainer/ButtonsGridContainer/AddColorButton" to="ButtonsPanelContainer" method="_on_add_color_button_pressed"]
