@@ -6,25 +6,21 @@ public partial class PaintingGalleryButtons : Control
 {
 	private GridContainer paintingContainer;
 	private List<string> paintingFilePaths;
-	private List<PaintingStruct> paintingObjects;
 	
 	public override void _Ready()
 	{
-		// Create (or get in the future) paintings
-		paintingObjects = new List<PaintingStruct>();
-		
 		// Get grid container
 		paintingContainer = GetNode<GridContainer>("PaintingContainer");
 		
 		// Get photos
-		paintingFilePaths = GetPaintings("res://coloring-images");
+		//paintingFilePaths = GetPaintings("res://coloring-images");
 		
 		// Create a button for each photo
 		GD.Print("Loading photos");
-		foreach (string file in paintingFilePaths)
+		foreach (PaintingStruct painting in GlobalData.PaintingList)
 		{
 			// Complete photo path
-			string paintingPath = "res://coloring-images/" + file;
+			string paintingPath = painting.ColoringImagePath;
 			GD.Print("File loaded: " + paintingPath);
 			
 			// Create button for image

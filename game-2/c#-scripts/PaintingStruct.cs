@@ -10,9 +10,9 @@ using System.Collections.Generic;
 [GlobalClass]
 public partial class PaintingStruct : Resource
 {
-	string PaintingID;							// name of painting
-	string ColoringImagePath;					// path to lineart
-	Dictionary<Color, bool> RequiredColors;		// required colors and whether they have been found
+	public string PaintingID;							// name of painting
+	public string ColoringImagePath;					// path to lineart
+	public Dictionary<Color, bool> RequiredColors;		// required colors and whether they have been found
 	
 	public PaintingStruct(string paintingID, string coloringImagePath, Dictionary<Color, bool> requiredColors)
 	{
