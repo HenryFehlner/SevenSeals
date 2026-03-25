@@ -93,7 +93,7 @@ public partial class PaintingGalleryButtons : Control
 	{
 		// Set global active photo
 		GlobalData.ActivePainting = painting;
-		GD.Print("New active painting: " + GlobalData.ActivePainting);
+		GD.Print("New active painting: " + GlobalData.ActivePainting.PaintingID);
 		
 		// Change scene to color picker
 		GetTree().ChangeSceneToFile("res://scenes/game_play.tscn");

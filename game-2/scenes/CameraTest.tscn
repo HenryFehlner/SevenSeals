@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c62ennoyw162b"]
+[gd_scene load_steps=8 format=3 uid="uid://dpdumilfj5vld"]
 
 [ext_resource type="Texture2D" uid="uid://7nkls5yfe86x" path="res://IconImages/PhotoButton.png" id="1_c34bw"]
 [ext_resource type="Shader" uid="uid://c77g2ddqxqycb" path="res://c#-scripts/CameraShader.gdshader" id="2_jlw4c"]
