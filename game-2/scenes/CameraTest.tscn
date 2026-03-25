@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://c62ennoyw162b"]
+
+[ext_resource type="Texture2D" uid="uid://7nkls5yfe86x" path="res://IconImages/PhotoButton.png" id="1_c34bw"]
+[ext_resource type="Shader" uid="uid://c77g2ddqxqycb" path="res://c#-scripts/CameraShader.gdshader" id="2_jlw4c"]
+[ext_resource type="Texture2D" uid="uid://di82o6mx2y48s" path="res://icon.svg" id="3_4r4jr"]
+[ext_resource type="Script" uid="uid://ba1uljgy16rui" path="res://c#-scripts/CameraDisplay.cs" id="4_g84vi"]
+[ext_resource type="Texture2D" uid="uid://bgs3xwff21dsm" path="res://IconImages/XButton.png" id="5_4r4jr"]
+[ext_resource type="Texture2D" uid="uid://dlw20tpv44sgo" path="res://IconImages/AcceptButton.png" id="6_g84vi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_64lfn"]
+shader = ExtResource("2_jlw4c")
+
+[node name="CameraTest" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -1.0
+offset_top = -7.0
+offset_right = 719.0
+offset_bottom = 1593.0
+
+[node name="CamSprite" type="Sprite2D" parent="Control"]
+material = SubResource("ShaderMaterial_64lfn")
+position = Vector2(360.99997, 564.00006)
+scale = Vector2(5.0820313, 7.40625)
+texture = ExtResource("3_4r4jr")
+script = ExtResource("4_g84vi")
+
+[node name="PhotoButton" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 206.0
+offset_top = 1069.0
+offset_right = 606.0
+offset_bottom = 1469.0
+scale = Vector2(0.8, 0.8)
+texture_normal = ExtResource("1_c34bw")
+
+[node name="DenyButton" type="TextureButton" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 52.0
+offset_top = 1067.0
+offset_right = 452.0
+offset_bottom = 1467.0
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("5_4r4jr")
+
+[node name="TextureButton" type="TextureButton" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 393.0
+offset_top = 1063.0
+offset_right = 793.0
+offset_bottom = 1463.0
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("6_g84vi")
