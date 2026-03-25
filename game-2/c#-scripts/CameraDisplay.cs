@@ -1,43 +1,54 @@
-/*
-
 using Godot;
 using System;
 
-public partial class CameraDisplay : Node
+public partial class CameraDisplay : Sprite2D
 {
-	
-	[Export]public TextureRect display;
-	private CameraFeed feed;
+	[Export] public string CameraName = "";
+
+	private CameraFeed camera;
 
 	public override void _Ready()
 	{
-		CameraServer.CameraFeedsUpdated += OnFeedsUpdated;
 		CameraServer.MonitoringFeeds = true;
-	}
+		
+		GD.Print("cameras:");
 
-	private void OnFeedsUpdated()
-	{
-		if (CameraServer.GetFeedCount() == 0)
+		foreach (CameraFeed feed in CameraServer.Feeds())
 		{
-			GD.Print("No cameras detected");
+			string name = feed.GetName();
+			GD.Print(name);
+
+			if (camera == null && (CameraName == "" || name == CameraName))
+			{
+				camera = feed;
+			}
+		}
+
+		if (camera == null)
+		{
+			GD.Print("no matching camera");
 			return;
 		}
 
-		feed = CameraServer.GetFeed(0);
-		GD.Print("Using camera ID: " + feed.GetId());
-	}
+		GD.Print($"using camera {camera} ({camera.GetName()})");
 
-	public override void _Process(double delta)
-	{
-		if (feed == null)
+		camera.FeedIsActive = true;
+
+		var mat = Material as ShaderMaterial;
+		if (mat == null)
+		{
+			GD.PrintErr("Material is not a ShaderMaterial!");
 			return;
+		}
 
-		display.Texture = feed.Texture;
+		
+		CameraTexture camTexY = (CameraTexture)mat.GetShaderParameter("camera_y");
+		CameraTexture camTexCbCr = (CameraTexture)mat.GetShaderParameter("camera_CbCr");
+
+		camTexY.CameraFeedId = camera.GetId();
+		camTexCbCr.CameraFeedId = camera.GetId();
+
+		mat.SetShaderParameter("camera_y", camTexY);
+		mat.SetShaderParameter("camera_CbCr", camTexCbCr);
 	}
-	
-	public void  startCamera(){
-		feed.feed_is_active = true; 
-	}
-	
 }
-*/
