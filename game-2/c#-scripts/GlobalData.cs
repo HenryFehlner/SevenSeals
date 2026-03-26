@@ -7,6 +7,7 @@ public partial class GlobalData : Node
 	public static string ActivePhoto;
 	public static List<Color> SavedColors = new List<Color>();
 	public static Dictionary<Color, bool> CurrentRequiredPalette = new Dictionary<Color, bool>();
+	
 	public static List<PaintingStruct> PaintingList;
 	public static PaintingStruct ActivePainting;
 
