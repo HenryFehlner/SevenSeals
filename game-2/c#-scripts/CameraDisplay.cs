@@ -12,7 +12,7 @@ enum CameraState
 
 public partial class CameraDisplay : Sprite2D
 {
-	[Export] public string CameraName = "2 | BACK";
+	[Export] public string CameraName = "0 | BACK";
 	
 	[Export] public TextureButton PhotoButton;
 	
@@ -112,19 +112,16 @@ camera.SetFormat(selected, new Godot.Collections.Dictionary());
 		GD.PrintErr("Material is NULL!");
 		return;
 	}
+	
 
-CameraTexture camTexY = new CameraTexture();
-CameraTexture camTexCbCr = new CameraTexture();
 
-camTexY.CameraFeedId = camera.GetId();
-camTexCbCr.CameraFeedId = camera.GetId();
+//CameraTexture camTexY = new CameraTexture();
+//CameraTexture camTexCbCr = new CameraTexture();
 
 camTex = new CameraTexture();
 camTex.CameraFeedId = camera.GetId();
 
-// Assign to shader
-mat.SetShaderParameter("camera_y", camTexY);
-mat.SetShaderParameter("camera_CbCr", camTexCbCr);
+mat.SetShaderParameter("camera_tex", camTex);
 
 GD.Print("Camera textures created and assigned");
 GD.Print("NEW BUILD CONFIRMED");

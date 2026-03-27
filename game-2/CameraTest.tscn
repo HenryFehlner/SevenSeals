@@ -1,18 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c62ennoyw162b"]
+[gd_scene load_steps=5 format=3 uid="uid://c62ennoyw162b"]
 
 [ext_resource type="Script" uid="uid://ba1uljgy16rui" path="res://c#-scripts/CameraDisplay.cs" id="1_fvl0b"]
 [ext_resource type="Shader" uid="uid://c77g2ddqxqycb" path="res://c#-scripts/CameraShader.gdshader" id="2_al3jc"]
 [ext_resource type="Texture2D" uid="uid://di82o6mx2y48s" path="res://icon.svg" id="3_mhm7m"]
 
-[sub_resource type="CameraTexture" id="CameraTexture_al3jc"]
-which_feed = 2
-
-[sub_resource type="CameraTexture" id="CameraTexture_mhm7m"]
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_64lfn"]
 shader = ExtResource("2_al3jc")
-shader_parameter/camera_y = SubResource("CameraTexture_mhm7m")
-shader_parameter/camera_CbCr = SubResource("CameraTexture_al3jc")
 
 [node name="CameraTest" type="Node2D"]
 
