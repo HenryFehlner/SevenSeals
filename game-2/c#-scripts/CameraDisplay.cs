@@ -4,6 +4,8 @@ using System;
 public partial class CameraDisplay : Sprite2D
 {
 	[Export] public string CameraName = "";
+	
+	[Export] public TextureButton PhotoButton;
 
 	private CameraFeed camera;
 
@@ -51,4 +53,9 @@ public partial class CameraDisplay : Sprite2D
 		mat.SetShaderParameter("camera_y", camTexY);
 		mat.SetShaderParameter("camera_CbCr", camTexCbCr);
 	}
+	
+	public void TakePhoto(){
+		
+	}
+	
 }

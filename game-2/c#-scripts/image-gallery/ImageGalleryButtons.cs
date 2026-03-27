@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class GalleryButtons : Control
+public partial class ImageGalleryButtons : Control
 {
 	private GridContainer photoContainer;
 	private List<string> photoFilePaths;
@@ -96,6 +96,12 @@ public partial class GalleryButtons : Control
 		GD.Print("New active photo: " + GlobalData.ActivePhoto);
 		
 		// Change scene to color picker
-		GetTree().ChangeSceneToFile("res://scenes/ImageColorPick.tscn");
+		GetTree().ChangeSceneToFile("res://scenes/image-color-pick.tscn");
+	}
+	
+	public void _on_return_button_pressed()
+	{
+		GD.Print("Returning to painting scene");
+		GetTree().ChangeSceneToFile("res://scenes/game_play.tscn");
 	}
 }

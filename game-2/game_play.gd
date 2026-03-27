@@ -546,4 +546,4 @@ func loadSavedPalette():
 			paletteButtons[i].texture_normal = make_color_texture(colors[i])
 
 func _on_gallery_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/Gallery.tscn")
+	get_tree().change_scene_to_file("res://scenes/image-gallery.tscn")
