@@ -195,7 +195,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
-text = "Gallery
+text = "Photo Gallery
 "
 
 [node name="Painting" type="Button" parent="ToolBar/GridContainer"]
@@ -203,7 +203,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
-text = "painting
+text = "More Paintings
 
 "
 
