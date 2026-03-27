@@ -52,7 +52,7 @@ transparent_bg = true
 size = Vector2i(720, 1100)
 render_target_update_mode = 4
 
-[node name="PhotoSprite" type="Sprite2D" parent="Control/SubViewport"]
+[node name="PictureSprite" type="Sprite2D" parent="Control/SubViewport"]
 material = SubResource("ShaderMaterial_4r4jr")
 position = Vector2(359.99997, 557.00006)
 scale = Vector2(5.0820313, 7.40625)
@@ -67,7 +67,6 @@ offset_bottom = 1573.0
 text = "Return to Painting"
 
 [node name="CamSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("PhotoButton", "AcceptButton", "RejectButton", "ReturnButton", "subViewport", "PhotoSprite")]
-visible = false
 material = SubResource("ShaderMaterial_4r4jr")
 position = Vector2(359.99997, 557.00006)
 scale = Vector2(5.0820313, 7.40625)
@@ -78,7 +77,7 @@ AcceptButton = NodePath("../Control/AcceptButton")
 RejectButton = NodePath("../Control/DenyButton")
 ReturnButton = NodePath("../Control/ReturnButton")
 subViewport = NodePath("../Control/SubViewport")
-PhotoSprite = NodePath("../Control/SubViewport/PhotoSprite")
+PhotoSprite = NodePath("../Control/SubViewport/PictureSprite")
 
 [node name="Preview" type="Sprite2D" parent="."]
 visible = false

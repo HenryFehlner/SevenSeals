@@ -25,7 +25,7 @@ public partial class ZoomAndPanImage : Node2D
 		FitToScreen();
 		
 		// Get sprite
-		//sprite = GetNode<Sprite2D>("PhotoSprite");
+		sprite = GetNode<Sprite2D>("PhotoSprite");
 	}
 
 	private void FitToScreen()

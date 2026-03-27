@@ -158,7 +158,6 @@ public async void TakePhoto()
 		return;
 	}
 
-	img.FlipY();
 
 	capturedImage = img;
 	currentState = CameraState.Preview;
