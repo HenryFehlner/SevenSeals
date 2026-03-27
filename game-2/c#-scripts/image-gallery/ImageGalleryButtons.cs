@@ -13,14 +13,29 @@ public partial class ImageGalleryButtons : Control
 		photoContainer = GetNode<GridContainer>("PhotoContainer");
 		
 		// Get photos
-		photoFilePaths = GetPhotos("res://user-photos");
+		string imageId = GlobalData.ActivePaintingId;
+		string folderPath = $"user://photos/{imageId}/";
+
+		//photoFilePaths = GetPhotos(folderPath);
+		//photoFilePaths = GetPhotos("res://user-photos");
+		
+		if (GlobalData.Instance.ImagePhotos.ContainsKey(imageId))
+		{
+			photoFilePaths = GlobalData.Instance.ImagePhotos[imageId];
+		}
+		else
+		{
+			GD.Print("No photos found for: " + imageId);
+			photoFilePaths = new List<string>();
+		}
 		
 		// Create a button for each photo
 		GD.Print("Loading photos");
 		foreach (string file in photoFilePaths)
 		{
 			// Complete photo path
-			string photoPath = "res://user-photos/" + file;
+			//string photoPath = "res://user-photos/" + file;
+			string photoPath = folderPath + file;
 			GD.Print("File loaded: " + photoPath);
 			
 			// Create button for image
@@ -32,7 +47,19 @@ public partial class ImageGalleryButtons : Control
 			//Image loadedImage = new Image();
 			//loadedImage.Load(photoPath);
 			//ImageTexture texture = ImageTexture.CreateFromImage(loadedImage);
-			var texture = ResourceLoader.Load<Texture2D>(photoPath);
+			//var texture = ResourceLoader.Load<Texture2D>(photoPath);
+			
+			Image image = new Image();
+			Error err = image.Load(photoPath);
+
+			if (err != Error.Ok)
+			{
+				GD.PrintErr("Failed to load image: " + photoPath);
+				continue;
+			}
+
+			ImageTexture texture = ImageTexture.CreateFromImage(image);
+			
 			
 			// Populate photoRect with loaded image
 			TextureRect photoRect = new TextureRect();

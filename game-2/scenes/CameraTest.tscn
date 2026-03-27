@@ -59,6 +59,14 @@ texture = ExtResource("3_4r4jr")
 script = ExtResource("4_g84vi")
 PhotoButton = NodePath("../../PhotoButton")
 
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 1438.0
+offset_right = 722.0
+offset_bottom = 1573.0
+text = "Return to Painting"
+
 [node name="CamSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("PhotoButton", "AcceptButton", "RejectButton", "subViewport")]
 material = SubResource("ShaderMaterial_4r4jr")
 position = Vector2(359.99997, 557.00006)

@@ -547,3 +547,6 @@ func loadSavedPalette():
 
 func _on_gallery_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/image-gallery.tscn")
+	
+func _on_camera_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/CameraTest.tscn")

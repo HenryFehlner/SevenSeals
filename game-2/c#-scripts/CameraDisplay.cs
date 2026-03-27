@@ -20,6 +20,8 @@ public partial class CameraDisplay : Sprite2D
 	
 	[Export] public TextureButton RejectButton;
 	
+	[Export] public Button ReturnButton;
+	
 	[Export] public SubViewport subViewport;
 	
 	private CameraTexture camTex;
@@ -227,6 +229,10 @@ void ResetToIdle()
 
 	if (RejectButton != null)
 		RejectButton.Visible = isPreview;
+}
+
+void ReturnToPainting(){
+	
 }
 	
 }
