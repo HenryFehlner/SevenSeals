@@ -26,7 +26,10 @@ public partial class ImageColorPicker : Node2D
 		colorOutlineRect = GetNode<ColorRect>("RectOutline");
 		
 		// Set sprite to the global active photo
-		photoSprite.Texture = GD.Load<Texture2D>(GlobalData.ActivePhoto);
+		Image image = GD.Load<Image>(GlobalData.ActivePhoto);
+		photoSprite.Texture = ImageTexture.CreateFromImage(image);
+		//photoSprite.Texture = GD.Load<Texture2D>(GlobalData.ActivePhoto);
+		//photoSprite.Texture = GD.Load<Texture2D>(GlobalData.ActivePainting.);
 		
 		// Cache image for performance when getting pixel color
 		cachedImage = photoSprite.Texture.GetImage();
