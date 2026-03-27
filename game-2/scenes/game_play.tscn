@@ -184,7 +184,7 @@ text = "Next Image"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Camera (coming soon)"
+text = "Camera"
 
 [node name="Gallery" type="Button" parent="ToolBar/GridContainer"]
 layout_mode = 2
@@ -274,6 +274,7 @@ stretch_mode = 0
 [connection signal="pressed" from="ToolBar/GridContainer/Redo" to="." method="_on_redo_pressed"]
 [connection signal="pressed" from="ToolBar/GridContainer/Previous" to="." method="_on_previous_pressed"]
 [connection signal="pressed" from="ToolBar/GridContainer/Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="ToolBar/GridContainer/Camera" to="." method="_on_camera_pressed"]
 [connection signal="pressed" from="ToolBar/GridContainer/Gallery" to="." method="_on_gallery_pressed"]
 [connection signal="pressed" from="ToolBar/GridContainer/Brush" to="." method="_on_brush_pressed"]
 [connection signal="pressed" from="ColorToolbar/GridContainer/color1" to="." method="_on_color_1_pressed" flags=18]

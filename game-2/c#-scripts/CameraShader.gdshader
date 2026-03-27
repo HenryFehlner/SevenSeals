@@ -4,18 +4,19 @@ uniform sampler2D camera_y;
 uniform sampler2D camera_CbCr;
 
 void fragment() {
-	vec3 ycbcr;
-	ycbcr.x = texture(camera_y, UV).r;
-	ycbcr.yz = texture(camera_CbCr, UV).rg;
+    vec2 uv = vec2(UV.y, 1.0 - UV.x);
 
-	float y = ycbcr.x;
-	float cb = ycbcr.y - 0.5;
-	float cr = ycbcr.z - 0.5;
+    float y = texture(camera_y, uv).r;
 
-	vec3 rgb;
-	rgb.r = y + 1.402 * cr;
-	rgb.g = y - 0.344136 * cb - 0.714136 * cr;
-	rgb.b = y + 1.772 * cb;
+    vec2 chroma = texture(camera_CbCr, uv).rg;
 
-	COLOR = vec4(rgb, 1.0);
+    // Explicit decode (no matrix tricks)
+    float cb = chroma.x - 0.5;
+    float cr = chroma.y - 0.5;
+
+    float r = y + 1.402 * cr;
+    float g = y - 0.344 * cb - 0.714 * cr;
+    float b = y + 1.772 * cb;
+
+    COLOR = vec4(clamp(vec3(r, g, b), 0.0, 1.0), 1.0);
 }

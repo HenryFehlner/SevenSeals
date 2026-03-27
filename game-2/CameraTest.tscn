@@ -1,11 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://c62ennoyw162b"]
+[gd_scene load_steps=7 format=3 uid="uid://c62ennoyw162b"]
 
 [ext_resource type="Script" uid="uid://ba1uljgy16rui" path="res://c#-scripts/CameraDisplay.cs" id="1_fvl0b"]
 [ext_resource type="Shader" uid="uid://c77g2ddqxqycb" path="res://c#-scripts/CameraShader.gdshader" id="2_al3jc"]
 [ext_resource type="Texture2D" uid="uid://di82o6mx2y48s" path="res://icon.svg" id="3_mhm7m"]
 
+[sub_resource type="CameraTexture" id="CameraTexture_al3jc"]
+which_feed = 2
+
+[sub_resource type="CameraTexture" id="CameraTexture_mhm7m"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_64lfn"]
 shader = ExtResource("2_al3jc")
+shader_parameter/camera_y = SubResource("CameraTexture_mhm7m")
+shader_parameter/camera_CbCr = SubResource("CameraTexture_al3jc")
 
 [node name="CameraTest" type="Node2D"]
 
@@ -15,25 +22,14 @@ anchors_preset = 0
 offset_right = 720.0
 offset_bottom = 1600.0
 
-[node name="PhotoButtons" type="BoxContainer" parent="Control"]
-layout_mode = 0
-offset_top = 1200.0
-offset_right = 720.0
-offset_bottom = 1600.0
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(720, 1200)
 
-[node name="TextureButton" type="TextureButton" parent="Control/PhotoButtons"]
-layout_mode = 2
-
-[node name="ConfimButtons" type="BoxContainer" parent="Control"]
-visible = false
-layout_mode = 0
-offset_top = 1200.0
-offset_right = 720.0
-offset_bottom = 1600.0
-
-[node name="CamSprite" type="Sprite2D" parent="Control"]
+[node name="CamSprite" type="Sprite2D" parent="SubViewport"]
 material = SubResource("ShaderMaterial_64lfn")
-position = Vector2(360.99997, 564.00006)
-scale = Vector2(5.0820313, 7.40625)
+position = Vector2(360.99997, 623.50006)
+scale = Vector2(4.846, 8)
 texture = ExtResource("3_mhm7m")
 script = ExtResource("1_fvl0b")
