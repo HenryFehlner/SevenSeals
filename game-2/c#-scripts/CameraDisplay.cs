@@ -24,6 +24,8 @@ public partial class CameraDisplay : Sprite2D
 	
 	[Export] public SubViewport subViewport;
 	
+	[Export] public Sprite2D PhotoSprite;
+	
 	private CameraTexture camTex;
 
 	private CameraFeed camera;
@@ -111,7 +113,6 @@ camera.SetFormat(selected, new Godot.Collections.Dictionary());
 		return;
 	}
 
-	// 🔥 Create textures instead of reading them
 CameraTexture camTexY = new CameraTexture();
 CameraTexture camTexCbCr = new CameraTexture();
 
@@ -135,6 +136,7 @@ GD.Print("NEW BUILD CONFIRMED");
 	PhotoButton.Pressed += TakePhoto;
 	AcceptButton.Pressed += AcceptPhoto;
 	RejectButton.Pressed += RejectPhoto;
+	ReturnButton.Pressed+=ReturnToPainting;
 	UpdateUI();
 		GD.Print("ButtonLinked");
 }
@@ -147,6 +149,7 @@ public async void TakePhoto()
 
 	await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 
+	PhotoSprite.Texture = camTex;
 	var img = subViewport.GetTexture().GetImage();
 
 	if (img == null)
@@ -155,7 +158,6 @@ public async void TakePhoto()
 		return;
 	}
 
-	img.FlipY();
 
 	capturedImage = img;
 	currentState = CameraState.Preview;
@@ -164,8 +166,8 @@ public async void TakePhoto()
 	UpdateUI();
 
 	// Optional: pause camera
-	if (camera != null)
-		camera.FeedIsActive = false;
+	//if (camera != null)
+		//camera.FeedIsActive = false;
 }
 
 public void AcceptPhoto()
@@ -173,7 +175,7 @@ public void AcceptPhoto()
 	if (capturedImage == null)
 		return;
 
-	string imageId = "image_001"; // TODO: replace with your actual image ID
+	string imageId = GlobalData.ActivePainting.PaintingID; 
 	string dirPath = $"user://photos/{imageId}/";
 
 	DirAccess.MakeDirRecursiveAbsolute(dirPath);
@@ -193,7 +195,7 @@ public void AcceptPhoto()
 	}
 		GD.Print("Saved to: ", fullPath);
 		GD.Print(ProjectSettings.GlobalizePath(fullPath));
-		GlobalData.AddPhoto(imageId,fileName);
+		GlobalData.AddPhoto(imageId,fullPath);
 		
 		ResetToIdle();
 	}
@@ -232,7 +234,7 @@ void ResetToIdle()
 }
 
 void ReturnToPainting(){
-	
+	GetTree().ChangeSceneToFile("res://scenes/game_play.tscn");
 }
 	
 }

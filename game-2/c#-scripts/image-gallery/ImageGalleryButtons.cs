@@ -12,12 +12,32 @@ public partial class ImageGalleryButtons : Control
 		// Get grid container
 		photoContainer = GetNode<GridContainer>("PhotoContainer");
 		
+		
+		
 		// Get photos
-		string imageId = GlobalData.ActivePaintingId;
-		string folderPath = $"user://photos/{imageId}/";
+		string imageId = GlobalData.ActivePainting.PaintingID;
+		//string folderPath = $"user://photos/{imageId}/";
 
 		//photoFilePaths = GetPhotos(folderPath);
 		//photoFilePaths = GetPhotos("res://user-photos");
+		
+		GD.Print("Active Painting ID: " + imageId);
+
+		if (GlobalData.Instance.ImagePhotos.ContainsKey(imageId))
+		{
+			GD.Print("Photo count: " + GlobalData.Instance.ImagePhotos[imageId].Count);
+			
+			foreach (string path in GlobalData.Instance.ImagePhotos[imageId])
+			{
+				GD.Print("Photo path: " + path);
+			}
+		}
+		else
+		{
+			GD.Print("No entry in ImagePhotos for this painting");
+		}
+		
+		
 		
 		if (GlobalData.Instance.ImagePhotos.ContainsKey(imageId))
 		{
@@ -29,13 +49,17 @@ public partial class ImageGalleryButtons : Control
 			photoFilePaths = new List<string>();
 		}
 		
+		
+		
+		
+		
 		// Create a button for each photo
 		GD.Print("Loading photos");
 		foreach (string file in photoFilePaths)
 		{
 			// Complete photo path
 			//string photoPath = "res://user-photos/" + file;
-			string photoPath = folderPath + file;
+			string photoPath = file;
 			GD.Print("File loaded: " + photoPath);
 			
 			// Create button for image

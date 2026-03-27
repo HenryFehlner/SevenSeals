@@ -50,16 +50,15 @@ texture_normal = ExtResource("6_g84vi")
 [node name="SubViewport" type="SubViewport" parent="Control"]
 transparent_bg = true
 size = Vector2i(720, 1100)
+render_target_update_mode = 4
 
-[node name="CamSprite" type="Sprite2D" parent="Control/SubViewport" node_paths=PackedStringArray("PhotoButton")]
+[node name="PictureSprite" type="Sprite2D" parent="Control/SubViewport"]
 material = SubResource("ShaderMaterial_4r4jr")
 position = Vector2(359.99997, 557.00006)
 scale = Vector2(5.0820313, 7.40625)
 texture = ExtResource("3_4r4jr")
-script = ExtResource("4_g84vi")
-PhotoButton = NodePath("../../PhotoButton")
 
-[node name="Button" type="Button" parent="Control"]
+[node name="ReturnButton" type="Button" parent="Control"]
 layout_mode = 0
 offset_left = 7.0
 offset_top = 1438.0
@@ -67,7 +66,7 @@ offset_right = 722.0
 offset_bottom = 1573.0
 text = "Return to Painting"
 
-[node name="CamSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("PhotoButton", "AcceptButton", "RejectButton", "subViewport")]
+[node name="CamSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("PhotoButton", "AcceptButton", "RejectButton", "ReturnButton", "subViewport", "PhotoSprite")]
 material = SubResource("ShaderMaterial_4r4jr")
 position = Vector2(359.99997, 557.00006)
 scale = Vector2(5.0820313, 7.40625)
@@ -76,7 +75,9 @@ script = ExtResource("4_g84vi")
 PhotoButton = NodePath("../Control/PhotoButton")
 AcceptButton = NodePath("../Control/AcceptButton")
 RejectButton = NodePath("../Control/DenyButton")
+ReturnButton = NodePath("../Control/ReturnButton")
 subViewport = NodePath("../Control/SubViewport")
+PhotoSprite = NodePath("../Control/SubViewport/PictureSprite")
 
 [node name="Preview" type="Sprite2D" parent="."]
 visible = false
