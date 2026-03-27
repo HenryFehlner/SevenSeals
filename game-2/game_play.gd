@@ -494,7 +494,7 @@ func player_has_unlocked_color(check_color: Color) -> bool:
 # =========================================================
 
 func _on_gallery_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/painting-gallery.tscn")
+	get_tree().change_scene_to_file("res://scenes/image-gallery.tscn")
 
 
 func _on_camera_pressed() -> void:
