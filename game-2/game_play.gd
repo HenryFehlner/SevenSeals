@@ -322,39 +322,67 @@ func setup_region_rules() -> void:
 	region_to_required_color.clear()
 
 	match activePaintingKey:
+
 		"pikachu2":
-			region_to_required_color[color_key(Color(1, 0, 0, 1))] = Color(1.0, 0.84, 0.0, 1.0)
-			region_to_required_color[color_key(Color(0, 1, 0, 1))] = Color(0.55, 0.27, 0.07, 1.0)
-			region_to_required_color[color_key(Color(0, 0, 1, 1))] = Color(1.0, 0.0, 0.0, 1.0)
-			region_to_required_color[color_key(Color(1, 1, 0, 1))] = Color(0.0, 0.0, 0.0, 1.0)
+			
+			# RED -> body
+			region_to_required_color[color_key(Color(1, 0, 0, 1))] = Color(0.991, 0.832, 0.0, 1.0)
+			
+			# GREEN -> background
+			region_to_required_color[color_key(Color(0, 1, 0, 1))] = Color(0.689, 0.877, 0.961, 1.0)
+			
+			# MAGENTA -> cheeks
+			region_to_required_color[color_key(Color(1, 0, 1, 1))] = Color(0.962, 0.382, 0.561, 1.0)
+
+			# CYAN -> highlights
+			region_to_required_color[color_key(Color(0, 1, 1, 1))] = Color(0.922, 0.769, 0.991, 1.0)
+			
+			# YELLOW -> base tail
+			region_to_required_color[color_key(Color(1, 1, 0, 1))] = Color(0.592, 0.349, 0.231, 1.0)
+
 
 		"mareanie":
 			# RED -> teal outer body
 			region_to_required_color[color_key(Color(1, 0, 0, 1))] = Color(0.39, 0.676, 0.704, 1.0)
 
-			# GREEN -> purple inner body / lower section
+			# GREEN -> purple inner body
 			region_to_required_color[color_key(Color(0, 1, 0, 1))] = Color(0.615, 0.41, 0.802, 1.0)
 
-			# BLUE -> blue eyes
+			# BLUE -> light blue eyes
 			region_to_required_color[color_key(Color(0, 0, 1, 1))] = Color(0.418, 0.773, 0.95, 1.0)
 
-			# YELLOW -> yellow crown/eye accents
+			# YELLOW -> crown
 			region_to_required_color[color_key(Color(1, 1, 0, 1))] = Color(0.881, 0.819, 0.404, 1.0)
 
-			# MAGENTA -> light purple spikes
+			# MAGENTA -> spikes
 			region_to_required_color[color_key(Color(1, 0, 1, 1))] = Color(0.80, 0.70, 0.90, 1.0)
 
-			# CYAN -> pink tongue
+			# CYAN -> tongue
 			region_to_required_color[color_key(Color(0, 1, 1, 1))] = Color(1.0, 0.55, 0.663, 1.0)
 
 			# BLACK -> mouth
 			region_to_required_color[color_key(Color(0, 0, 0, 1))] = Color(0.0, 0.0, 0.0, 1.0)
 
+
 		"slyveon":
-			region_to_required_color[color_key(Color(1, 0, 0, 1))] = Color(1.0, 0.55, 0.663, 1.0)
-			region_to_required_color[color_key(Color(0, 1, 0, 1))] = Color(0.418, 0.773, 0.95, 1.0)
-			region_to_required_color[color_key(Color(0, 0, 1, 1))] = Color(1.0, 1.0, 1.0, 1.0)
-			region_to_required_color[color_key(Color(1, 1, 0, 1))] = Color(0.109, 0.49, 0.68, 1.0)
+			# RED -> light gray
+			region_to_required_color[color_key(Color(1, 0, 0, 1))] = Color(0.85, 0.85, 0.85, 1)
+
+			# BLUE -> white
+			region_to_required_color[color_key(Color(0, 0, 1, 1))] = Color(1, 1, 1, 1)
+
+			# GREEN -> pink
+			region_to_required_color[color_key(Color(0, 1, 0, 1))] = Color(1.0, 0.651, 0.822, 1.0)
+
+			# CYAN -> light blue
+			region_to_required_color[color_key(Color(0, 1, 1, 1))] = Color(0.651, 0.825, 1.0, 1.0)
+
+			# YELLOW -> dark blue
+			region_to_required_color[color_key(Color(1, 1, 0, 1))] = Color(0.358, 0.489, 0.947, 1.0)
+
+			# MAGENTA -> light purple
+			region_to_required_color[color_key(Color(1, 0, 1, 1))] = Color(0.8, 0.7, 0.9, 1)
+
 
 		_:
 			print("No region rules set for painting key: ", activePaintingKey)

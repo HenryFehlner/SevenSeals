@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crubqlmqy6nxr"
-path="res://.godot/imported/pikachu2.png-639bc47d20846febf1dcf8ef7ccc5ed2.ctex"
+uid="uid://dfn02uek3fodn"
+path="res://.godot/imported/pikachu2_regions.png-8b2b8aac4fe073c544cc3a70fcbbdd47.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://coloring-images/pikachu2.png"
-dest_files=["res://.godot/imported/pikachu2.png-639bc47d20846febf1dcf8ef7ccc5ed2.ctex"]
+source_file="res://coloring-images/pikachu2_regions.png"
+dest_files=["res://.godot/imported/pikachu2_regions.png-8b2b8aac4fe073c544cc3a70fcbbdd47.ctex"]
 
 [params]
 
