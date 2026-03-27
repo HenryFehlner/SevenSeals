@@ -157,24 +157,28 @@ size_flags_vertical = 3
 text = "Eraser"
 
 [node name="Undo" type="Button" parent="ToolBar/GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Undo"
 
 [node name="Redo" type="Button" parent="ToolBar/GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Redo"
 
 [node name="Previous" type="Button" parent="ToolBar/GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Previous Image"
 
 [node name="Next" type="Button" parent="ToolBar/GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -194,7 +198,17 @@ action_mode = 0
 text = "Gallery
 "
 
+[node name="Painting" type="Button" parent="ToolBar/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+action_mode = 0
+text = "painting
+
+"
+
 [node name="Brush" type="Button" parent="ToolBar/GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -276,6 +290,7 @@ stretch_mode = 0
 [connection signal="pressed" from="ToolBar/GridContainer/Next" to="." method="_on_next_pressed"]
 [connection signal="pressed" from="ToolBar/GridContainer/Camera" to="." method="_on_camera_pressed"]
 [connection signal="pressed" from="ToolBar/GridContainer/Gallery" to="." method="_on_gallery_pressed"]
+[connection signal="pressed" from="ToolBar/GridContainer/Painting" to="." method="_on_gallery_pressed"]
 [connection signal="pressed" from="ToolBar/GridContainer/Brush" to="." method="_on_brush_pressed"]
 [connection signal="pressed" from="ColorToolbar/GridContainer/color1" to="." method="_on_color_1_pressed" flags=18]
 [connection signal="pressed" from="ColorToolbar/GridContainer/color2" to="." method="_on_color_2_pressed" flags=18]
