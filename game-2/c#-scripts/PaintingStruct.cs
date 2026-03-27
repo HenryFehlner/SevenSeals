@@ -6,7 +6,7 @@ using System.Collections.Generic;
 // Should contain:
 //		GUID for creating a filepath for unique photo storage
 //		Image to paint
-//		Required colors palette
+//		Required colors palette	
 [GlobalClass]
 public partial class PaintingStruct : Resource
 {
