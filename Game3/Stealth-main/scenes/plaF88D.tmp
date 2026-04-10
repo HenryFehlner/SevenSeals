@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bf16qn2y6jofb"]
+
+[ext_resource type="Script" path="res://scripts/characterMovement.gd" id="1_kmsxj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uaap0"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7oqf3"]
+height = 1.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8uis3"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER")]
+script = ExtResource("1_kmsxj")
+CAMERA_CONTROLLER = NodePath("head/eyes/Camera3D")
+
+[node name="standingCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_uaap0")
+
+[node name="crouchingCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_7oqf3")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_8uis3")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.778191, 0)
+target_position = Vector3(0, 0, 0)
+
+[node name="head" type="Node3D" parent="."]
+
+[node name="eyes" type="Node3D" parent="head"]
+
+[node name="Camera3D" type="Camera3D" parent="head/eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+near = 1.077

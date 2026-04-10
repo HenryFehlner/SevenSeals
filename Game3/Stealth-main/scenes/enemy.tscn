@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnpqkdg22m3jm"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_ohf5o"]
+[ext_resource type="AudioStream" uid="uid://bnmdl5yjg7m1h" path="res://soundsEffects/heartBeat.mp3" id="2_plhba"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xlpe4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3og3a"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xbgtn"]
+radius = 10.5727
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_up2vo"]
+radius = 3.71083
+
+[node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
+transform = Transform3D(0.996555, 0.00218058, -0.0829038, -0.00258599, 0.999985, -0.00478309, 0.0828921, 0.004981, 0.996546, 0, 0, 0)
+script = ExtResource("1_ohf5o")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.999036, 1.57161e-09, -7.45058e-09, -3.20142e-09, 1.55545, 8.84756e-09, 0, -1.72295e-08, 0.997303, 0.00812527, 1.31935, -0.0115169)
+mesh = SubResource("CapsuleMesh_xlpe4")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00269227, 0.0453409, -0.346992, 0.277969, 0.0157187, -0.00268794, 0.00709615, -0.598529, -0.0263567, -0.110507, 2.1687, -0.29615)
+mesh = SubResource("CapsuleMesh_xlpe4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.996795, 2.44472e-09, 1.49012e-08, 6.98492e-10, 1.71883, 1.86265e-09, -3.72529e-08, 3.72529e-09, 0.994065, -0.00301335, 1.16524, -0.00557353)
+shape = SubResource("CapsuleShape3D_3og3a")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="PatrolTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="HearingFar" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HearingFar"]
+transform = Transform3D(1, 4.94765e-10, -1.49012e-08, 3.20142e-10, 1, 1.86265e-09, 0, -1.39698e-09, 1, -0.00320383, 1.2389, -0.00592587)
+shape = SubResource("SphereShape3D_xbgtn")
+
+[node name="HearingClose" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HearingClose"]
+transform = Transform3D(1.00319, 1.74623e-10, -1.49012e-08, -1.74623e-10, 1.00319, 2.79397e-09, 0, -1.86265e-09, 1.00319, 0, 0, 0)
+shape = SubResource("SphereShape3D_up2vo")
+
+[node name="Head" type="Marker3D" parent="."]
+transform = Transform3D(1, 2.03727e-10, -7.45058e-09, 2.91038e-11, 1, 9.31323e-10, 0, -9.31323e-10, 1, -0.00543893, 2.1032, -0.0100599)
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_plhba")
+attenuation_model = 3
+
+[connection signal="timeout" from="PatrolTimer" to="." method="_on_patrol_timer_timeout"]
+[connection signal="body_entered" from="HearingFar" to="." method="_on_hearing_far_body_entered"]
+[connection signal="body_exited" from="HearingFar" to="." method="_on_hearing_far_body_exited"]
+[connection signal="body_entered" from="HearingClose" to="." method="_on_hearing_close_body_entered"]
+[connection signal="body_exited" from="HearingClose" to="." method="_on_hearing_close_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

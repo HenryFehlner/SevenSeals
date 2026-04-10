@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://bf16qn2y6jofb"]
+
+[ext_resource type="Script" path="res://scripts/characterMovement.gd" id="1_kmsxj"]
+[ext_resource type="AudioStream" uid="uid://durrgvyqpw83f" path="res://soundsEffects/footsteps_Running.mp3" id="2_5tjif"]
+[ext_resource type="Script" path="res://scripts/flashLightRay.gd" id="2_e6mlm"]
+[ext_resource type="AudioStream" uid="uid://d33hl4qpbiasw" path="res://soundsEffects/footSteps_Walking.mp3" id="3_0k8vd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uaap0"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7oqf3"]
+height = 1.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8uis3"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER")]
+script = ExtResource("1_kmsxj")
+CAMERA_CONTROLLER = NodePath("head/eyes/Camera3D")
+
+[node name="standingCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_uaap0")
+
+[node name="crouchingCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_7oqf3")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_8uis3")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.778191, 0)
+target_position = Vector3(0, 0, 0)
+
+[node name="head" type="Node3D" parent="."]
+
+[node name="eyes" type="Node3D" parent="head"]
+
+[node name="Camera3D" type="Camera3D" parent="head/eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+near = 1.077
+
+[node name="hand" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.693935, -0.187137, 0.126334)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.667784, 0.272795, 0.373686)
+light_energy = 16.0
+light_volumetric_fog_energy = 13.0
+light_size = 0.635
+spot_range = 30.0
+spot_attenuation = 0.784581
+spot_angle = 20.0
+
+[node name="RayCast3D" type="RayCast3D" parent="hand/SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.667784, 0.272795, -2.12479)
+target_position = Vector3(0, 0, -30)
+debug_shape_custom_color = Color(0.623529, 0.964706, 0.415686, 1)
+debug_shape_thickness = 5
+script = ExtResource("2_e6mlm")
+
+[node name="runningSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_5tjif")
+volume_db = -20.0
+
+[node name="walkingSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_0k8vd")
+volume_db = -20.0
