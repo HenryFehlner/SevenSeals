@@ -16,11 +16,15 @@ var SPEED = 5.0
 const walking_speed = 5.0
 const sprinting_speed = 12.0
 const crouching_speed = 2.0
+const sliding_speed = 12.0
 const JUMP_VELOCITY = 4.5
 
 var direction = Vector3.ZERO
 var lerp_speed = 10.0
 var crouching_depth = -0.5
+
+var is_sliding = false
+var slide_velocity = 1.0
 
 #Head Bobbing variables
 const head_bobbing_sprinting_speed = 22.0
@@ -91,6 +95,7 @@ func _update_camera(delta):
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	flashLight.spot_range = 50
 
 func _physics_process(delta):
 	var input_dir = Input.get_vector("left", "right", "forward", "backwards")
@@ -105,7 +110,17 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("flashLightToggle"):
 		flashLight.visible = !flashLight.visible
 	
-	#Handling movement states 
+	#Handling movement states
+	#Slide
+	if Input.is_action_just_pressed("slide"):
+		is_sliding = !is_sliding
+		if is_sliding:
+			slide_velocity = 5
+			print("started sliding")
+		else:
+			slide_velocity = 1.0
+			print("stopped sliding")
+	
 	#crouching is not working 
 	if Input.is_action_pressed("crouch"):
 		SPEED = crouching_speed
@@ -190,5 +205,7 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+		
+	velocity *= slide_velocity
 
 	move_and_slide()
