@@ -8,12 +8,11 @@ func _physics_process(delta):
 	_check_collision(get_collider())
 
 func _check_collision(collider: Object):
-	if (collider == null):
+	if collider == null:
 		return
 	
-	print_debug(collider)
-	if (collider.is_in_group("enemies") and flashLight.visible != false):
-		collider.changeState(3) 
-		collider.chaseTimer.start()
+	if collider.is_in_group("enemies") and flashLight.visible:
+		if collider.has_method("react_to_flashlight"):
+			collider.react_to_flashlight()
 	#elif(collider.is_in_group("enemies") and flashLight.visible == false):
 		#collider.changeState(1)

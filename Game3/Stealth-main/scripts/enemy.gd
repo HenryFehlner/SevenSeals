@@ -6,130 +6,221 @@ enum States{
 	stalk,
 	chase
 }
+
 var _currentState: States
 var _navigationAgent: NavigationAgent3D
+
 @export var wayPoints: Array[Marker3D]
 @export var chaseSpeed = 2
 @export var patrolSpeed = 1
+
+@onready var stateIndicator = $StateIndicator
+@onready var stateMat : StandardMaterial3D = stateIndicator.get_surface_override_material(0)
 @onready var patrolTimer = $PatrolTimer
-@onready var chaseTimer = $Timer
 @onready var heartBeat = $AudioStreamPlayer3D
+
 var wayPointIndex: int
 var player
-var playerInEarshotFar : bool 
-var playerInEarshotClose : bool
+
+var playerInEarshotFar : bool = false
+var playerInEarshotClose : bool = false
+
+
+var lastKnownPlayerPos: Vector3
+var hasLastKnownPos: bool = false
 
 func _ready():
-	_currentState = States.patrol
 	_navigationAgent = $NavigationAgent3D
 	player = get_tree().get_nodes_in_group("Player")[0]
+	
+	changeState(States.patrol)
+	updateStateIndicator()
 	_navigationAgent.target_position = wayPoints[0].global_position
-	pass
+
 
 func _process(delta):
-	
 	match _currentState:
+		
 		States.patrol:
-			if(_navigationAgent.is_navigation_finished()):
-				_currentState = States.wait
+			if _navigationAgent.is_navigation_finished():
+				changeState(States.wait)
 				patrolTimer.start()
 				return
+			
 			MoveTowardsPoint(delta, patrolSpeed)
 			CheckForPlayer()
-			heartBeatSounds()
-			pass
+		
+		
 		States.wait:
-			heartBeatSounds()
-			pass
+			# Idle but still aware
+			CheckForPlayer()
+		
+		
 		States.stalk:
-			if(_navigationAgent.is_navigation_finished()):
-				patrolTimer.start()
-				_currentState = States.wait
+			# Move toward last known position
+			if hasLastKnownPos:
+				_navigationAgent.target_position = lastKnownPlayerPos
+			
+			if _navigationAgent.is_navigation_finished():
+				# Couldn't find player → go back to patrol
+				hasLastKnownPos = false
+				changeState(States.patrol)
+				return
+			
 			MoveTowardsPoint(delta, patrolSpeed)
-			heartBeatSounds()
-			pass
+			CheckForPlayer()
+		
+		
 		States.chase:
-			if(_navigationAgent.is_navigation_finished()):
-				patrolTimer.start()
-				_currentState = States.wait
-			_navigationAgent.target_position = player.global_position
+			CheckForPlayer()
+			
+			if playerInEarshotClose:
+				# Direct chase
+				_navigationAgent.target_position = player.global_position
+				lastKnownPlayerPos = player.global_position
+				hasLastKnownPos = true
+			else:
+				# Lost player → go to last known position
+				if hasLastKnownPos:
+					_navigationAgent.target_position = lastKnownPlayerPos
+				else:
+					changeState(States.stalk)
+					return
+			
+			if _navigationAgent.is_navigation_finished():
+				# Reached last known position → search
+				changeState(States.stalk)
+				return
+			
 			MoveTowardsPoint(delta, chaseSpeed)
-			heartBeatSounds()
-			pass
-	pass
+	
+	heartBeatSounds()
+
 
 func MoveTowardsPoint(delta, speed):
 	var targetPos = _navigationAgent.get_next_path_position()
+	
+	# Prevent jitter + look_at crash
+	if global_position.distance_to(targetPos) < 0.05:
+		velocity = Vector3.ZERO
+		return
+	
 	var direction = global_position.direction_to(targetPos)
 	faceDirection(targetPos)
 	velocity = direction * speed
 	move_and_slide()
-	if(playerInEarshotFar):
-		CheckForPlayer()
+
 
 func CheckForPlayer():
 	var space_state = get_world_3d().direct_space_state
-	var result = space_state.intersect_ray(PhysicsRayQueryParameters3D.create(self.global_position, player.global_position))
-	if result.size() > 0:
-		if(result["collider"].is_in_group("Player")):
-			if(playerInEarshotClose):
-				if(result["collider"].crouching == false):
-					_currentState = States.chase
-					_navigationAgent.target_position = result["collider"].global_position
-			if(playerInEarshotFar):
-				if(result["collider"].crouching == false):
-					_currentState = States.stalk
-					_navigationAgent.target_position = result["collider"].global_position
+	var result = space_state.intersect_ray(
+		PhysicsRayQueryParameters3D.create(global_position, player.global_position)
+	)
+	
+	if result.size() > 0 and result["collider"].is_in_group("Player"):
+		if result["collider"].crouching == false:
+			
+			# 🔥 Save last known position ALWAYS when seen
+			lastKnownPlayerPos = player.global_position
+			hasLastKnownPos = true
+			
+			# 🔥 PRIORITY FIX
+			if playerInEarshotClose:
+				changeState(States.chase)
+				return
+			
+			elif playerInEarshotFar:
+				changeState(States.stalk)
+
 
 func faceDirection(direction: Vector3):
-	look_at(Vector3(direction.x, global_position.y, direction.z ), Vector3.UP)
+	var target = Vector3(direction.x, global_position.y, direction.z)
+	
+	if global_position.distance_to(target) < 0.01:
+		return
+		
+	look_at(target, Vector3.UP)
+
 
 func _on_patrol_timer_timeout():
-	_currentState = States.patrol
+	changeState(States.patrol)
+	
 	wayPointIndex += 1
 	if wayPointIndex > wayPoints.size() - 1:
 		wayPointIndex = 0
+	
 	_navigationAgent.target_position = wayPoints[wayPointIndex].global_position
-	pass # Replace with function body.
 
 
+# 🔊 Hearing system
 func _on_hearing_far_body_entered(body):
 	if body.is_in_group("Player"):
-		playerInEarshotFar = true 
-		print("Player is far in earshot")
-	pass # Replace with function body.
+		playerInEarshotFar = true
 
 
 func _on_hearing_close_body_entered(body):
 	if body.is_in_group("Player"): 
 		playerInEarshotClose = true
-		print("Player is close in earshot")
-	pass # Replace with function body.
 
 
 func _on_hearing_far_body_exited(body):
 	if body.is_in_group("Player"): 
-		print("Player is not far in earshot")
 		playerInEarshotFar = false
-	pass # Replace with function body.
 
 
 func _on_hearing_close_body_exited(body):
 	if body.is_in_group("Player"): 
 		playerInEarshotClose = false
-		print("Player has left close earshot")
-	pass # Replace with function body.
+
+
 
 func changeState(newState):
+	if _currentState == newState:
+		return
+	
 	_currentState = newState
+	updateStateIndicator()
+
+
 
 func heartBeatSounds():
 	if _currentState != States.chase and heartBeat.playing:
-			heartBeat.stop()
-	elif heartBeat.playing == false:
-		heartBeat.play() 
+		heartBeat.stop()
+	elif _currentState == States.chase and heartBeat.playing == false:
+		heartBeat.play()
 
-func _on_timer_timeout():
-	if(_currentState == States.chase):
-		_currentState = States.patrol
-	pass # Replace with function body.
+
+
+func updateStateIndicator():
+	if stateMat == null:
+		print("Material is NULL!")
+		return
+	
+	match _currentState:
+		States.patrol:
+			stateMat.albedo_color = Color(0, 1, 0)
+			stateMat.emission = Color(0, 1, 0)
+			
+		States.wait:
+			stateMat.albedo_color = Color(1, 1, 0)
+			stateMat.emission = Color(1, 1, 0)
+			
+		States.stalk:
+			stateMat.albedo_color = Color(1, 0.5, 0)
+			stateMat.emission = Color(1, 0.5, 0)
+			
+		States.chase:
+			stateMat.albedo_color = Color(1, 0, 0)
+			stateMat.emission = Color(1, 0, 0)
+			
+var lastFlashHitTime = 0.0
+
+func react_to_flashlight():
+	if Time.get_ticks_msec() - lastFlashHitTime < 200:
+		return
+	
+	lastFlashHitTime = Time.get_ticks_msec()
+	
+	lastKnownPlayerPos = player.global_position
+	hasLastKnownPos = true
+	changeState(States.chase)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bet2ti286w46a"]
+[gd_scene load_steps=8 format=3 uid="uid://bet2ti286w46a"]
 
 [ext_resource type="PackedScene" uid="uid://bf16qn2y6jofb" path="res://scenes/player.tscn" id="1_lyx0c"]
 [ext_resource type="PackedScene" uid="uid://bnpqkdg22m3jm" path="res://scenes/enemy.tscn" id="2_gljv2"]
@@ -13,6 +13,12 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Arr
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pu20x"]
 albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_7u8ti"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctdb1"]
+emission_enabled = true
+emission_energy_multiplier = 1.36
 
 [node name="Node3D" type="Node"]
 
@@ -49,6 +55,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.07833, -3.15133, 4.46253)
 [node name="Enemy" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.97434, 0.735815, -25.0254)
 wayPoints = [NodePath("../../Node3D/Marker3D"), NodePath("../../Node3D/Marker3D2")]
+
+[node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 3.532629, 0)
+mesh = SubResource("SphereMesh_7u8ti")
+surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 
 [node name="Node3D" type="Node3D" parent="."]
 
