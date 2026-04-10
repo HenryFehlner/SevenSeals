@@ -120,11 +120,11 @@ func CheckForPlayer():
 	if result.size() > 0 and result["collider"].is_in_group("Player"):
 		if result["collider"].crouching == false:
 			
-			# 🔥 Save last known position ALWAYS when seen
+			
 			lastKnownPlayerPos = player.global_position
 			hasLastKnownPos = true
 			
-			# 🔥 PRIORITY FIX
+			
 			if playerInEarshotClose:
 				changeState(States.chase)
 				return
