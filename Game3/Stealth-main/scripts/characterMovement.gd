@@ -112,14 +112,14 @@ func _physics_process(delta):
 	
 	#Handling movement states
 	#Slide
-	if Input.is_action_just_pressed("slide"):
-		is_sliding = !is_sliding
-		if is_sliding:
-			slide_velocity = 5
-			print("started sliding")
-		else:
-			slide_velocity = 1.0
-			print("stopped sliding")
+	if Input.is_action_pressed("slide"):
+		is_sliding = true
+		slide_velocity = 4.0
+		print("started sliding")
+	else:
+		is_sliding = false
+		slide_velocity = 1.0
+		print("stopped sliding")
 	
 	#crouching is not working 
 	if Input.is_action_pressed("crouch"):
@@ -202,9 +202,10 @@ func _physics_process(delta):
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+	
+	#else:
+		#velocity.x = move_toward(velocity.x, 0, SPEED)
+		#velocity.z = move_toward(velocity.z, 0, SPEED)
 		
 	velocity *= slide_velocity
 
