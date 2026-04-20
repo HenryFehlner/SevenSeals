@@ -13,8 +13,8 @@ var _navigationAgent: NavigationAgent3D
 @export var wayPoints: Array[Marker3D]
 @export var chaseSpeed = 2
 @export var patrolSpeed = 1
-
 @onready var stateIndicator = $StateIndicator
+@onready var destinationIndicator = $DestinationIndicator
 @onready var stateMat : StandardMaterial3D = stateIndicator.get_surface_override_material(0)
 @onready var patrolTimer = $PatrolTimer
 @onready var heartBeat = $AudioStreamPlayer3D
@@ -200,18 +200,22 @@ func updateStateIndicator():
 		States.patrol:
 			stateMat.albedo_color = Color(0, 1, 0)
 			stateMat.emission = Color(0, 1, 0)
+			destinationIndicator.visible = false;
 			
 		States.wait:
 			stateMat.albedo_color = Color(1, 1, 0)
 			stateMat.emission = Color(1, 1, 0)
+			destinationIndicator.visible = false;
 			
 		States.stalk:
 			stateMat.albedo_color = Color(1, 0.5, 0)
 			stateMat.emission = Color(1, 0.5, 0)
+			destinationIndicator.visible = true;
 			
 		States.chase:
 			stateMat.albedo_color = Color(1, 0, 0)
 			stateMat.emission = Color(1, 0, 0)
+			destinationIndicator.visible = false;
 			
 var lastFlashHitTime = 0.0
 
