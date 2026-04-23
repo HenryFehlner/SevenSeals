@@ -10,21 +10,23 @@ extends CharacterBody3D
 @onready var flashLight = $hand/SpotLight3D
 @onready var walkingSounds = $walkingSound
 @onready var runningSounds = $runningSound
+@onready var slideResetTimer = $SlideResetTimer
+@onready var slideDurationTimer = $SlideDurationTimer
 #Movement Variables
 var SPEED = 5.0
 
 const walking_speed = 5.0
 const sprinting_speed = 12.0
 const crouching_speed = 2.0
-const sliding_speed = 12.0
 const JUMP_VELOCITY = 4.5
 
 var direction = Vector3.ZERO
 var lerp_speed = 10.0
 var crouching_depth = -0.5
 
-var is_sliding = false
-var slide_velocity = 1.0
+#sliding
+const slide_speed = 0.1
+var slide_dir = Vector3.ZERO
 
 #Head Bobbing variables
 const head_bobbing_sprinting_speed = 22.0
@@ -44,6 +46,8 @@ var walking = false;
 var sprinting = false; 
 var crouching = false; 
 var sliding = false; 
+var slide_ready = true;
+var moving = false;
 
 #Camera Controls 
 @export var MOUSE_SENSITIVITY : float = 0.4
@@ -96,6 +100,8 @@ func _update_camera(delta):
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	flashLight.spot_range = 50
+	slideResetTimer.one_shot = true
+	slideDurationTimer.one_shot = true
 
 func _physics_process(delta):
 	var input_dir = Input.get_vector("left", "right", "forward", "backwards")
@@ -111,16 +117,6 @@ func _physics_process(delta):
 		flashLight.visible = !flashLight.visible
 	
 	#Handling movement states
-	#Slide
-	if Input.is_action_pressed("slide"):
-		is_sliding = true
-		slide_velocity = 4.0
-		print("started sliding")
-	else:
-		is_sliding = false
-		slide_velocity = 1.0
-		print("stopped sliding")
-	
 	#crouching is not working 
 	if Input.is_action_pressed("crouch"):
 		SPEED = crouching_speed
@@ -197,16 +193,41 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
+	
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), delta*lerp_speed)
-	if direction:
+	
+	# Allow input only if not sliding
+	if sliding:
+		position += slide_dir * slide_speed
+		head.position.y = .6 +crouching_depth
+	elif direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
-	
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
-		#velocity.z = move_toward(velocity.z, 0, SPEED)
 		
-	velocity *= slide_velocity
+	# just check for movement input
+	if input_dir:
+		moving = true
+	else:
+		moving = false
+	
+	#slide
+	if Input.is_action_just_pressed("slide") and moving and slide_ready:
+		sliding = true
+		slide_ready = false
+		slide_dir = Vector3(velocity.x, 0, velocity.z)
+		slideResetTimer.start()
+		slideDurationTimer.start()
+		print("Initiate slide")
 
 	move_and_slide()
+
+
+func _on_slide_timer_timeout() -> void:
+	print("Reset slide timer")
+	slide_ready = true
+
+func _on_slide_duration_timer_timeout() -> void:
+	print("End slide")
+	sliding = false
+	head.position.y = lerp(CAMERA_CONTROLLER.position.y, .6, lerp_speed)
