@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://bet2ti286w46a"]
+[gd_scene load_steps=16 format=3 uid="uid://bet2ti286w46a"]
 
-[ext_resource type="PackedScene" uid="uid://dhb8ybqb1eep0" path="res://scenes/BlackOutMap.tscn" id="1_6yqq2"]
+[ext_resource type="PackedScene" path="res://scenes/BlackOutMap.tscn" id="1_6yqq2"]
 [ext_resource type="PackedScene" uid="uid://bf16qn2y6jofb" path="res://scenes/player.tscn" id="1_lyx0c"]
 [ext_resource type="PackedScene" uid="uid://bnpqkdg22m3jm" path="res://scenes/enemy.tscn" id="2_gljv2"]
 [ext_resource type="PackedScene" uid="uid://c3ciafejdap3j" path="res://3dModels/icicle_01.glb" id="3_bnr4y"]
@@ -23,6 +23,16 @@ emission_enabled = true
 emission_energy_multiplier = 1.36
 
 [sub_resource type="TorusMesh" id="TorusMesh_7u8ti"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvirt"]
+emission_enabled = true
+emission_energy_multiplier = 1.37
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ch65c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t2xsx"]
+emission_enabled = true
+emission_energy_multiplier = 1.37
 
 [node name="Node3D" type="Node"]
 
@@ -141,6 +151,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy"]
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
+surface_material_override/0 = SubResource("StandardMaterial3D_lvirt")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Enemy/Enemy"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.667784, 0.272795, 0.373686)
@@ -170,6 +181,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy3"]
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
+surface_material_override/0 = SubResource("StandardMaterial3D_ch65c")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Enemy/Enemy3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.667784, 0.272795, 0.373686)
@@ -199,6 +211,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy2"]
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
+surface_material_override/0 = SubResource("StandardMaterial3D_t2xsx")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Enemy/Enemy2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.667784, 0.272795, 0.373686)
