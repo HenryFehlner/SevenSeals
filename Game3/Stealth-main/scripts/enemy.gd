@@ -104,7 +104,7 @@ func _process(delta):
 	heartBeatSounds()
 
 
-func MoveTowardsPoint(delta, speed):
+func MoveTowardsPoint(_delta, speed):
 	var targetPos = _navigationAgent.get_next_path_position()
 	
 	if global_position.distance_to(targetPos) < 0.05:

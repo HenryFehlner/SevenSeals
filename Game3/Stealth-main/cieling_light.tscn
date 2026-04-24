@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://b54tkv6o0ban0"]
+
+[ext_resource type="PackedScene" uid="uid://b2m6u83cguimb" path="res://3dModels/ceiling_lamp.glb" id="1_wfxdn"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_wfxdn")]
