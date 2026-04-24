@@ -109,7 +109,7 @@ func _process(delta):
 				if hasLastKnownPos:
 					_navigationAgent.target_position = lastKnownPlayerPos
 			
-				return
+				
 			
 			MoveTowardsPoint(delta, chaseSpeed)
 	
@@ -141,12 +141,10 @@ func CheckForPlayer():
 			lastKnownPlayerPos = player.global_position
 			hasLastKnownPos = true
 			
-			if playerInEarshotClose:
+			if playerInEarshotClose or playerInEarshotFar:
 				changeState(States.chase)
 				return
 			
-			elif playerInEarshotFar:
-				changeState(States.stalk)
 
 
 func faceDirection(direction: Vector3):
@@ -253,4 +251,4 @@ func react_to_flashlight():
 	
 	lastKnownPlayerPos = player.global_position
 	hasLastKnownPos = true
-	changeState(States.chase)
+	changeState(States.stalk)
