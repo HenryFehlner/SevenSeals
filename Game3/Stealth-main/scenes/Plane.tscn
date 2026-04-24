@@ -37,7 +37,7 @@ environment = SubResource("Environment_pulcu")
 navigation_mesh = SubResource("NavigationMesh_fh7dh")
 
 [node name="Sketchfab_Scene" parent="Platform/NavigationRegion3D" instance=ExtResource("1_6yqq2")]
-transform = Transform3D(0.2364776, 0, 0, 0, 0.0500687, 0, 0, 0, 0.23086837, -0.020252228, 0.04453087, -302.0942)
+transform = Transform3D(0.23647758, 0, 0, 0, 0.0500687, 0, 0, 0, 0.23086835, -0.020252228, 0.04453087, -302.0942)
 
 [node name="Light" type="Node" parent="Platform/NavigationRegion3D/Sketchfab_Scene"]
 
@@ -160,7 +160,7 @@ script = ExtResource("3_ctdb1")
 
 [node name="Enemy3" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
 transform = Transform3D(-0.7970361, 0, 0.60393167, 0, 1, 0, -0.60393167, 0, -0.7970361, -80.79543, 36.84613, 115.97023)
-wayPoints = [NodePath("../../WayPoints/Marker3D5"), NodePath("../../WayPoints/Marker3D4"), NodePath("../../WayPoints/Marker3D6")]
+wayPoints = [NodePath("../../WayPoints/Marker3D5"), NodePath("../../WayPoints/Marker3D6")]
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy3"]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 3.532629, 0)
