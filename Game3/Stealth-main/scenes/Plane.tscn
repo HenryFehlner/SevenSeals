@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bet2ti286w46a"]
+[gd_scene load_steps=13 format=3 uid="uid://bet2ti286w46a"]
 
 [ext_resource type="PackedScene" uid="uid://dhb8ybqb1eep0" path="res://scenes/BlackOutMap.tscn" id="1_6yqq2"]
 [ext_resource type="PackedScene" uid="uid://bf16qn2y6jofb" path="res://scenes/player.tscn" id="1_lyx0c"]
 [ext_resource type="PackedScene" uid="uid://bnpqkdg22m3jm" path="res://scenes/enemy.tscn" id="2_gljv2"]
 [ext_resource type="PackedScene" uid="uid://c3ciafejdap3j" path="res://3dModels/icicle_01.glb" id="3_bnr4y"]
 [ext_resource type="Script" uid="uid://wwommglswli1" path="res://scripts/flashLightRay.gd" id="3_ctdb1"]
+[ext_resource type="PackedScene" uid="uid://c5jwbtj55mej4" path="res://3dModels/case_boxes.glb" id="4_lvirt"]
 [ext_resource type="PackedScene" uid="uid://b2m6u83cguimb" path="res://3dModels/ceiling_lamp.glb" id="5_qbpoo"]
 
 [sub_resource type="Environment" id="Environment_pulcu"]
@@ -38,48 +39,66 @@ navigation_mesh = SubResource("NavigationMesh_fh7dh")
 [node name="Sketchfab_Scene" parent="Platform/NavigationRegion3D" instance=ExtResource("1_6yqq2")]
 transform = Transform3D(0.2364776, 0, 0, 0, 0.0500687, 0, 0, 0, 0.23086837, 0, 0, -302.3448)
 
-[node name="Node" type="Node" parent="Platform/NavigationRegion3D/Sketchfab_Scene"]
+[node name="Light" type="Node" parent="Platform/NavigationRegion3D/Sketchfab_Scene"]
 
-[node name="Sketchfab_Scene" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Node" instance=ExtResource("5_qbpoo")]
+[node name="Sketchfab_Scene" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, 9.190734, 14.684671, 37.27007)
 
-[node name="Sketchfab_Scene2" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Node" instance=ExtResource("5_qbpoo")]
+[node name="Sketchfab_Scene2" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, 17.378975, 14.684671, -14.649136)
 
-[node name="Sketchfab_Scene3" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Node" instance=ExtResource("5_qbpoo")]
+[node name="Sketchfab_Scene3" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, 48.55844, 14.684671, -14.652985)
 
-[node name="Sketchfab_Scene4" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Node" instance=ExtResource("5_qbpoo")]
+[node name="Sketchfab_Scene4" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, 59.47629, 14.684671, 37.27007)
 
-[node name="Sketchfab_Scene5" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Node" instance=ExtResource("5_qbpoo")]
+[node name="Sketchfab_Scene5" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -63.337723, 14.684671, 3.8670998)
 
-[node name="Sketchfab_Scene6" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Node" instance=ExtResource("5_qbpoo")]
+[node name="Sketchfab_Scene6" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -39.374886, 14.684671, 37.27007)
 
-[node name="Sketchfab_Scene7" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Node" instance=ExtResource("5_qbpoo")]
+[node name="Sketchfab_Scene7" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -83.204445, 14.684671, 73.805244)
 
-[node name="Sketchfab_Scene9" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Node" instance=ExtResource("5_qbpoo")]
+[node name="Sketchfab_Scene9" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -47.418007, 14.684671, 124.49669)
 
-[node name="Sketchfab_Scene8" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Node" instance=ExtResource("5_qbpoo")]
+[node name="Sketchfab_Scene8" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -123.29981, 14.684671, 65.97273)
 
-[node name="Node" type="Node" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Node"]
+[node name="Icicle" type="Node" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light"]
 
-[node name="Sketchfab_Scene3" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Node/Node" instance=ExtResource("3_bnr4y")]
+[node name="Sketchfab_Scene3" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Icicle" instance=ExtResource("3_bnr4y")]
 transform = Transform3D(2.8918877, 0, 0, 0, 3.3502665, 0, 0, 0, 2.785233, 5.6947374, 10.957298, 1.2915783)
 
-[node name="Sketchfab_Scene4" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Node/Node" instance=ExtResource("3_bnr4y")]
+[node name="Sketchfab_Scene4" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Icicle" instance=ExtResource("3_bnr4y")]
 transform = Transform3D(2.8918877, 0, 0, 0, 3.3502665, 0, 0, 0, 2.785233, 11.783748, 10.957298, 1.2915783)
 
-[node name="Sketchfab_Scene6" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Node/Node" instance=ExtResource("3_bnr4y")]
+[node name="Sketchfab_Scene6" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Icicle" instance=ExtResource("3_bnr4y")]
 transform = Transform3D(2.8918877, 0, 0, 0, 3.3502665, 0, 0, 0, 2.785233, 42.578827, 10.957298, 1.2915783)
 
-[node name="Sketchfab_Scene5" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Node/Node" instance=ExtResource("3_bnr4y")]
+[node name="Sketchfab_Scene5" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Icicle" instance=ExtResource("3_bnr4y")]
 transform = Transform3D(2.8918877, 0, 0, 0, 3.3502665, 0, 0, 0, 2.785233, 29.039883, 10.957298, 1.839117)
+
+[node name="Sketchfab_Scene2" parent="Platform/NavigationRegion3D" instance=ExtResource("4_lvirt")]
+transform = Transform3D(-1.6287595, 0, -5.005108, 0, 9.216184, 0, 5.2005587, 0, -1.5675465, 54.560738, 2.2292728, 26.029419)
+
+[node name="Sketchfab_Scene4" parent="Platform/NavigationRegion3D" instance=ExtResource("4_lvirt")]
+transform = Transform3D(-5.19845, 0, -1.5740093, 0, 9.216184, 0, 1.6354746, 0, -5.0030785, 5.0684624, 2.454421, 40.285458)
+
+[node name="Sketchfab_Scene5" parent="Platform/NavigationRegion3D" instance=ExtResource("4_lvirt")]
+transform = Transform3D(-5.1255975, 0, 1.7816191, 0, 9.216184, 0, -1.8511916, 0, -4.932964, -7.5306425, 2.6366587, 38.14052)
+
+[node name="Sketchfab_Scene7" parent="Platform/NavigationRegion3D" instance=ExtResource("4_lvirt")]
+transform = Transform3D(5.220341, 0, 1.5054047, 0, 9.216184, 0, -1.5641911, 0, 5.024147, -14.907084, 2.6366587, -12.791946)
+
+[node name="Sketchfab_Scene6" parent="Platform/NavigationRegion3D" instance=ExtResource("4_lvirt")]
+transform = Transform3D(1.0437624, 0, 5.1477375, 0, 9.216184, 0, -5.3487587, 0, 1.0045352, -24.688015, 2.8010674, 20.319954)
+
+[node name="Sketchfab_Scene3" parent="Platform/NavigationRegion3D" instance=ExtResource("4_lvirt")]
+transform = Transform3D(2.1169958, 0, -4.832926, 0, 9.216184, 0, 5.0216527, 0, 2.0374334, 54.560738, 2.2292728, 14.67857)
 
 [node name="Player" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.08819, 6.2971897, 34.783386)
@@ -127,7 +146,7 @@ script = ExtResource("3_ctdb1")
 
 [node name="Enemy2" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.97434, 36.40836, 85.295685)
-wayPoints = [NodePath("../../WayPoints/Marker3D"), NodePath("../../WayPoints/Marker3D2")]
+wayPoints = [NodePath("../../WayPoints/Marker3D3"), NodePath("../../WayPoints/Marker3D4")]
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy2"]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 3.532629, 0)
@@ -162,6 +181,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69.53688, 2.2438736, 31.8414
 
 [node name="Marker3D2" type="Marker3D" parent="WayPoints"]
 transform = Transform3D(1, 0, 0, 0, 0.98236895, 0.1869527, 0, -0.1869527, 0.98236895, 13.333397, 5.2011547, 109.02138)
+
+[node name="Marker3D3" type="Marker3D" parent="WayPoints"]
+transform = Transform3D(1, 0, 0, 0, 0.98236895, 0.1869527, 0, -0.1869527, 0.98236895, 59.868576, 5.2011547, -12.894483)
+
+[node name="Marker3D4" type="Marker3D" parent="WayPoints"]
+transform = Transform3D(1, 0, 0, 0, 0.98236895, 0.1869527, 0, -0.1869527, 0.98236895, -13.472839, 5.2011547, 33.173527)
 
 [connection signal="timeout" from="Player/CharacterBody3D/SlideResetTimer" to="Player/CharacterBody3D" method="_on_slide_timer_timeout"]
 [connection signal="timeout" from="Player/CharacterBody3D/SlideDurationTimer" to="Player/CharacterBody3D" method="_on_slide_duration_timer_timeout"]
