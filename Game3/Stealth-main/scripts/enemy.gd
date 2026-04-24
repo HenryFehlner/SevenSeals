@@ -16,7 +16,7 @@ var _navigationAgent: NavigationAgent3D
 @export var chaseGraceDuration: float = 1.0
 
 @onready var stateIndicator = $StateIndicator
-@onready var destinationIndicator = $DestinationIndicator
+# @onready var destinationIndicator = $DestinationIndicator
 @onready var stateMat : StandardMaterial3D = stateIndicator.get_surface_override_material(0)
 @onready var patrolTimer = $PatrolTimer
 @onready var heartBeat = $AudioStreamPlayer3D
@@ -36,7 +36,6 @@ func _ready():
 	_navigationAgent = $NavigationAgent3D
 	player = get_tree().get_nodes_in_group("Player")[0]
 
-	
 	if stateIndicator.get_surface_override_material(0):
 		stateIndicator.set_surface_override_material(
 			0,
@@ -44,11 +43,12 @@ func _ready():
 		)
 		stateMat = stateIndicator.get_surface_override_material(0)
 
-	if destinationIndicator.get_surface_override_material(0):
-		destinationIndicator.set_surface_override_material(
-			0,
-			destinationIndicator.get_surface_override_material(0).duplicate()
-		)
+	# 🔻 Destination indicator disabled
+	# if destinationIndicator.get_surface_override_material(0):
+	# 	destinationIndicator.set_surface_override_material(
+	# 		0,
+	# 		destinationIndicator.get_surface_override_material(0).duplicate()
+	# 	)
 
 	changeState(States.patrol)
 	updateStateIndicator()
@@ -59,7 +59,7 @@ func _process(delta):
 	match _currentState:
 		
 		States.patrol:
-			destinationIndicator.visible = false
+			# destinationIndicator.visible = false
 			if _navigationAgent.is_navigation_finished():
 				changeState(States.wait)
 				patrolTimer.start()
@@ -71,13 +71,13 @@ func _process(delta):
 		
 		States.wait:
 			CheckForPlayer()
-			destinationIndicator.visible = false
+			# destinationIndicator.visible = false
 		
 		
 		States.stalk:
 			if hasLastKnownPos:
 				_navigationAgent.target_position = lastKnownPlayerPos
-				updateDestinationIndicator()
+				# updateDestinationIndicator()
 			
 			if _navigationAgent.is_navigation_finished():
 				hasLastKnownPos = false
@@ -86,12 +86,12 @@ func _process(delta):
 			
 			MoveTowardsPoint(delta, patrolSpeed)
 			CheckForPlayer()
-			destinationIndicator.visible = true
+			# destinationIndicator.visible = true
 		
 		
 		States.chase:
 			CheckForPlayer()
-			destinationIndicator.visible = false
+			# destinationIndicator.visible = false
 			
 			if playerInEarshotClose:
 				chaseGraceTimer = chaseGraceDuration
@@ -194,7 +194,6 @@ func changeState(newState):
 	
 	_currentState = newState
 	
-
 	if newState == States.chase:
 		chaseGraceTimer = chaseGraceDuration
 	
@@ -217,32 +216,33 @@ func updateStateIndicator():
 		States.patrol:
 			stateMat.albedo_color = Color(0, 1, 0)
 			stateMat.emission = Color(0, 1, 0)
-			destinationIndicator.visible = false
+			# destinationIndicator.visible = false
 			
 		States.wait:
 			stateMat.albedo_color = Color(1, 1, 0)
 			stateMat.emission = Color(1, 1, 0)
-			destinationIndicator.visible = false
+			# destinationIndicator.visible = false
 			
 		States.stalk:
 			stateMat.albedo_color = Color(1, 0.5, 0)
 			stateMat.emission = Color(1, 0.5, 0)
-			destinationIndicator.visible = true
+			# destinationIndicator.visible = true
 			
 		States.chase:
 			stateMat.albedo_color = Color(1, 0, 0)
 			stateMat.emission = Color(1, 0, 0)
-			destinationIndicator.visible = false
+			# destinationIndicator.visible = false
 
 
 var lastFlashHitTime = 0.0
 
-func updateDestinationIndicator():
-	if not destinationIndicator.visible:
-		return
-	
-	if hasLastKnownPos:
-		destinationIndicator.global_position = lastKnownPlayerPos
+# 🔻 Disabled
+# func updateDestinationIndicator():
+# 	if not destinationIndicator.visible:
+# 		return
+# 	
+# 	if hasLastKnownPos:
+# 		destinationIndicator.global_position = lastKnownPlayerPos
 
 
 func react_to_flashlight():

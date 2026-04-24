@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bet2ti286w46a"]
+[gd_scene load_steps=17 format=3 uid="uid://bet2ti286w46a"]
 
 [ext_resource type="PackedScene" path="res://scenes/BlackOutMap.tscn" id="1_6yqq2"]
 [ext_resource type="PackedScene" uid="uid://bf16qn2y6jofb" path="res://scenes/player.tscn" id="1_lyx0c"]
@@ -31,6 +31,10 @@ emission_energy_multiplier = 1.37
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ch65c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t2xsx"]
+emission_enabled = true
+emission_energy_multiplier = 1.37
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1e2ag"]
 emission_enabled = true
 emission_energy_multiplier = 1.37
 
@@ -320,6 +324,7 @@ mesh = SubResource("SphereMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy"]
+process_mode = 4
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_lvirt")
@@ -350,6 +355,7 @@ mesh = SubResource("SphereMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy3"]
+process_mode = 4
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_ch65c")
@@ -370,6 +376,32 @@ debug_shape_custom_color = Color(0.623529, 0.964706, 0.415686, 1)
 debug_shape_thickness = 5
 script = ExtResource("3_ctdb1")
 
+[node name="RayCast3D2" type="RayCast3D" parent="Enemy/Enemy3/SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.667784, 0.272795, -2.12479)
+target_position = Vector3(0, 0, -30)
+debug_shape_custom_color = Color(0.623529, 0.964706, 0.415686, 1)
+debug_shape_thickness = 5
+script = ExtResource("3_ctdb1")
+
+[node name="StateIndicator2" type="MeshInstance3D" parent="Enemy/Enemy3"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 3.532629, 0)
+mesh = SubResource("SphereMesh_7u8ti")
+surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
+
+[node name="DestinationIndicator2" type="MeshInstance3D" parent="Enemy/Enemy3"]
+process_mode = 4
+visible = false
+mesh = SubResource("TorusMesh_7u8ti")
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Enemy/Enemy3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.667784, 0.272795, 0.373686)
+light_energy = 16.0
+light_volumetric_fog_energy = 13.0
+light_size = 0.635
+spot_range = 15.115435
+spot_attenuation = 0.784581
+spot_angle = 20.0
+
 [node name="Enemy2" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.97434, 36.40836, 85.295685)
 wayPoints = [NodePath("../../WayPoints/Marker3D3"), NodePath("../../WayPoints/Marker3D4")]
@@ -380,6 +412,7 @@ mesh = SubResource("SphereMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy2"]
+process_mode = 4
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_t2xsx")
@@ -400,38 +433,9 @@ debug_shape_custom_color = Color(0.623529, 0.964706, 0.415686, 1)
 debug_shape_thickness = 5
 script = ExtResource("3_ctdb1")
 
-[node name="Enemy3" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
+[node name="Enemy4" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
 transform = Transform3D(-0.7970361, 0, 0.60393167, 0, 1, 0, -0.60393167, 0, -0.7970361, -80.79543, 36.84613, 115.97023)
 wayPoints = [NodePath("../../WayPoints/Marker3D5"), NodePath("../../WayPoints/Marker3D6")]
-
-[node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy3"]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 3.532629, 0)
-mesh = SubResource("SphereMesh_7u8ti")
-surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
-
-[node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy3"]
-visible = false
-mesh = SubResource("TorusMesh_7u8ti")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Enemy/Enemy3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.667784, 0.272795, 0.373686)
-light_energy = 16.0
-light_volumetric_fog_energy = 13.0
-light_size = 0.635
-spot_range = 15.115435
-spot_attenuation = 0.784581
-spot_angle = 20.0
-
-[node name="RayCast3D" type="RayCast3D" parent="Enemy/Enemy3/SpotLight3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.667784, 0.272795, -2.12479)
-target_position = Vector3(0, 0, -30)
-debug_shape_custom_color = Color(0.623529, 0.964706, 0.415686, 1)
-debug_shape_thickness = 5
-script = ExtResource("3_ctdb1")
-
-[node name="Enemy4" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.284363, 36.84613, 197.24023)
-wayPoints = [NodePath("../../WayPoints/Marker3D"), NodePath("../../WayPoints/Marker3D2")]
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy4"]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 3.532629, 0)
@@ -439,8 +443,10 @@ mesh = SubResource("SphereMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy4"]
+process_mode = 4
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
+surface_material_override/0 = SubResource("StandardMaterial3D_1e2ag")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Enemy/Enemy4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.667784, 0.272795, 0.373686)
@@ -459,7 +465,7 @@ debug_shape_thickness = 5
 script = ExtResource("3_ctdb1")
 
 [node name="Enemy5" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -209.57896, 36.84613, 249.31602)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.284363, 36.84613, 197.24023)
 wayPoints = [NodePath("../../WayPoints/Marker3D"), NodePath("../../WayPoints/Marker3D2")]
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy5"]
@@ -468,6 +474,7 @@ mesh = SubResource("SphereMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy5"]
+process_mode = 4
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
 
@@ -488,7 +495,7 @@ debug_shape_thickness = 5
 script = ExtResource("3_ctdb1")
 
 [node name="Enemy6" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -85.87578, 38.508583, 295.42908)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -209.57896, 36.84613, 249.31602)
 wayPoints = [NodePath("../../WayPoints/Marker3D"), NodePath("../../WayPoints/Marker3D2")]
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy6"]
@@ -497,6 +504,7 @@ mesh = SubResource("SphereMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy6"]
+process_mode = 4
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
 
@@ -517,7 +525,7 @@ debug_shape_thickness = 5
 script = ExtResource("3_ctdb1")
 
 [node name="Enemy7" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.257187, 46.665985, 290.9477)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -85.87578, 38.508583, 295.42908)
 wayPoints = [NodePath("../../WayPoints/Marker3D"), NodePath("../../WayPoints/Marker3D2")]
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy7"]
@@ -526,6 +534,7 @@ mesh = SubResource("SphereMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy7"]
+process_mode = 4
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
 
@@ -546,7 +555,7 @@ debug_shape_thickness = 5
 script = ExtResource("3_ctdb1")
 
 [node name="Enemy8" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -297.84756, 38.42668, 290.75732)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.257187, 46.665985, 290.9477)
 wayPoints = [NodePath("../../WayPoints/Marker3D"), NodePath("../../WayPoints/Marker3D2")]
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy8"]
@@ -555,6 +564,7 @@ mesh = SubResource("SphereMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy8"]
+process_mode = 4
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
 
@@ -575,7 +585,7 @@ debug_shape_thickness = 5
 script = ExtResource("3_ctdb1")
 
 [node name="Enemy9" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -352.518, 35.65218, 429.71625)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -297.84756, 38.42668, 290.75732)
 wayPoints = [NodePath("../../WayPoints/Marker3D"), NodePath("../../WayPoints/Marker3D2")]
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy9"]
@@ -584,6 +594,7 @@ mesh = SubResource("SphereMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy9"]
+process_mode = 4
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
 
@@ -604,7 +615,7 @@ debug_shape_thickness = 5
 script = ExtResource("3_ctdb1")
 
 [node name="Enemy10" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -394.18207, 35.65218, 408.92493)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -352.518, 35.65218, 429.71625)
 wayPoints = [NodePath("../../WayPoints/Marker3D"), NodePath("../../WayPoints/Marker3D2")]
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy10"]
@@ -613,6 +624,7 @@ mesh = SubResource("SphereMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy10"]
+process_mode = 4
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
 
@@ -633,7 +645,7 @@ debug_shape_thickness = 5
 script = ExtResource("3_ctdb1")
 
 [node name="Enemy11" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -465.0593, 38.38036, 326.91718)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -394.18207, 35.65218, 408.92493)
 wayPoints = [NodePath("../../WayPoints/Marker3D"), NodePath("../../WayPoints/Marker3D2")]
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy11"]
@@ -642,6 +654,7 @@ mesh = SubResource("SphereMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy11"]
+process_mode = 4
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
 
@@ -662,7 +675,7 @@ debug_shape_thickness = 5
 script = ExtResource("3_ctdb1")
 
 [node name="Enemy12" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -534.4651, 33.416542, 355.8169)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -465.0593, 38.38036, 326.91718)
 wayPoints = [NodePath("../../WayPoints/Marker3D"), NodePath("../../WayPoints/Marker3D2")]
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy12"]
@@ -671,6 +684,7 @@ mesh = SubResource("SphereMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy12"]
+process_mode = 4
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
 
@@ -691,7 +705,7 @@ debug_shape_thickness = 5
 script = ExtResource("3_ctdb1")
 
 [node name="Enemy13" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -592.43805, 33.416542, 340.16986)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -534.4651, 33.416542, 355.8169)
 wayPoints = [NodePath("../../WayPoints/Marker3D"), NodePath("../../WayPoints/Marker3D2")]
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy13"]
@@ -700,6 +714,7 @@ mesh = SubResource("SphereMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy13"]
+process_mode = 4
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
 
@@ -720,7 +735,7 @@ debug_shape_thickness = 5
 script = ExtResource("3_ctdb1")
 
 [node name="Enemy14" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -719.47327, 42.144882, 223.25908)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -592.43805, 33.416542, 340.16986)
 wayPoints = [NodePath("../../WayPoints/Marker3D"), NodePath("../../WayPoints/Marker3D2")]
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy14"]
@@ -729,6 +744,7 @@ mesh = SubResource("SphereMesh_7u8ti")
 surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy14"]
+process_mode = 4
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
 
