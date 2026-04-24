@@ -105,6 +105,7 @@ public partial class ImageGalleryButtons : Control
 			button.FocusMode = Control.FocusModeEnum.None;
 			
 			// Set signal
+			GD.Print("!!!!!!", photoPath);
 			button.Pressed += () => OnPhotoPressed(photoPath);
 			
 			// Add to scene

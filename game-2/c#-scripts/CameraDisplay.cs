@@ -192,7 +192,7 @@ public void AcceptPhoto()
 	}
 		GD.Print("Saved to: ", fullPath);
 		GD.Print(ProjectSettings.GlobalizePath(fullPath));
-		GlobalData.AddPhoto(imageId,fullPath);
+		GlobalData.AddPhoto(imageId,ProjectSettings.GlobalizePath(fullPath));
 		
 		ResetToIdle();
 	}

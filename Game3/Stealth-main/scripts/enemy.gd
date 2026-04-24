@@ -18,6 +18,7 @@ var _navigationAgent: NavigationAgent3D
 @onready var stateIndicator = $StateIndicator
 @onready var destinationIndicator = $DestinationIndicator
 @onready var stateMat : StandardMaterial3D = stateIndicator.get_surface_override_material(0)
+@onready var destinationMat : StandardMaterial3D = destinationIndicator.get_surface_override_material(0)
 @onready var patrolTimer = $PatrolTimer
 @onready var heartBeat = $AudioStreamPlayer3D
 
@@ -225,6 +226,8 @@ func updateDestinationIndicator():
 		return
 	
 	if hasLastKnownPos:
+		destinationMat.albedo_color = Color(1, 0.5, 0)
+		destinationMat.emission = Color(1, 0.5, 0)
 		destinationIndicator.global_position = lastKnownPlayerPos
 
 
