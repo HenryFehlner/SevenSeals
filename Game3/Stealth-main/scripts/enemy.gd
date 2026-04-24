@@ -11,8 +11,8 @@ var _currentState: States
 var _navigationAgent: NavigationAgent3D
 
 @export var wayPoints: Array[Marker3D]
-@export var chaseSpeed = 2
-@export var patrolSpeed = 1
+@export var chaseSpeed = 5
+@export var patrolSpeed = 2
 @export var chaseGraceDuration: float = 1.0
 
 @onready var stateIndicator = $StateIndicator

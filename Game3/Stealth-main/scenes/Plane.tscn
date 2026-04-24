@@ -352,7 +352,6 @@ script = ExtResource("3_ctdb1")
 transform = Transform3D(-0.7970361, 0, 0.60393167, 0, 1, 0, -0.60393167, 0, -0.7970361, -80.79543, 36.84613, 115.97023)
 wayPoints = [NodePath("../../WayPoints/Marker3D5"), NodePath("../../WayPoints/Marker3D6")]
 chaseSpeed = 4
-patrolSpeed = 2
 chaseGraceDuration = 5.0
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy3"]
@@ -412,7 +411,6 @@ spot_angle = 20.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.97434, 36.40836, 85.295685)
 wayPoints = [NodePath("../../WayPoints/Marker3D3"), NodePath("../../WayPoints/Marker3D4")]
 chaseSpeed = 4
-patrolSpeed = 2
 chaseGraceDuration = 5.0
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy2"]
