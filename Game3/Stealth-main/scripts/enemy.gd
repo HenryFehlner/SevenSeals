@@ -42,6 +42,7 @@ func _process(delta):
 	match _currentState:
 		
 		States.patrol:
+			destinationIndicator.visible = false;
 			if _navigationAgent.is_navigation_finished():
 				changeState(States.wait)
 				patrolTimer.start()
@@ -54,12 +55,14 @@ func _process(delta):
 		States.wait:
 			# Idle but still aware
 			CheckForPlayer()
+			destinationIndicator.visible = false;
 		
 		
 		States.stalk:
 			# Move toward last known position
 			if hasLastKnownPos:
 				_navigationAgent.target_position = lastKnownPlayerPos
+				updateDestinationIndicator()
 			
 			if _navigationAgent.is_navigation_finished():
 				# Couldn't find player → go back to patrol
@@ -69,10 +72,14 @@ func _process(delta):
 			
 			MoveTowardsPoint(delta, patrolSpeed)
 			CheckForPlayer()
+			stateMat.albedo_color = Color(1, 0.5, 0)
+			stateMat.emission = Color(1, 0.5, 0)
+			destinationIndicator.visible = true;
 		
 		
 		States.chase:
 			CheckForPlayer()
+			destinationIndicator.visible = false;
 			
 			if playerInEarshotClose:
 				# Direct chase
@@ -218,6 +225,13 @@ func updateStateIndicator():
 			destinationIndicator.visible = false;
 			
 var lastFlashHitTime = 0.0
+
+func updateDestinationIndicator():
+	if not destinationIndicator.visible:
+		return
+	
+	if hasLastKnownPos:
+		destinationIndicator.global_position = lastKnownPlayerPos
 
 func react_to_flashlight():
 	if Time.get_ticks_msec() - lastFlashHitTime < 200:

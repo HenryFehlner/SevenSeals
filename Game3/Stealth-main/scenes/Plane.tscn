@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bet2ti286w46a"]
+[gd_scene load_steps=10 format=3 uid="uid://bet2ti286w46a"]
 
 [ext_resource type="PackedScene" uid="uid://bf16qn2y6jofb" path="res://scenes/player.tscn" id="1_lyx0c"]
 [ext_resource type="PackedScene" uid="uid://bnpqkdg22m3jm" path="res://scenes/enemy.tscn" id="2_gljv2"]
+[ext_resource type="Script" uid="uid://wwommglswli1" path="res://scripts/flashLightRay.gd" id="3_ctdb1"]
 
 [sub_resource type="Environment" id="Environment_pulcu"]
 volumetric_fog_enabled = true
@@ -72,6 +73,22 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
 [node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy/Enemy"]
 visible = false
 mesh = SubResource("TorusMesh_7u8ti")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Enemy/Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.667784, 0.272795, 0.373686)
+light_energy = 16.0
+light_volumetric_fog_energy = 13.0
+light_size = 0.635
+spot_range = 15.115435
+spot_attenuation = 0.784581
+spot_angle = 20.0
+
+[node name="RayCast3D" type="RayCast3D" parent="Enemy/Enemy/SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.667784, 0.272795, -2.12479)
+target_position = Vector3(0, 0, -30)
+debug_shape_custom_color = Color(0.623529, 0.964706, 0.415686, 1)
+debug_shape_thickness = 5
+script = ExtResource("3_ctdb1")
 
 [node name="Node3D" type="Node3D" parent="."]
 
