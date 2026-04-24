@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bet2ti286w46a"]
 
-[ext_resource type="PackedScene" uid="uid://dhb8ybqb1eep0" path="res://scenes/BlackOutMap.tscn" id="1_6yqq2"]
+[ext_resource type="PackedScene" path="res://scenes/BlackOutMap.tscn" id="1_6yqq2"]
 [ext_resource type="PackedScene" uid="uid://bf16qn2y6jofb" path="res://scenes/player.tscn" id="1_lyx0c"]
 [ext_resource type="PackedScene" uid="uid://bnpqkdg22m3jm" path="res://scenes/enemy.tscn" id="2_gljv2"]
 [ext_resource type="PackedScene" uid="uid://c3ciafejdap3j" path="res://3dModels/icicle_01.glb" id="3_bnr4y"]
@@ -73,8 +73,9 @@ wait_time = 0.7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.39714, -75.287)
 
 [node name="Enemy" parent="Enemy" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.97434, 39.212147, -108.60261)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.741093, 20.75378, 112.75858)
 wayPoints = [NodePath("../../Node3D/Marker3D"), NodePath("../../Node3D/Marker3D2")]
+chaseSpeed = 5
 
 [node name="StateIndicator" type="MeshInstance3D" parent="Enemy/Enemy"]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 3.532629, 0)
@@ -108,6 +109,39 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.0045, 0.975837, -29.6417)
 
 [node name="Marker3D2" type="Marker3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.2801, 0.975837, -27.3675)
+
+[node name="Enemy2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6055126, -75.287)
+
+[node name="Enemy" parent="Enemy2" node_paths=PackedStringArray("wayPoints") instance=ExtResource("2_gljv2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.97434, 39.212147, -108.60261)
+wayPoints = [NodePath("../../Node3D/Marker3D"), NodePath("../../Node3D/Marker3D2")]
+chaseSpeed = 5
+
+[node name="StateIndicator" type="MeshInstance3D" parent="Enemy2/Enemy"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 3.532629, 0)
+mesh = SubResource("SphereMesh_7u8ti")
+surface_material_override/0 = SubResource("StandardMaterial3D_ctdb1")
+
+[node name="DestinationIndicator" type="MeshInstance3D" parent="Enemy2/Enemy"]
+visible = false
+mesh = SubResource("TorusMesh_7u8ti")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Enemy2/Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.667784, 0.272795, 0.373686)
+light_energy = 16.0
+light_volumetric_fog_energy = 13.0
+light_size = 0.635
+spot_range = 15.115435
+spot_attenuation = 0.784581
+spot_angle = 20.0
+
+[node name="RayCast3D" type="RayCast3D" parent="Enemy2/Enemy/SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.667784, 0.272795, -2.12479)
+target_position = Vector3(0, 0, -30)
+debug_shape_custom_color = Color(0.623529, 0.964706, 0.415686, 1)
+debug_shape_thickness = 5
+script = ExtResource("3_ctdb1")
 
 [connection signal="timeout" from="Player/CharacterBody3D/SlideResetTimer" to="Player/CharacterBody3D" method="_on_slide_timer_timeout"]
 [connection signal="timeout" from="Player/CharacterBody3D/SlideDurationTimer" to="Player/CharacterBody3D" method="_on_slide_duration_timer_timeout"]
