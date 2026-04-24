@@ -18,7 +18,6 @@ var _navigationAgent: NavigationAgent3D
 @onready var stateIndicator = $StateIndicator
 @onready var destinationIndicator = $DestinationIndicator
 @onready var stateMat : StandardMaterial3D = stateIndicator.get_surface_override_material(0)
-@onready var destinationMat : StandardMaterial3D = destinationIndicator.get_surface_override_material(0)
 @onready var patrolTimer = $PatrolTimer
 @onready var heartBeat = $AudioStreamPlayer3D
 
@@ -36,7 +35,21 @@ var chaseGraceTimer: float = 0.0
 func _ready():
 	_navigationAgent = $NavigationAgent3D
 	player = get_tree().get_nodes_in_group("Player")[0]
+
 	
+	if stateIndicator.get_surface_override_material(0):
+		stateIndicator.set_surface_override_material(
+			0,
+			stateIndicator.get_surface_override_material(0).duplicate()
+		)
+		stateMat = stateIndicator.get_surface_override_material(0)
+
+	if destinationIndicator.get_surface_override_material(0):
+		destinationIndicator.set_surface_override_material(
+			0,
+			destinationIndicator.get_surface_override_material(0).duplicate()
+		)
+
 	changeState(States.patrol)
 	updateStateIndicator()
 	_navigationAgent.target_position = wayPoints[0].global_position
@@ -96,8 +109,6 @@ func _process(delta):
 				if hasLastKnownPos:
 					_navigationAgent.target_position = lastKnownPlayerPos
 			
-			if _navigationAgent.is_navigation_finished():
-				changeState(States.stalk)
 				return
 			
 			MoveTowardsPoint(delta, chaseSpeed)
@@ -105,7 +116,7 @@ func _process(delta):
 	heartBeatSounds()
 
 
-func MoveTowardsPoint(_delta, speed):
+func MoveTowardsPoint(delta, speed):
 	var targetPos = _navigationAgent.get_next_path_position()
 	
 	if global_position.distance_to(targetPos) < 0.05:
@@ -182,6 +193,11 @@ func changeState(newState):
 		return
 	
 	_currentState = newState
+	
+
+	if newState == States.chase:
+		chaseGraceTimer = chaseGraceDuration
+	
 	updateStateIndicator()
 
 
@@ -226,8 +242,6 @@ func updateDestinationIndicator():
 		return
 	
 	if hasLastKnownPos:
-		destinationMat.albedo_color = Color(1, 0.5, 0)
-		destinationMat.emission = Color(1, 0.5, 0)
 		destinationIndicator.global_position = lastKnownPlayerPos
 
 
