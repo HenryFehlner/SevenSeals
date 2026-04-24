@@ -49,57 +49,228 @@ navigation_mesh = SubResource("NavigationMesh_fh7dh")
 [node name="Sketchfab_Scene" parent="Platform/NavigationRegion3D" instance=ExtResource("1_6yqq2")]
 transform = Transform3D(0.23647758, 0, 0, 0, 0.0500687, 0, 0, 0, 0.23086835, -0.020252228, 0.04453087, -302.0942)
 
+[node name="Icicle" type="Node" parent="Platform/NavigationRegion3D/Sketchfab_Scene"]
+
+[node name="Sketchfab_Scene3" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Icicle" instance=ExtResource("3_bnr4y")]
+transform = Transform3D(2.8918877, 0, 0, 0, 3.3502665, 0, 0, 0, 2.785233, 5.6947374, 10.957298, 1.2915783)
+
+[node name="Sketchfab_Scene7" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Icicle" instance=ExtResource("3_bnr4y")]
+transform = Transform3D(2.8918877, 0, 0, 0, 3.3502665, 0, 0, 0, 2.785233, 5.6947374, 10.957298, 28.68832)
+
+[node name="Sketchfab_Scene8" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Icicle" instance=ExtResource("3_bnr4y")]
+transform = Transform3D(-0.38822317, 0, 2.7600212, 0, 3.350266, 0, -2.8657107, 0, -0.37390506, -33.093113, 13.198376, 15.501801)
+
+[node name="Sketchfab_Scene9" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Icicle" instance=ExtResource("3_bnr4y")]
+transform = Transform3D(-0.38822317, 0, 2.7600212, 0, 3.350266, 0, -2.8657107, 0, -0.37390506, -46.011845, 13.402722, -7.1549835)
+
+[node name="Sketchfab_Scene4" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Icicle" instance=ExtResource("3_bnr4y")]
+transform = Transform3D(2.8918877, 0, 0, 0, 3.3502665, 0, 0, 0, 2.785233, 11.783748, 10.957298, 1.2915783)
+
+[node name="Sketchfab_Scene6" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Icicle" instance=ExtResource("3_bnr4y")]
+transform = Transform3D(2.8918877, 0, 0, 0, 3.3502665, 0, 0, 0, 2.785233, 42.578827, 10.957298, 1.2915783)
+
+[node name="Sketchfab_Scene5" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Icicle" instance=ExtResource("3_bnr4y")]
+transform = Transform3D(2.8918877, 0, 0, 0, 3.3502665, 0, 0, 0, 2.785233, 29.039883, 10.957298, 1.839117)
+
 [node name="Light" type="Node" parent="Platform/NavigationRegion3D/Sketchfab_Scene"]
 
 [node name="Sketchfab_Scene" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, 9.190734, 14.684671, 37.27007)
 
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
+
 [node name="Sketchfab_Scene2" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, 17.378975, 14.684671, -14.649136)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene2"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
 
 [node name="Sketchfab_Scene3" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, 48.55844, 14.684671, -14.652985)
 
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene3"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
+
 [node name="Sketchfab_Scene4" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, 59.47629, 14.684671, 37.27007)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene4"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
 
 [node name="Sketchfab_Scene5" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -63.337723, 14.684671, 3.8670998)
 
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene5"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
+
 [node name="Sketchfab_Scene6" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -39.374886, 14.684671, 37.27007)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene6"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
 
 [node name="Sketchfab_Scene7" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -83.204445, 14.684671, 73.805244)
 
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene7"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
+
 [node name="Sketchfab_Scene9" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -47.418007, 14.684671, 124.49669)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene9"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
 
 [node name="Sketchfab_Scene8" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
 transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -123.29981, 14.684671, 65.97273)
 
-[node name="Icicle" type="Node" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene8"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
 
-[node name="Sketchfab_Scene3" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Icicle" instance=ExtResource("3_bnr4y")]
-transform = Transform3D(2.8918877, 0, 0, 0, 3.3502665, 0, 0, 0, 2.785233, 5.6947374, 10.957298, 1.2915783)
+[node name="Sketchfab_Scene10" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
+transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -90.55308, 21.755623, 197.60915)
 
-[node name="Sketchfab_Scene7" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Icicle" instance=ExtResource("3_bnr4y")]
-transform = Transform3D(2.8918877, 0, 0, 0, 3.3502665, 0, 0, 0, 2.785233, 5.6947374, 10.957298, 28.68832)
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene10"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
 
-[node name="Sketchfab_Scene8" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Icicle" instance=ExtResource("3_bnr4y")]
-transform = Transform3D(-0.38822317, 0, 2.7600212, 0, 3.350266, 0, -2.8657107, 0, -0.37390506, -33.093113, 13.198376, 15.501801)
+[node name="Sketchfab_Scene11" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
+transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -168.58499, 14.152966, 197.60915)
 
-[node name="Sketchfab_Scene9" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Icicle" instance=ExtResource("3_bnr4y")]
-transform = Transform3D(-0.38822317, 0, 2.7600212, 0, 3.350266, 0, -2.8657107, 0, -0.37390506, -46.011845, 13.402722, -7.1549835)
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene11"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
 
-[node name="Sketchfab_Scene4" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Icicle" instance=ExtResource("3_bnr4y")]
-transform = Transform3D(2.8918877, 0, 0, 0, 3.3502665, 0, 0, 0, 2.785233, 11.783748, 10.957298, 1.2915783)
+[node name="Sketchfab_Scene12" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
+transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -219.7844, 14.152966, 184.54404)
 
-[node name="Sketchfab_Scene6" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Icicle" instance=ExtResource("3_bnr4y")]
-transform = Transform3D(2.8918877, 0, 0, 0, 3.3502665, 0, 0, 0, 2.785233, 42.578827, 10.957298, 1.2915783)
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene12"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
 
-[node name="Sketchfab_Scene5" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Icicle" instance=ExtResource("3_bnr4y")]
-transform = Transform3D(2.8918877, 0, 0, 0, 3.3502665, 0, 0, 0, 2.785233, 29.039883, 10.957298, 1.839117)
+[node name="Sketchfab_Scene13" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
+transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -288.57144, 14.152966, 209.99321)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene13"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
+
+[node name="Sketchfab_Scene14" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
+transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -320.72195, 12.566376, 342.50586)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene14"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
+
+[node name="Sketchfab_Scene15" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
+transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -374.95438, 12.566376, 342.50586)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene15"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
+
+[node name="Sketchfab_Scene16" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
+transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -487.06247, 11.9295845, 273.0969)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene16"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
+
+[node name="Sketchfab_Scene17" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
+transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -449.02142, 11.9295845, 240.16055)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene17"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
+
+[node name="Sketchfab_Scene18" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
+transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -534.6791, 16.630083, 266.49915)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene18"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
+
+[node name="Sketchfab_Scene19" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
+transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -578.7734, 16.630083, 266.49915)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene19"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
+
+[node name="Sketchfab_Scene20" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
+transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -590.30457, 16.630085, 225.63841)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene20"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
+
+[node name="Sketchfab_Scene21" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
+transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -672.06506, 16.630085, 235.4184)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene21"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
+
+[node name="Sketchfab_Scene22" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light" instance=ExtResource("5_qbpoo")]
+transform = Transform3D(1, 0, 0, 0, 20.4178, 0, 0, 0, 31.985264, -755.4814, 16.630085, 194.64659)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Platform/NavigationRegion3D/Sketchfab_Scene/Light/Sketchfab_Scene22"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.15900552, 0)
+light_energy = 10.0
+spot_range = 17.100447
+spot_angle = 47.42253
 
 [node name="Boxes" type="Node" parent="Platform/NavigationRegion3D/Sketchfab_Scene"]
 
