@@ -13,6 +13,8 @@ var _navigationAgent: NavigationAgent3D
 @export var wayPoints: Array[Marker3D]
 @export var chaseSpeed = 2
 @export var patrolSpeed = 1
+@export var chaseGraceDuration: float = 1.0
+
 @onready var stateIndicator = $StateIndicator
 @onready var destinationIndicator = $DestinationIndicator
 @onready var stateMat : StandardMaterial3D = stateIndicator.get_surface_override_material(0)
@@ -25,9 +27,10 @@ var player
 var playerInEarshotFar : bool = false
 var playerInEarshotClose : bool = false
 
-
 var lastKnownPlayerPos: Vector3
 var hasLastKnownPos: bool = false
+
+var chaseGraceTimer: float = 0.0
 
 func _ready():
 	_navigationAgent = $NavigationAgent3D
@@ -42,7 +45,7 @@ func _process(delta):
 	match _currentState:
 		
 		States.patrol:
-			destinationIndicator.visible = false;
+			destinationIndicator.visible = false
 			if _navigationAgent.is_navigation_finished():
 				changeState(States.wait)
 				patrolTimer.start()
@@ -53,49 +56,46 @@ func _process(delta):
 		
 		
 		States.wait:
-			# Idle but still aware
 			CheckForPlayer()
-			destinationIndicator.visible = false;
+			destinationIndicator.visible = false
 		
 		
 		States.stalk:
-			# Move toward last known position
 			if hasLastKnownPos:
 				_navigationAgent.target_position = lastKnownPlayerPos
 				updateDestinationIndicator()
 			
 			if _navigationAgent.is_navigation_finished():
-				# Couldn't find player → go back to patrol
 				hasLastKnownPos = false
 				changeState(States.patrol)
 				return
 			
 			MoveTowardsPoint(delta, patrolSpeed)
 			CheckForPlayer()
-			stateMat.albedo_color = Color(1, 0.5, 0)
-			stateMat.emission = Color(1, 0.5, 0)
-			destinationIndicator.visible = true;
+			destinationIndicator.visible = true
 		
 		
 		States.chase:
 			CheckForPlayer()
-			destinationIndicator.visible = false;
+			destinationIndicator.visible = false
 			
 			if playerInEarshotClose:
-				# Direct chase
+				chaseGraceTimer = chaseGraceDuration
+				
 				_navigationAgent.target_position = player.global_position
 				lastKnownPlayerPos = player.global_position
 				hasLastKnownPos = true
 			else:
-				# Lost player → go to last known position
-				if hasLastKnownPos:
-					_navigationAgent.target_position = lastKnownPlayerPos
-				else:
+				chaseGraceTimer -= delta
+				
+				if chaseGraceTimer <= 0.0:
 					changeState(States.stalk)
 					return
+				
+				if hasLastKnownPos:
+					_navigationAgent.target_position = lastKnownPlayerPos
 			
 			if _navigationAgent.is_navigation_finished():
-				# Reached last known position → search
 				changeState(States.stalk)
 				return
 			
@@ -107,7 +107,6 @@ func _process(delta):
 func MoveTowardsPoint(_delta, speed):
 	var targetPos = _navigationAgent.get_next_path_position()
 	
-	# Prevent jitter + look_at crash
 	if global_position.distance_to(targetPos) < 0.05:
 		velocity = Vector3.ZERO
 		return
@@ -127,10 +126,8 @@ func CheckForPlayer():
 	if result.size() > 0 and result["collider"].is_in_group("Player"):
 		if result["collider"].crouching == false:
 			
-			
 			lastKnownPlayerPos = player.global_position
 			hasLastKnownPos = true
-			
 			
 			if playerInEarshotClose:
 				changeState(States.chase)
@@ -159,7 +156,6 @@ func _on_patrol_timer_timeout():
 	_navigationAgent.target_position = wayPoints[wayPointIndex].global_position
 
 
-# 🔊 Hearing system
 func _on_hearing_far_body_entered(body):
 	if body.is_in_group("Player"):
 		playerInEarshotFar = true
@@ -180,7 +176,6 @@ func _on_hearing_close_body_exited(body):
 		playerInEarshotClose = false
 
 
-
 func changeState(newState):
 	if _currentState == newState:
 		return
@@ -189,13 +184,11 @@ func changeState(newState):
 	updateStateIndicator()
 
 
-
 func heartBeatSounds():
 	if _currentState != States.chase and heartBeat.playing:
 		heartBeat.stop()
 	elif _currentState == States.chase and heartBeat.playing == false:
 		heartBeat.play()
-
 
 
 func updateStateIndicator():
@@ -207,23 +200,24 @@ func updateStateIndicator():
 		States.patrol:
 			stateMat.albedo_color = Color(0, 1, 0)
 			stateMat.emission = Color(0, 1, 0)
-			destinationIndicator.visible = false;
+			destinationIndicator.visible = false
 			
 		States.wait:
 			stateMat.albedo_color = Color(1, 1, 0)
 			stateMat.emission = Color(1, 1, 0)
-			destinationIndicator.visible = false;
+			destinationIndicator.visible = false
 			
 		States.stalk:
 			stateMat.albedo_color = Color(1, 0.5, 0)
 			stateMat.emission = Color(1, 0.5, 0)
-			destinationIndicator.visible = true;
+			destinationIndicator.visible = true
 			
 		States.chase:
 			stateMat.albedo_color = Color(1, 0, 0)
 			stateMat.emission = Color(1, 0, 0)
-			destinationIndicator.visible = false;
-			
+			destinationIndicator.visible = false
+
+
 var lastFlashHitTime = 0.0
 
 func updateDestinationIndicator():
@@ -232,6 +226,7 @@ func updateDestinationIndicator():
 	
 	if hasLastKnownPos:
 		destinationIndicator.global_position = lastKnownPlayerPos
+
 
 func react_to_flashlight():
 	if Time.get_ticks_msec() - lastFlashHitTime < 200:
